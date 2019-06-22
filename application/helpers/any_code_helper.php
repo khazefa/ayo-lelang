@@ -1,0 +1,45 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+if (!function_exists('setFlashData')) {
+	function setFlashData($status, $flashMsg)
+	{
+		$CI = &get_instance();
+		$CI->session->set_flashdata($status, $flashMsg);
+	}
+}
+
+if (!function_exists('format_rupiah')) {
+	function format_rupiah($value)
+	{
+		$a = (string)$value; //membuat $value menjadi string
+		$len = strlen($a); //menghitung panjang string $a
+
+		if ($len <= 18) {
+			$ratril = $len - 3 - 1;
+			$ramil = $len - 6 - 1;
+			$rajut = $len - 9 - 1; //untuk mengecek apakah ada nilai ratusan juta (9angka dari belakang)
+			$juta = $len - 12 - 1; //untuk mengecek apakah ada nilai jutaan (6angka belakang)
+			$ribu = $len - 15 - 1; //untuk mengecek apakah ada nilai ribuan (3angka belakang)
+
+			$angka = '';
+			for ($i = 0; $i < $len; $i++) {
+				if ($i == $ratril) {
+					$angka = $angka . $a[$i] . ".";
+				} else if ($i == $ramil) {
+					$angka = $angka . $a[$i] . ".";
+				} else if ($i == $rajut) {
+					$angka = $angka . $a[$i] . "."; //meletakkan tanda titik setelah 3angka dari depan
+				} else if ($i == $juta) {
+					$angka = $angka . $a[$i] . "."; //meletakkan tanda titik setelah 6angka dari depan
+				} else if ($i == $ribu) {
+					$angka = $angka . $a[$i] . "."; //meletakkan tanda titik setelah 9angka dari depan
+				} else {
+					$angka = $angka . $a[$i];
+				}
+			}
+		}
+		return $angka . ",-";
+	}
+}
+
+?>
