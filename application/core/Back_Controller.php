@@ -12,8 +12,6 @@ class Back_Controller extends MY_Controller
 	protected $accKey = '';
 	protected $accEmail = '';
 	protected $accName = '';
-	protected $accType = '';
-	protected $accGroup = '';
 	protected $accRole = '';
 
 	protected $global = array ();
@@ -27,7 +25,7 @@ class Back_Controller extends MY_Controller
 		$this->refreshCache();
 		//check for Session
 		if (!$this->session->userdata('logged_in')) {
-			redirect('/backside', true);
+			redirect('/admin', true);
 		}
 	}
 	/**
@@ -49,28 +47,24 @@ class Back_Controller extends MY_Controller
 		$isSessionFilled = $this->session->userdata ( 'logged_in' );
 
 		if (! isset ( $isSessionFilled ) || $isSessionFilled != TRUE) {
-			redirect ( '/backside' );
+			redirect ( '/admin' );
 		} else {
 			$this->accBid = $this->session->userdata ( 'accBid' );
 			$this->accKey = $this->session->userdata ( 'accKey' );
 			$this->accName = $this->session->userdata ( 'accName' );
 			$this->accEmail = $this->session->userdata ( 'accEmail' );
-			// $this->accGroup = $this->session->userdata ( 'accGroup' );
-			// $this->accRole = $this->session->userdata ( 'accRole' );
-			// $this->accType = $this->session->userdata ( 'accType' );
+			$this->accRole = $this->session->userdata ( 'accRole' );
 
 			$this->global ['name'] = $this->accName;
-			// $this->global ['type'] = $this->accType;
-			// $this->global ['group'] = $this->accGroup;
-			// $this->global ['role'] = $this->accRole;
+			$this->global ['role'] = $this->accRole;
 		}
 	}
 
 	/**
      * This function is used to check the access
      */
-    function isCMSAdmin() {
-        if ($this->accType === "CMS") {
+    function isWebAdmin() {
+        if ($this->accRole === "admin") {
             return true;
         } else {
             return false;
@@ -80,8 +74,8 @@ class Back_Controller extends MY_Controller
     /**
      * This function is used to check the access
      */
-    function isWebAdmin() {
-        if ($this->accType === "Website") {
+    function isStaff() {
+        if ($this->accRole === "staff") {
             return true;
         } else {
             return false;
