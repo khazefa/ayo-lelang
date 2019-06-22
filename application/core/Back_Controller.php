@@ -12,7 +12,6 @@ class Back_Controller extends MY_Controller
 	protected $accKey = '';
 	protected $accEmail = '';
 	protected $accName = '';
-	protected $accKat = '';
 	protected $accType = '';
 	protected $accGroup = '';
 	protected $accRole = '';
@@ -36,14 +35,11 @@ class Back_Controller extends MY_Controller
 	 */
 	private function refreshCache()
 	{
-		// any valid date in the past
-		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-		// always modified right now
-		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-		// HTTP/1.1
-		header("Cache-Control: private, no-store, max-age=0, no-cache, must-revalidate, post-check=0, pre-check=0");
-		// HTTP/1.0
-		header("Pragma: no-cache");
+        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        header('Cache-Control: no-cache, no-store, must-revalidate, max-age=0');
+        header('Cache-Control: post-check=0, pre-check=0', FALSE);
+        header('Pragma: no-cache');
 	}
 
 	/**
@@ -59,15 +55,14 @@ class Back_Controller extends MY_Controller
 			$this->accKey = $this->session->userdata ( 'accKey' );
 			$this->accName = $this->session->userdata ( 'accName' );
 			$this->accEmail = $this->session->userdata ( 'accEmail' );
-			$this->accGroup = $this->session->userdata ( 'accGroup' );
-			$this->accKat = $this->session->userdata ( 'accKat' );
-			$this->accRole = $this->session->userdata ( 'accRole' );
-			$this->accType = $this->session->userdata ( 'accType' );
+			// $this->accGroup = $this->session->userdata ( 'accGroup' );
+			// $this->accRole = $this->session->userdata ( 'accRole' );
+			// $this->accType = $this->session->userdata ( 'accType' );
 
 			$this->global ['name'] = $this->accName;
-			$this->global ['type'] = $this->accType;
-			$this->global ['group'] = $this->accGroup;
-			$this->global ['role'] = $this->accRole;
+			// $this->global ['type'] = $this->accType;
+			// $this->global ['group'] = $this->accGroup;
+			// $this->global ['role'] = $this->accRole;
 		}
 	}
 
