@@ -60,7 +60,33 @@ class Produk extends Back_Controller
 		$rs_kategori = $this->MKategori->get_data($arrWhere, $arrOrder, $limit);
         $data['records_kategori'] = $rs_kategori;
         $this->digiAdminLayout($data, $this->view_dir.'create', $this->global);
-    }
+	}
+	
+	/**
+     * This function is used to upload file
+     */
+	function upload_files($field_name)
+	{
+		$filename = "";
+		$config['upload_path']          = './uploads/products/';
+		$config['allowed_types']        = 'jpg|png';
+		$config['max_size']             = 2048;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload($field_name))
+		{
+			setFlashData('error', 'Gagal upload gambar '. $this->upload->display_errors());
+		}
+		else
+		{
+			setFlashData('success', 'Data telah sukses ditambahkan ' . $this->upload->data('file_name'));
+			$filename = $this->upload->data('file_name');       // Returns: mypic.jpg
+		}
+		return $filename;
+	}
     
     /**
      * This function is used to add new data to the system
@@ -68,11 +94,13 @@ class Produk extends Back_Controller
     function create()
     {
         $fnama = $this->input->post('fnama', TRUE);
+        $fkategori = $this->input->post('fkategori', TRUE);
         $falias = $this->input->post('falias', TRUE);
         $fdeskripsi = $this->input->post('fdeskripsi', TRUE);
-
-        $dataInfo = array('alias_kategori'=> $falias, 'nama_kategori'=>$fnama, 'deskripsi_kategori'=>$fdeskripsi);
-        $count = $this->MProduk->check_data_exists(array('alias_kategori' => $falias));
+		$fgambar = 'fgambar';
+		$message = "";
+		
+        $count = $this->MProduk->check_data_exists(array('alias_produk' => $falias));
         if ($count > 0)
         { 
             setFlashData('error', 'Data sudah ada, harap isi dengan data lainnya');
@@ -80,8 +108,26 @@ class Produk extends Back_Controller
         }
         else
         { 
+			$config['upload_path']          = './uploads/products/';
+			$config['allowed_types']        = 'jpg|png';
+			$config['max_size']             = 2048;
+			$config['max_width']            = 1024;
+			$config['max_height']           = 768;
+
+			$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload($fgambar))
+			{
+				setFlashData('error', 'Gagal upload gambar '. $this->upload->display_errors());
+				$dataInfo = array('id_kategori'=>$fkategori, 'alias_produk'=> $falias, 'nama_produk'=>$fnama, 'deskripsi_produk'=>$fdeskripsi);
+			}
+			else
+			{
+				setFlashData('success', 'Sukses upload gambar ' . $this->upload->data('file_name'));
+				$filename = $this->upload->data('file_name');       // Returns: mypic.jpg
+				$dataInfo = array('id_kategori'=>$fkategori, 'alias_produk'=> $falias, 'nama_produk'=>$fnama, 'deskripsi_produk'=>$fdeskripsi, 'gambar_produk'=>$this->upload->data('file_name'));
+			}
+
             $result = $this->MProduk->insert_data($dataInfo);
-        
             if($result > 0)
             {
                 setFlashData('success', 'Data telah sukses ditambahkan');
