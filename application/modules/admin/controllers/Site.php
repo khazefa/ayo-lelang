@@ -13,7 +13,7 @@ class Site extends Back_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		// $this->load->model('admin/Auth_model', 'MLog');
+		$this->isLoggedIn();
 	}
 
 	/**
