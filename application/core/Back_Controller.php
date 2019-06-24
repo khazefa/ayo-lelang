@@ -19,8 +19,6 @@ class Back_Controller extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		//load session library
-		$this->load->library('session');
 		//check cache validation
 		$this->refreshCache();
 		//check for Session
@@ -33,11 +31,14 @@ class Back_Controller extends MY_Controller
 	 */
 	private function refreshCache()
 	{
-        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        header('Cache-Control: no-cache, no-store, must-revalidate, max-age=0');
-        header('Cache-Control: post-check=0, pre-check=0', FALSE);
-        header('Pragma: no-cache');
+		// any valid date in the past
+		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+		// always modified right now
+		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+		// HTTP/1.1
+		header("Cache-Control: private, no-store, max-age=0, no-cache, must-revalidate, post-check=0, pre-check=0");
+		// HTTP/1.0
+		header("Pragma: no-cache");
 	}
 
 	/**
@@ -74,7 +75,7 @@ class Back_Controller extends MY_Controller
     /**
      * This function is used to check the access
      */
-    function isStaff() {
+    function isWebStaff() {
         if ($this->accRole === "staff") {
             return true;
         } else {
