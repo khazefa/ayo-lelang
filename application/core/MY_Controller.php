@@ -15,38 +15,34 @@ class MY_Controller extends MX_Controller
 		parent::__construct();
 	}
 	/**
-	 * Layouting for Frontside
+	 * Layouting for frontend
 	 */
-	public function _renderFrontView($data = [], $view = null, $headerInfo = NULL, $footerInfo = NULL)
+	public function digiLayout($data = [], $view = null, $headerInfo = NULL, $footerInfo = NULL)
 	{
-		$this->load->view('layouts/frontside/header', $headerInfo);
+		$this->load->view('layouts/store/_partials/header', $headerInfo);
 		if ($view) {
 			$this->load->view($view, $data);
 		}
-		$this->load->view('layouts/frontside/footer', $footerInfo);
+		$this->load->view('layouts/store/_partials/footer', $footerInfo);
 	}
 	/**
-	 * Layouting for Backside
+	 * Layouting for Backend
 	 */
-	public function _renderBackView($data = [], $view = null, $headerInfo = NULL, $footerInfo = NULL)
+	public function digiAdminLayout($data = [], $view = null, $headerInfo = NULL, $footerInfo = NULL)
 	{
-		$this->load->view('layouts/backside/header', $headerInfo);
+		$this->load->view('layouts/admin/_partials/header', $headerInfo);
 		if ($view) {
 			$this->load->view($view, $data);
 		}
-		$this->load->view('layouts/backside/footer', $footerInfo);
+		$this->load->view('layouts/admin/_partials/footer', $footerInfo);
 	}
 	/**
 	 * Load a single View
 	 */
-	public function _renderView($data = [], $base = null, $view = null)
+	public function digiView($data = [], $view = null)
 	{
 		if ($view) {
-			if ($base) {
-				$this->load->view($base.'/'.$view, $data);
-			} else {
-				$this->load->view($view, $data);
-			}
+			$this->load->view($view, $data);
 		}
 	}
 }
