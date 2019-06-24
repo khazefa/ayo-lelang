@@ -5,7 +5,7 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
-					<button type="button" class="btn btn-default" onclick="location.href='<?php echo base_url('kategori/add');?>'" title="Add New">
+					<button type="button" class="btn btn-default" onclick="location.href='<?php echo base_url('admin/kategori/add');?>'" title="Add New">
 						<i class="fa fa-plus-circle"></i> Tambah
 					</button>
                     <!-- <h3 class="box-title"><?= $contentTitle;?></h3> -->
@@ -60,7 +60,7 @@
 											echo '<td>'.$r['nama_kategori'].'</td>';
 											echo '<td>'.$r['alias_kategori'].'</td>';
 											echo '<td>'.$r['deskripsi_kategori'].'</td>';
-											echo '<td><a class="btn btn-warning btn-sm" href="' . base_url('kategori/edit/') . $id . '"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-danger btn-sm" href="' . base_url('kategori/delete/') . $id . '"><i class="fa fa-trash"></i> Hapus</a></td>';
+											echo '<td><a class="btn btn-warning btn-sm" href="' . base_url('admin/kategori/edit/') . $id . '"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-danger btn-sm" href="' . base_url('admin/kategori/delete/') . $id . '"><i class="fa fa-trash"></i> Hapus</a></td>';
 										echo '</tr>';
 									}
 								?>
