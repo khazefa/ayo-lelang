@@ -131,7 +131,7 @@ class Kategori_model extends CI_Model
         $this->db->where($this->primKey, $id);
         $query = $this->db->get();
         
-        return $query->result();
+        return $query->result_array();
     }
     
     /**
