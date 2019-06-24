@@ -44,7 +44,7 @@ class Auth extends MY_Controller
 		$password = filter_var($input['password'], FILTER_SANITIZE_STRING);
 
 		if ($email && $password) {
-			$result = $this->MAuth->auth_default($email, $password);
+			$result = $this->MAuth->auth_email($email, $password);
 
 			if (count($result) > 0) {
 				foreach ($result as $res) {
