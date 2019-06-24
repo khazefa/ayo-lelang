@@ -4,10 +4,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title><?= empty($page_title) ? SITE_NAME : $page_title . ' - ' . SITE_NAME; ?></title>
+	<title><?= empty($pageTitle) ? SITE_NAME : $pageTitle . ' - ' . SITE_NAME; ?></title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<meta name="description" content="<?= empty($page_title) ? SITE_NAME : $page_title . ' - ' . SITE_NAME; ?>">
+	<meta name="description" content="<?= empty($pageTitle) ? SITE_NAME : $pageTitle . ' - ' . SITE_NAME; ?>">
 	<meta name="author" content="Salman">
 
 	<!-- Bootstrap 3.3.7 -->
@@ -39,9 +39,11 @@
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">
-			<p class="login-box-msg">Sign in</p>
+			<p class="login-box-msg">
+				<?= empty($this->session->flashdata('error_login')) ? '' : '<span class="text-danger">' . $this->session->flashdata('error_login') . '</span>'; ?>
+			</p>
 
-			<form action="<?= base_url('admin/auth'); ?>" method="post">
+			<form action="<?= base_url('admin/check'); ?>" method="post">
 				<div class="form-group has-feedback">
 					<input type="email" name="email" class="form-control" placeholder="Email">
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
