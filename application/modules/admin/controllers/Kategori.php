@@ -1,12 +1,12 @@
 <?php
 /**
- * Class CKategori.php.
+ * Class Kategori.php.
  * Desc: Class for every Kategori function purposes
  * @author: Sigit Prayitno
  * @email: cybergitt@gmail.com
  */
 
-class CKategori extends Back_Controller
+class Kategori extends Back_Controller
 {
     private $view_dir = 'admin/kategori/';
 
@@ -25,13 +25,19 @@ class CKategori extends Back_Controller
      */
 	public function index()
 	{
+        $rs = array();
+		$arrWhere = array();
+		$arrOrder = array('nama_kategori'=>'ASC');
+		$limit = 0;
+		
 		$this->global['pageTitle'] = 'Kategori';
 		$this->global['contentHeader'] = 'Kategori';
 		$this->global['contentTitle'] = 'Kategori';
-		$this->global ['name'] = $this->accName;
-		$this->global ['role'] = $this->accRole;
+		$this->global['name'] = $this->accName;
+		$this->global['role'] = $this->accRole;
 
-        $data['url_list'] = base_url($this->cname.'/list/json');
+		$rs = $this->MKategori->get_data($arrWhere, $arrOrder, $limit);
+        $data['records'] = $rs;
 		$this->digiAdminLayout($data, $this->view_dir.'index', $this->global);
     }
 }
