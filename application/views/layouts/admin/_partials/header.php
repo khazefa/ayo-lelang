@@ -142,19 +142,19 @@ desired effect
 
 				<!-- Sidebar Menu -->
 				<ul class="sidebar-menu" data-widget="tree">
-					<li class="header">HEADER</li>
+					<li class="header">NAVIGATION</li>
 					<!-- Optionally, you can add icons to the links -->
-					<li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+					<li><a href="<?= base_url('admin/dashboard'); ?>"><i class="fa fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
 					<li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
 					<li class="treeview">
-						<a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+						<a href="#"><i class="fa fa-link"></i> <span>Produk</span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="#">Link in level 2</a></li>
-							<li><a href="#">Link in level 2</a></li>
+							<li><a href="<?= base_url('admin/kategori'); ?>">Kategori</a></li>
+							<li><a href="#">Katalog</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -162,3 +162,20 @@ desired effect
 			</section>
 			<!-- /.sidebar -->
 		</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					<?= $contentHeader;?>
+					<!-- <small>it all starts here</small> -->
+				</h1>
+				<!-- Use breadcrumb later
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#">Examples</a></li>
+					<li class="active">Blank page</li>
+				</ol>
+				-->
+			</section>
