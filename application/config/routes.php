@@ -59,6 +59,11 @@ $route['admin/signin'] = 'admin/Auth';
 $route['admin/check'] = 'admin/Auth/check';
 $route['admin/reset-password'] = 'admin/Auth/reset';
 $route['admin/signout'] = 'admin/Auth/signout';
-// Dashboard
-$route['admin/dashboard'] = 'admin/Site';
 /* End Routing Sign In */
+
+
+/* Routing Dashboard */
+$route['admin/dashboard'] = 'admin/Site';
+
+/* Routing Kategori Produk */
+$route['admin/kategori'] = 'admin/Kategori';
