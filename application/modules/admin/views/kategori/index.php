@@ -1,7 +1,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-8 offset-md-4">
             <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
