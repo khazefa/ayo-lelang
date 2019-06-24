@@ -1,3 +1,6 @@
+  </div>
+  <!-- /.content-wrapper -->
+
   <!-- Main Footer -->
   <footer class="main-footer">
   	<!-- To the right -->
@@ -5,7 +8,7 @@
 	  <?= SITE_NAME; ?>
   	</div>
   	<!-- Default to the left -->
-  	<strong>Copyright &copy; 2019 <a href="#">Company</a>.</strong> All rights reserved.
+  	<strong>Copyright &copy; 2019 <a href="#">Salman</a>.</strong> All rights reserved.
   </footer>
 
   </div>
