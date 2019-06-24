@@ -8,7 +8,7 @@ Options All -Indexes
   #  http://www.example.com/mypage/test1
   # then use
   # RewriteBase /mypage/test1/
-  # RewriteBase /
+  #RewriteBase /
   RewriteCond $1 !^(index\.php|resources|robots\.txt)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
@@ -27,4 +27,3 @@ Options All -Indexes
 </IfModule>
 
 #php_value memory_limit 512M
-

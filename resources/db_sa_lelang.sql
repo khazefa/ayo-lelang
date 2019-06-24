@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 23, 2019 at 01:04 AM
--- Server version: 5.7.25
--- PHP Version: 7.1.27
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 24 Jun 2019 pada 11.30
+-- Versi server: 10.3.16-MariaDB
+-- Versi PHP: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `akun`
+-- Struktur dari tabel `akun`
 --
 
 CREATE TABLE `akun` (
@@ -37,7 +39,7 @@ CREATE TABLE `akun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `akun`
+-- Dumping data untuk tabel `akun`
 --
 
 INSERT INTO `akun` (`id_akun`, `nama_akun`, `sandi_akun`, `nama_lengkap_akun`, `email_akun`, `level_akun`, `status_akun`) VALUES
@@ -46,7 +48,7 @@ INSERT INTO `akun` (`id_akun`, `nama_akun`, `sandi_akun`, `nama_lengkap_akun`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alamat_peserta`
+-- Struktur dari tabel `alamat_peserta`
 --
 
 CREATE TABLE `alamat_peserta` (
@@ -61,7 +63,7 @@ CREATE TABLE `alamat_peserta` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `biaya_kirim`
+-- Struktur dari tabel `biaya_kirim`
 --
 
 CREATE TABLE `biaya_kirim` (
@@ -73,7 +75,7 @@ CREATE TABLE `biaya_kirim` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_order_lelang`
+-- Struktur dari tabel `detail_order_lelang`
 --
 
 CREATE TABLE `detail_order_lelang` (
@@ -86,19 +88,28 @@ CREATE TABLE `detail_order_lelang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori_produk`
+-- Struktur dari tabel `kategori_produk`
 --
 
 CREATE TABLE `kategori_produk` (
   `id_kategori` int(5) NOT NULL,
+  `alias_kategori` varchar(100) NOT NULL,
   `nama_kategori` varchar(100) NOT NULL,
   `deskripsi_kategori` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data untuk tabel `kategori_produk`
+--
+
+INSERT INTO `kategori_produk` (`id_kategori`, `alias_kategori`, `nama_kategori`, `deskripsi_kategori`) VALUES
+(1, 'hp', 'Handphone', 'Handphone'),
+(2, 'aksesoris', 'Aksesoris', 'Aksesoris');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kota`
+-- Struktur dari tabel `kota`
 --
 
 CREATE TABLE `kota` (
@@ -109,7 +120,7 @@ CREATE TABLE `kota` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lelang`
+-- Struktur dari tabel `lelang`
 --
 
 CREATE TABLE `lelang` (
@@ -124,7 +135,7 @@ CREATE TABLE `lelang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_lelang`
+-- Struktur dari tabel `order_lelang`
 --
 
 CREATE TABLE `order_lelang` (
@@ -139,7 +150,7 @@ CREATE TABLE `order_lelang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `peserta`
+-- Struktur dari tabel `peserta`
 --
 
 CREATE TABLE `peserta` (
@@ -155,7 +166,7 @@ CREATE TABLE `peserta` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produk`
+-- Struktur dari tabel `produk`
 --
 
 CREATE TABLE `produk` (
@@ -173,113 +184,115 @@ CREATE TABLE `produk` (
 --
 
 --
--- Indexes for table `akun`
+-- Indeks untuk tabel `akun`
 --
 ALTER TABLE `akun`
   ADD PRIMARY KEY (`id_akun`),
   ADD UNIQUE KEY `user_email` (`email_akun`);
 
 --
--- Indexes for table `alamat_peserta`
+-- Indeks untuk tabel `alamat_peserta`
 --
 ALTER TABLE `alamat_peserta`
   ADD PRIMARY KEY (`id_alamat`);
 
 --
--- Indexes for table `biaya_kirim`
+-- Indeks untuk tabel `biaya_kirim`
 --
 ALTER TABLE `biaya_kirim`
   ADD PRIMARY KEY (`id_biaya_kirim`);
 
 --
--- Indexes for table `detail_order_lelang`
+-- Indeks untuk tabel `detail_order_lelang`
 --
 ALTER TABLE `detail_order_lelang`
   ADD PRIMARY KEY (`id_detail_order`);
 
 --
--- Indexes for table `kategori_produk`
+-- Indeks untuk tabel `kategori_produk`
 --
 ALTER TABLE `kategori_produk`
-  ADD PRIMARY KEY (`id_kategori`);
+  ADD PRIMARY KEY (`id_kategori`),
+  ADD UNIQUE KEY `alias_kategori` (`alias_kategori`);
 
 --
--- Indexes for table `kota`
+-- Indeks untuk tabel `kota`
 --
 ALTER TABLE `kota`
   ADD PRIMARY KEY (`id_kota`);
 
 --
--- Indexes for table `lelang`
+-- Indeks untuk tabel `lelang`
 --
 ALTER TABLE `lelang`
   ADD PRIMARY KEY (`id_lelang`);
 
 --
--- Indexes for table `order_lelang`
+-- Indeks untuk tabel `order_lelang`
 --
 ALTER TABLE `order_lelang`
   ADD PRIMARY KEY (`id_order`),
   ADD UNIQUE KEY `notrans_order` (`notrans_order`);
 
 --
--- Indexes for table `peserta`
+-- Indeks untuk tabel `peserta`
 --
 ALTER TABLE `peserta`
   ADD PRIMARY KEY (`id_peserta`),
   ADD UNIQUE KEY `email_peserta` (`email_peserta`);
 
 --
--- Indexes for table `produk`
+-- Indeks untuk tabel `produk`
 --
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`id_produk`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `akun`
+-- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
   MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `alamat_peserta`
+-- AUTO_INCREMENT untuk tabel `alamat_peserta`
 --
 ALTER TABLE `alamat_peserta`
   MODIFY `id_alamat` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `kategori_produk`
+-- AUTO_INCREMENT untuk tabel `kategori_produk`
 --
 ALTER TABLE `kategori_produk`
-  MODIFY `id_kategori` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kategori` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `kota`
+-- AUTO_INCREMENT untuk tabel `kota`
 --
 ALTER TABLE `kota`
   MODIFY `id_kota` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `order_lelang`
+-- AUTO_INCREMENT untuk tabel `order_lelang`
 --
 ALTER TABLE `order_lelang`
   MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `peserta`
+-- AUTO_INCREMENT untuk tabel `peserta`
 --
 ALTER TABLE `peserta`
   MODIFY `id_peserta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `produk`
+-- AUTO_INCREMENT untuk tabel `produk`
 --
 ALTER TABLE `produk`
   MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

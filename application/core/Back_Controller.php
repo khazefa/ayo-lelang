@@ -22,6 +22,8 @@ class Back_Controller extends MY_Controller
 		//check cache validation
 		$this->refreshCache();
 		//check for Session
+		//load session library
+		$this->load->library('session');
 		if (!$this->session->userdata('logged_in')) {
 			redirect('/admin', true);
 		}
