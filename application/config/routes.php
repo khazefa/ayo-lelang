@@ -54,11 +54,11 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 /* Routing Sign In */
-$route['admin/signin'] = 'admin/Auth/index';
+$route['admin'] = 'admin/Auth';
+$route['admin/signin'] = 'admin/Auth';
 $route['admin/check'] = 'admin/Auth/check';
 $route['admin/reset-password'] = 'admin/Auth/reset';
 $route['admin/signout'] = 'admin/Auth/signout';
 // Dashboard
-$route['admin'] = 'admin/Auth';
-$route['admin/dashboard'] = 'admin/Dashboard';
+$route['admin/dashboard'] = 'admin/Site';
 /* End Routing Sign In */
