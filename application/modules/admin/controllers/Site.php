@@ -13,8 +13,6 @@ class Site extends Back_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		//load session library
-		$this->load->library('session');
 		// $this->load->model('admin/Auth_model', 'MLog');
 	}
 
