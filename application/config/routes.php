@@ -67,3 +67,8 @@ $route['admin/dashboard'] = 'admin/Site';
 
 /* Routing Kategori Produk */
 $route['admin/kategori'] = 'admin/Kategori';
+$route['admin/kategori/add'] = 'admin/Kategori/add';
+$route['admin/kategori/create'] = 'admin/Kategori/create';
+$route['admin/kategori/edit/(:any)'] = 'admin/Kategori/edit/$1';
+$route['admin/kategori/update'] = 'admin/Kategori/update';
+$route['admin/kategori/delete/(:any)'] = 'admin/Kategori/delete/$1';
