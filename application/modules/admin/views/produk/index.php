@@ -57,11 +57,15 @@
 								<?php
 									foreach ($records as $r) {
 										$id = $r['id_produk'];
+										$nama = $r['nama_produk'];
+										$alias = $r['alias_produk'];
+										$kategori = $r['nama_kategori'];
+										$status = (int) $r['status_produk'] === 1 ? "Active" : "Deactive";
 										echo '<tr>';
-											echo '<td>'.$r['nama_produk'].'</td>';
-											echo '<td>'.$r['alias_produk'].'</td>';
-											echo '<td>'.$r['nama_kategori'].'</td>';
-											echo '<td>'.(int) $r['status_produk'] === 1 ? "Active" : "Deactive".'</td>';
+											echo '<td>'.$nama.'</td>';
+											echo '<td>'.$alias.'</td>';
+											echo '<td>'.$kategori.'</td>';
+											echo '<td>'.$status.'</td>';
 											echo '<td><a class="btn btn-warning btn-sm" href="' . base_url('admin/produk/edit/') . $id . '"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-danger btn-sm" href="' . base_url('admin/produk/delete/') . $id . '"><i class="fa fa-trash"></i> Hapus</a></td>';
 										echo '</tr>';
 									}

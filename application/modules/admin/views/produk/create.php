@@ -65,7 +65,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Deskripsi <span class="text-danger">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="fdeskripsi" name="fdeskripsi" placeholder="Deskripsi">
+								<textarea id="fdeskripsi" name="fdeskripsi" class="form-control" placeholder="Deskripsi"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Foto</label>
+                            <div class="col-sm-6">
+                                <input type="file" class="form-control" id="fgambar" name="fgambar" placeholder="Upload Foto">
+                                <p class="help-block">tipe file gambar (jpg, jpeg, png)</p>
                             </div>
                         </div>
                     </div>

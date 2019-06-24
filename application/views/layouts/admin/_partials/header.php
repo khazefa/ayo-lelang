@@ -144,10 +144,10 @@ desired effect
 				<ul class="sidebar-menu" data-widget="tree">
 					<li class="header">NAVIGATION</li>
 					<!-- Optionally, you can add icons to the links -->
-					<li><a href="<?= base_url('admin/dashboard'); ?>"><i class="fa fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-					<li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+					<li><a href="<?= base_url('admin/dashboard'); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+					<li><a href="#"><i class="fa fa-link"></i> <span>Static Link</span></a></li>
 					<li class="treeview">
-						<a href="#"><i class="fa fa-link"></i> <span>Produk</span>
+						<a href="#"><i class="fa fa-database"></i> <span>Produk</span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>
 							</span>
