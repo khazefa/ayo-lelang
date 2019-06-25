@@ -153,11 +153,11 @@ desired effect
 							</span>
 						</a>
 						<ul class="treeview-menu">
-						<?php
-						if ($role === "auctioner") {
-							?>
+							<?php
+							if ($role === "auctioner") {
+								?>
 								<li><a href="<?= base_url('admin/produk'); ?>">Katalog Lelang</a></li>
-						<?php
+							<?php
 						} else {
 							?>
 								<li><a href="<?= base_url('admin/kategori'); ?>">Kategori Produk Lelang</a></li>
@@ -166,6 +166,22 @@ desired effect
 						?>
 						</ul>
 					</li>
+					<?php
+					if ($role === "admin") {
+						?>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-truck"></i> <span>Pengiriman</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('admin/kota'); ?>">Kota</a></li>
+							</ul>
+						</li>
+					<?php
+				}
+				?>
 				</ul>
 				<!-- /.sidebar-menu -->
 			</section>
@@ -181,10 +197,10 @@ desired effect
 					<!-- <small>it all starts here</small> -->
 				</h1>
 				<!-- Use breadcrumb later
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li><a href="#">Examples</a></li>
-					<li class="active">Blank page</li>
-				</ol>
-				-->
+					<ol class="breadcrumb">
+						<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+						<li><a href="#">Examples</a></li>
+						<li class="active">Blank page</li>
+					</ol>
+					-->
 			</section>
