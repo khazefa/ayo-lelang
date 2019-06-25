@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 25, 2019 at 07:34 AM
+-- Generation Time: Jun 25, 2019 at 11:01 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
@@ -55,6 +55,15 @@ CREATE TABLE `biaya_kirim` (
   `jumlah_biaya_kirim` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `biaya_kirim`
+--
+
+INSERT INTO `biaya_kirim` (`id_biaya_kirim`, `id_kota`, `jumlah_biaya_kirim`) VALUES
+(1, 1, 9000),
+(2, 3, 9000),
+(3, 2, 9000);
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +95,15 @@ CREATE TABLE `kota` (
   `id_kota` int(11) NOT NULL,
   `nama_kota` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kota`
+--
+
+INSERT INTO `kota` (`id_kota`, `nama_kota`) VALUES
+(1, 'Jakarta Pusat'),
+(2, 'Jakarta Timur'),
+(3, 'Jakarta Selatan');
 
 -- --------------------------------------------------------
 
@@ -256,6 +274,12 @@ ALTER TABLE `akun`
   MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `biaya_kirim`
+--
+ALTER TABLE `biaya_kirim`
+  MODIFY `id_biaya_kirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
@@ -265,7 +289,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `kota`
 --
 ALTER TABLE `kota`
-  MODIFY `id_kota` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_lelang`
