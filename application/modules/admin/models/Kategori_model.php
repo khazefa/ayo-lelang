@@ -8,7 +8,7 @@
 
 class Kategori_model extends CI_Model
 {
-    protected $tbl_kategori = 'kategori_produk';
+    protected $tbl_kategori = 'kategori';
     protected $primKey = 'id_kategori';
     protected $indexKey = 'id_kategori';
     protected $order = array('nama_kategori' => 'asc'); // default order
