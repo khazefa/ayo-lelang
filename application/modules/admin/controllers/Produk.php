@@ -17,8 +17,12 @@ class Produk extends Back_Controller
 	{
 		parent::__construct();
 		$this->isLoggedIn();
-        $this->load->model('admin/Produk_model','MProduk');
-        $this->load->model('admin/Kategori_model','MKategori');
+		if ( $this->accRole === 'auctioner' ) {
+			$this->load->model('admin/Produk_model', 'MProduk');
+			$this->load->model('admin/Kategori_model', 'MKategori');
+		} else {
+			redirect('admin');
+		}
     }
 
     /**
@@ -104,7 +108,6 @@ class Produk extends Back_Controller
         $fketerangan = $this->input->post('fketerangan', TRUE);
 		$id_pelelang = (int)$this->session->userdata('accBid');
 		$fgambar = 'fgambar';
-		$message = "";
 
 		$config['upload_path']          = './uploads/products/';
 		$config['allowed_types']        = 'jpg|jpeg|png';
@@ -156,7 +159,14 @@ class Produk extends Back_Controller
         $this->global['role'] = $this->accRole;
 
 		$rs = $this->MProduk->get_data_info($fkey);
-        $data['records'] = $rs;
+		$data['records'] = $rs;
+
+		$arrWhere = array();
+		$arrOrder = array('nama_kategori' => 'ASC');
+		$limit = 0;
+
+		$rs_kategori = $this->MKategori->get_data($arrWhere, $arrOrder, $limit);
+		$data['records_kategori'] = $rs_kategori;
         $this->digiAdminLayout($data, $this->view_dir.'edit', $this->global);
     }
     
@@ -166,11 +176,36 @@ class Produk extends Back_Controller
     function update()
     {
         $fid = $this->input->post('fid', TRUE);
-        $fnama = $this->input->post('fnama', TRUE);
-        $falias = $this->input->post('falias', TRUE);
-        $fdeskripsi = $this->input->post('fdeskripsi', TRUE);
+		$fnama = $this->input->post('fnama', TRUE);
+		$fkategori = $this->input->post('fkategori', TRUE);
+		$fharga1 = $this->input->post('fharga1', TRUE);
+		$fharga2 = $this->input->post('fharga2', TRUE);
+		$fwaktu1 = $this->input->post('fwaktu1', TRUE);
+		$fwaktu2 = $this->input->post('fwaktu2', TRUE);
+		$fketerangan = $this->input->post('fketerangan', TRUE);
+		$id_pelelang = (int)$this->session->userdata('accBid');
+		$fgambar = 'fgambar';
 
-        $dataInfo = array('alias_kategori'=> $falias, 'nama_kategori'=>$fnama, 'deskripsi_kategori'=>$fdeskripsi);
+		$config['upload_path']          = './uploads/products/';
+		$config['allowed_types']        = 'jpg|jpeg|png';
+		$config['max_size']             = 2048;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		if ( $_FILES['fgambar']['size'] == 0 ) {
+			$dataInfo = array('id_kategori' => $fkategori, 'id_pelelang' => $id_pelelang, 'nama_lelang' => $fnama, 'harga_awal' => $fharga1, 'harga_maksimal' => $fharga2, 'waktu_mulai' => $fwaktu1, 'waktu_selesai' => $fwaktu2, 'keterangan' => $fketerangan);
+		} else {
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload($fgambar)) {
+				setFlashData('error', 'Gagal upload gambar ' . $this->upload->display_errors());
+				$dataInfo = array('id_kategori' => $fkategori, 'id_pelelang' => $id_pelelang, 'nama_lelang' => $fnama, 'harga_awal' => $fharga1, 'harga_maksimal' => $fharga2, 'waktu_mulai' => $fwaktu1, 'waktu_selesai' => $fwaktu2, 'keterangan' => $fketerangan);
+			} else {
+				setFlashData('success', 'Sukses upload gambar ' . $this->upload->data('file_name'));
+				$filename = $this->upload->data('file_name');       // Returns: mypic.jpg
+				$dataInfo = array('id_kategori' => $fkategori, 'id_pelelang' => $id_pelelang, 'nama_lelang' => $fnama, 'harga_awal' => $fharga1, 'harga_maksimal' => $fharga2, 'waktu_mulai' => $fwaktu1, 'waktu_selesai' => $fwaktu2, 'keterangan' => $fketerangan, 'gambar_produk' => $this->upload->data('file_name'));
+			}
+		}
+
         $result = $this->MProduk->update_data($dataInfo, $fid);
         if($result == true)
         {
