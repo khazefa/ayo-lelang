@@ -17,8 +17,12 @@ class BiayaKirim extends Back_Controller
 	{
 		parent::__construct();
 		$this->isLoggedIn();
-		$this->load->model('admin/BiayaKirim_model', 'MBiayaKirim');
-		$this->load->model('admin/Kota_model', 'MKota');
+		if ($this->accRole === 'admin') {
+			$this->load->model('admin/BiayaKirim_model', 'MBiayaKirim');
+			$this->load->model('admin/Kota_model', 'MKota');
+		} else {
+			redirect('admin');
+		}
 	}
 
 	/**
