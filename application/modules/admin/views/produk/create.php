@@ -67,13 +67,13 @@
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Waktu Mulai</label>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<input type="date" class="form-control" id="fwaktu1" name="fwaktu1" placeholder="mm/dd/yyyy">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Waktu Selesai</label>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<input type="date" class="form-control" id="fwaktu2" name="fwaktu2" placeholder="mm/dd/yyyy">
 							</div>
 						</div>
