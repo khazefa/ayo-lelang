@@ -68,7 +68,7 @@
 									$waktu_mulai = indonesian_date($r['waktu_mulai']);
 									$waktu_selesai = indonesian_date($r['waktu_selesai']);
 									$keterangan = $r['keterangan'];
-									$status = (int)$r['status_lelang'] === 1 ? "Active" : "Deactive";
+									$status = $r['status_lelang'] === "active" ? "Active" : "End";
 									echo '<tr>';
 									echo '<td>' . $foto . '</td>';
 									echo '<td>' . $nama . '</td>';
