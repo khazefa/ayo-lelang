@@ -1,82 +1,94 @@
 <!-- Main content -->
 <section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Default box -->
-            <div class="box">
-                <div class="box-header with-border">
-					<button type="button" class="btn btn-default" onclick="location.href='<?php echo base_url('admin/produk/add');?>'" title="Add New">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- Default box -->
+			<div class="box">
+				<div class="box-header with-border">
+					<button type="button" class="btn btn-default" onclick="location.href='<?php echo base_url('admin/produk/add'); ?>'" title="Add New">
 						<i class="fa fa-plus-circle"></i> Tambah
 					</button>
-                    <!-- <h3 class="box-title"><?= $contentTitle;?></h3> -->
+					<!-- <h3 class="box-title"><?= $contentTitle; ?></h3> -->
 
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                title="Collapse">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="box-body">
-                    <p class="text-success text-center">
-                        <?php
-                        $error = $this->session->flashdata('error');
-                        if($error)
-                        {
-                        ?>
-                        <div class="alert alert-danger alert-dismissable" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <?php echo $error; ?>                    
-                        </div>
-                        <?php
-                        }
-                        $success = $this->session->flashdata('success');
-                        if($success)
-                        {
-                        ?>
-                        <div class="alert alert-success alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <?php echo $success; ?>                    
-                        </div>
-                        <?php } ?>
-                    </p>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+							<i class="fa fa-minus"></i>
+						</button>
+					</div>
+				</div>
 
-                    <div class="table-responsive">
-                        <table id="data_grid" class="table table-bordered table-hover">
-                            <thead>
+				<div class="box-body">
+					<p class="text-success text-center">
+						<?php
+						$error = $this->session->flashdata('error');
+						if ($error) {
+							?>
+							<div class="alert alert-danger alert-dismissable" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<?php echo $error; ?>
+							</div>
+						<?php
+					}
+					$success = $this->session->flashdata('success');
+					if ($success) {
+						?>
+							<div class="alert alert-success alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<?php echo $success; ?>
+							</div>
+						<?php } ?>
+					</p>
+
+					<div class="table-responsive">
+						<table id="data_grid" class="table table-bordered table-hover">
+							<thead>
 								<tr>
-									<th>Nama</th>
-									<th>Alias</th>
+									<th>Foto Barang</th>
+									<th>Nama Barang</th>
 									<th>Kategori</th>
+									<th>Harga Awal</th>
+									<th>Harga Maksimal</th>
+									<th>Waktu Mulai</th>
+									<th>Waktu Selesai</th>
 									<th>Status</th>
 									<th>&nbsp;</th>
 								</tr>
-                            </thead>
-                            <tbody>
+							</thead>
+							<tbody>
 								<?php
-									foreach ($records as $r) {
-										$id = $r['id_produk'];
-										$nama = $r['nama_produk'];
-										$alias = $r['alias_produk'];
-										$kategori = $r['nama_kategori'];
-										$status = (int) $r['status_produk'] === 1 ? "Active" : "Deactive";
-										echo '<tr>';
-											echo '<td>'.$nama.'</td>';
-											echo '<td>'.$alias.'</td>';
-											echo '<td>'.$kategori.'</td>';
-											echo '<td>'.$status.'</td>';
-											echo '<td><a class="btn btn-warning btn-sm" href="' . base_url('admin/produk/edit/') . $id . '"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-danger btn-sm" href="' . base_url('admin/produk/delete/') . $id . '"><i class="fa fa-trash"></i> Hapus</a></td>';
-										echo '</tr>';
-									}
+								foreach ($records as $r) {
+									$id = $r['id_lelang'];
+									$foto = '<img src="' . base_url() . '/uploads/products/' . $r['gambar_produk'] . '" width="100px">';
+									$nama = $r['nama_produk'];
+									$kategori = $r['nama_kategori'];
+									$harga_awal = $r['harga_awal'];
+									$harga_awal_rp = "Rp. " . format_rupiah($r['harga_awal']);
+									$harga_akhir = $r['harga_akhir'];
+									$harga_akhir_rp = "Rp. " . format_rupiah($r['harga_akhir']);
+									$waktu_mulai = tgl_indo($r['waktu_mulai']);
+									$waktu_selesai = tgl_indo($r['waktu_selesai']);
+									$keterangan = $r['keterangan'];
+									$status = (int)$r['status_lelang'] === 1 ? "Active" : "Deactive";
+									echo '<tr>';
+									echo '<td>' . $foto . '</td>';
+									echo '<td>' . $nama . '</td>';
+									echo '<td>' . $kategori . '</td>';
+									echo '<td>' . $harga_awal_rp . '</td>';
+									echo '<td>' . $harga_akhir_rp . '</td>';
+									echo '<td>' . $waktu_mulai . '</td>';
+									echo '<td>' . $waktu_selesai . '</td>';
+									echo '<td>' . $status . '</td>';
+									echo '<td><a class="btn btn-warning btn-sm" href="' . base_url('admin/produk/edit/') . $id . '"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-danger btn-sm" href="' . base_url('admin/produk/delete/') . $id . '"><i class="fa fa-trash"></i> Hapus</a></td>';
+									echo '</tr>';
+								}
 								?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 
-        </div>
-    </div>
+		</div>
+	</div>
 </section>
 <!-- /.content -->
