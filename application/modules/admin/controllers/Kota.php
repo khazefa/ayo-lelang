@@ -17,7 +17,11 @@ class Kota extends Back_Controller
 	{
 		parent::__construct();
 		$this->isLoggedIn();
-		$this->load->model('admin/Kota_model', 'MKota');
+		if ($this->accRole === 'admin') {
+			$this->load->model('admin/Kota_model', 'MKota');
+		} else {
+			redirect('admin');
+		}
 	}
 
 	/**
