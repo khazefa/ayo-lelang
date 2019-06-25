@@ -153,7 +153,7 @@ desired effect
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="<?= base_url('admin/kategori'); ?>">Kategori</a></li>
+							<li><a href="<?= base_url('admin/kategori'); ?>">Kategori Produk Lelang</a></li>
 							<li><a href="<?= base_url('admin/produk'); ?>">Katalog</a></li>
 						</ul>
 					</li>
