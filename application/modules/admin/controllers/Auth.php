@@ -47,8 +47,9 @@ class Auth extends MY_Controller
 
 		if ($email && $password) {
 			$result = $this->MAuth->auth_email($email, $password);
+			$result2 = $this->MAuth->auth_email_p($email, $password);
 
-			if (count($result) > 0) {
+			if ( count($result) > 0 ) {
 				foreach ($result as $res) {
 					$sessionArray = array(
 						'accBid' => $res->id_akun,
@@ -56,6 +57,19 @@ class Auth extends MY_Controller
 						'accEmail' => $res->email_akun,
 						'accName' => $res->nama_lengkap_akun,
 						'accRole' => $res->level_akun,
+						'logged_in' => TRUE
+					);
+				}
+				$this->session->set_userdata($sessionArray);
+				redirect('/admin/dashboard');
+			} elseif ( count($result2) > 0 ) {
+				foreach ($result2 as $res) {
+					$sessionArray = array(
+						'accBid' => $res->id_pelelang,
+						'accKey' => $res->akun_pelelang,
+						'accEmail' => $res->email_pelelang,
+						'accName' => $res->nama_pelelang,
+						'accRole' => 'auctioner',
 						'logged_in' => TRUE
 					);
 				}
