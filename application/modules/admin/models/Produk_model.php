@@ -8,11 +8,12 @@
 
 class Produk_model extends CI_Model
 {
-    protected $tbl_produk = 'produk';
-    protected $tbl_kategori = 'kategori_produk';
-    protected $primKey = 'id_produk';
-    protected $indexKey = 'alias_produk';
-    protected $order = array('nama_produk' => 'asc'); // default order
+    protected $tbl_produk = 'lelang';
+    protected $tbl_kategori = 'kategori';
+    protected $tbl_pelelang = 'pelelang';
+    protected $primKey = 'id_lelang';
+    protected $indexKey = 'id_lelang';
+    protected $order = array('nama_lelang' => 'asc'); // default order
 
     function __construct()
     {
@@ -92,18 +93,17 @@ class Produk_model extends CI_Model
     }
 
     // This function used to get list data by this table only, not join table
-    function get_data_join_kategori($arrWhere = array(), $arrOrder = array(), $limit = 0){
+    function get_data_join_data($arrWhere = array(), $arrOrder = array(), $limit = 0){
         $rs = array();
         //Flush Param
         $this->db->flush_cache();
         
-		$this->db->select('p.id_produk, p.alias_produk, p.id_kategori, p.nama_produk, p.deskripsi_produk, 
-			p.status_produk, k.nama_kategori, k.deskripsi_kategori');
+		$this->db->select('p.id_lelang, p.id_kategori, k.nama_kategori, p.id_pelelang, pl.nama_pelelang, p.nama_lelang, p.gambar_produk, p.harga_awal, p.harga_maksimal, p.waktu_mulai, p.waktu_selesai, p.keterangan, p.status_lelang');
         $this->db->from($this->tbl_produk.' as p');
         $this->db->join($this->tbl_kategori.' as k','p.id_kategori = k.id_kategori', 'both');
+        $this->db->join($this->tbl_pelelang.' as pl','p.id_pelelang = pl.id_pelelang', 'both');
 
         if(empty($arrWhere)){
-            // $rs = array();
             //Limit
 			if ($limit > 0){
 				$this->db->limit($limit);
