@@ -145,7 +145,6 @@ desired effect
 					<li class="header">NAVIGATION</li>
 					<!-- Optionally, you can add icons to the links -->
 					<li><a href="<?= base_url('admin/dashboard'); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-					<li><a href="#"><i class="fa fa-link"></i> <span>Static Link</span></a></li>
 					<li class="treeview">
 						<a href="#"><i class="fa fa-database"></i> <span>Produk</span>
 							<span class="pull-right-container">
@@ -156,7 +155,7 @@ desired effect
 							<?php
 							if ($role === "auctioner") {
 								?>
-								<li><a href="<?= base_url('admin/produk'); ?>">Katalog Lelang</a></li>
+								<li><a href="<?= base_url('admin/produk'); ?>">Produk Lelang</a></li>
 							<?php
 						} else {
 							?>
