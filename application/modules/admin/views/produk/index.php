@@ -59,14 +59,14 @@
 								foreach ($records as $r) {
 									$id = $r['id_lelang'];
 									$foto = '<img src="' . base_url() . '/uploads/products/' . $r['gambar_produk'] . '" width="100px">';
-									$nama = $r['nama_produk'];
+									$nama = $r['nama_lelang'];
 									$kategori = $r['nama_kategori'];
 									$harga_awal = $r['harga_awal'];
-									$harga_awal_rp = "Rp. " . format_rupiah($r['harga_awal']);
-									$harga_akhir = $r['harga_akhir'];
-									$harga_akhir_rp = "Rp. " . format_rupiah($r['harga_akhir']);
-									$waktu_mulai = tgl_indo($r['waktu_mulai']);
-									$waktu_selesai = tgl_indo($r['waktu_selesai']);
+									$harga_awal_rp = "Rp. " . format_rupiah($harga_awal);
+									$harga_akhir = $r['harga_maksimal'];
+									$harga_akhir_rp = "Rp. " . format_rupiah($harga_akhir);
+									$waktu_mulai = indonesian_date($r['waktu_mulai']);
+									$waktu_selesai = indonesian_date($r['waktu_selesai']);
 									$keterangan = $r['keterangan'];
 									$status = (int)$r['status_lelang'] === 1 ? "Active" : "Deactive";
 									echo '<tr>';
