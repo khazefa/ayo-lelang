@@ -83,5 +83,17 @@ class Back_Controller extends MY_Controller
         } else {
             return false;
         }
-    }
+	}
+
+	/**
+	 * This function is used to check the access
+	 */
+	function isAuctioner()
+	{
+		if ($this->accRole === "auctioner") {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
