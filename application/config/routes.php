@@ -72,3 +72,19 @@ $route['admin/kategori/create'] = 'admin/Kategori/create';
 $route['admin/kategori/edit/(:any)'] = 'admin/Kategori/edit/$1';
 $route['admin/kategori/update'] = 'admin/Kategori/update';
 $route['admin/kategori/delete/(:any)'] = 'admin/Kategori/delete/$1';
+
+/* Routing Produk */
+$route['admin/produk'] = 'admin/Produk';
+$route['admin/produk/add'] = 'admin/Produk/add';
+$route['admin/produk/create'] = 'admin/Produk/create';
+$route['admin/produk/edit/(:any)'] = 'admin/Produk/edit/$1';
+$route['admin/produk/update'] = 'admin/Produk/update';
+$route['admin/produk/delete/(:any)'] = 'admin/Produk/delete/$1';
+
+/* Routing Kota */
+$route['admin/kota'] = 'admin/Kota';
+$route['admin/kota/add'] = 'admin/Kota/add';
+$route['admin/kota/create'] = 'admin/Kota/create';
+$route['admin/kota/edit/(:any)'] = 'admin/Kota/edit/$1';
+$route['admin/kota/update'] = 'admin/Kota/update';
+$route['admin/kota/delete/(:any)'] = 'admin/Kota/delete/$1';
