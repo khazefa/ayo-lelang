@@ -177,6 +177,7 @@ desired effect
 							</a>
 							<ul class="treeview-menu">
 								<li><a href="<?= base_url('admin/kota'); ?>">Kota</a></li>
+								<li><a href="<?= base_url('admin/biaya-kirim'); ?>">Biaya Kirim</a></li>
 							</ul>
 						</li>
 					<?php
