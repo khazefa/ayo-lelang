@@ -100,6 +100,13 @@ class BiayaKirim extends Back_Controller
 
 		$rs = $this->MBiayaKirim->get_data_info($fkey);
 		$data['records'] = $rs;
+
+		$arrWhere = array();
+		$arrOrder = array('nama_kota' => 'ASC');
+		$limit = 0;
+
+		$rs_kota = $this->MKota->get_data($arrWhere, $arrOrder, $limit);
+		$data['records_kota'] = $rs_kota;
 		$this->digiAdminLayout($data, $this->view_dir . 'edit', $this->global);
 	}
 
@@ -109,9 +116,10 @@ class BiayaKirim extends Back_Controller
 	function update()
 	{
 		$fid = $this->input->post('fid', TRUE);
-		$fnama = $this->input->post('fnama', TRUE);
+		$fkota = $this->input->post('fkota', TRUE);
+		$fharga = $this->input->post('fharga', TRUE);
 
-		$dataInfo = array('nama_kota' => $fnama);
+		$dataInfo = array('id_kota' => $fkota, 'jumlah_biaya_kirim' => $fharga);
 		$result = $this->MBiayaKirim->update_data($dataInfo, $fid);
 		if ($result == true) {
 			setFlashData('success', 'Data is successfully updated');
