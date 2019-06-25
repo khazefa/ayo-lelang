@@ -30,9 +30,9 @@ class Kategori extends Back_Controller
 		$arrOrder = array('nama_kategori'=>'ASC');
 		$limit = 0;
 		
-		$this->global['pageTitle'] = 'Kategori';
-		$this->global['contentHeader'] = 'Kategori';
-		$this->global['contentTitle'] = 'Kategori';
+		$this->global['pageTitle'] = 'Kategori Produk Lelang';
+		$this->global['contentHeader'] = 'Kategori Produk Lelang';
+		$this->global['contentTitle'] = 'Kategori Produk Lelang';
 		$this->global['name'] = $this->accName;
 		$this->global['role'] = $this->accRole;
 
