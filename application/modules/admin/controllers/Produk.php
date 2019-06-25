@@ -97,50 +97,45 @@ class Produk extends Back_Controller
     {
         $fnama = $this->input->post('fnama', TRUE);
         $fkategori = $this->input->post('fkategori', TRUE);
-        $falias = $this->input->post('falias', TRUE);
-        $fdeskripsi = $this->input->post('fdeskripsi', TRUE);
+        $fharga1 = $this->input->post('fharga1', TRUE);
+        $fharga2 = $this->input->post('fharga2', TRUE);
+        $fwaktu1 = $this->input->post('fwaktu1', TRUE);
+        $fwaktu2 = $this->input->post('fwaktu2', TRUE);
+        $fketerangan = $this->input->post('fketerangan', TRUE);
+		$id_pelelang = (int)$this->session->userdata('accBid');
 		$fgambar = 'fgambar';
 		$message = "";
-		
-        $count = $this->MProduk->check_data_exists(array('alias_produk' => $falias));
-        if ($count > 0)
-        { 
-            setFlashData('error', 'Data sudah ada, harap isi dengan data lainnya');
-            redirect('admin/produk/add');
-        }
-        else
-        { 
-			$config['upload_path']          = './uploads/products/';
-			$config['allowed_types']        = 'jpg|png';
-			$config['max_size']             = 2048;
-			$config['max_width']            = 1024;
-			$config['max_height']           = 768;
 
-			$this->load->library('upload', $config);
-			if ( ! $this->upload->do_upload($fgambar))
-			{
-				setFlashData('error', 'Gagal upload gambar '. $this->upload->display_errors());
-				$dataInfo = array('id_kategori'=>$fkategori, 'alias_produk'=> $falias, 'nama_produk'=>$fnama, 'deskripsi_produk'=>$fdeskripsi);
-			}
-			else
-			{
-				setFlashData('success', 'Sukses upload gambar ' . $this->upload->data('file_name'));
-				$filename = $this->upload->data('file_name');       // Returns: mypic.jpg
-				$dataInfo = array('id_kategori'=>$fkategori, 'alias_produk'=> $falias, 'nama_produk'=>$fnama, 'deskripsi_produk'=>$fdeskripsi, 'gambar_produk'=>$this->upload->data('file_name'));
-			}
+		$config['upload_path']          = './uploads/products/';
+		$config['allowed_types']        = 'jpg|jpeg|png';
+		$config['max_size']             = 2048;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
 
-            $result = $this->MProduk->insert_data($dataInfo);
-            if($result > 0)
-            {
-                setFlashData('success', 'Data telah sukses ditambahkan');
-                redirect('admin/produk');
-            }
-            else
-            {
-                setFlashData('error', 'Data telah gagal ditambahkan');
-                redirect('admin/produk/add');
-            }
-        }
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload($fgambar))
+		{
+			setFlashData('error', 'Gagal upload gambar '. $this->upload->display_errors());
+			$dataInfo = array('id_kategori'=>$fkategori, 'id_pelelang'=> $id_pelelang, 'nama_lelang'=>$fnama, 'harga_awal'=>$fharga1, 'harga_maksimal'=>$fharga2, 'waktu_mulai'=>$fwaktu1, 'waktu_selesai'=>$fwaktu2, 'keterangan'=>$fketerangan);
+		}
+		else
+		{
+			setFlashData('success', 'Sukses upload gambar ' . $this->upload->data('file_name'));
+			$filename = $this->upload->data('file_name');       // Returns: mypic.jpg
+			$dataInfo = array('id_kategori' => $fkategori, 'id_pelelang' => $id_pelelang, 'nama_lelang' => $fnama, 'harga_awal' => $fharga1, 'harga_maksimal' => $fharga2, 'waktu_mulai' => $fwaktu1, 'waktu_selesai' => $fwaktu2, 'keterangan' => $fketerangan, 'gambar_produk'=> $this->upload->data('file_name'));
+		}
+
+		$result = $this->MProduk->insert_data($dataInfo);
+		if($result > 0)
+		{
+			setFlashData('success', 'Data telah sukses ditambahkan');
+			redirect('admin/produk');
+		}
+		else
+		{
+			setFlashData('error', 'Data telah gagal ditambahkan');
+			redirect('admin/produk/add');
+		}
     }
 
     /**
