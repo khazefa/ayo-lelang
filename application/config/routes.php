@@ -88,3 +88,11 @@ $route['admin/kota/create'] = 'admin/Kota/create';
 $route['admin/kota/edit/(:any)'] = 'admin/Kota/edit/$1';
 $route['admin/kota/update'] = 'admin/Kota/update';
 $route['admin/kota/delete/(:any)'] = 'admin/Kota/delete/$1';
+
+/* Routing Biaya Kirim */
+$route['admin/biaya-kirim'] = 'admin/BiayaKirim';
+$route['admin/biaya-kirim/add'] = 'admin/BiayaKirim/add';
+$route['admin/biaya-kirim/create'] = 'admin/BiayaKirim/create';
+$route['admin/biaya-kirim/edit/(:any)'] = 'admin/BiayaKirim/edit/$1';
+$route['admin/biaya-kirim/update'] = 'admin/BiayaKirim/update';
+$route['admin/biaya-kirim/delete/(:any)'] = 'admin/BiayaKirim/delete/$1';
