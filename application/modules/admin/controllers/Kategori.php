@@ -17,7 +17,11 @@ class Kategori extends Back_Controller
 	{
 		parent::__construct();
 		$this->isLoggedIn();
-        $this->load->model('admin/Kategori_model','MKategori');
+		if ($this->accRole === 'admin') {
+			$this->load->model('admin/Kategori_model', 'MKategori');
+		} else {
+			redirect('admin');
+		}
     }
 
     /**
