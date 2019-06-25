@@ -37,9 +37,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 	<!-- jQuery 3 -->
-	<script src="<?= base_url('assets/jquery/dist/jquery.min.js');?>"></script>
+	<script src="<?= base_url('assets/jquery/dist/jquery.min.js'); ?>"></script>
 	<!-- Bootstrap 3.3.7 -->
-	<script src="<?= base_url('assets/bootstrap/dist/js/bootstrap.min.js');?>"></script>
+	<script src="<?= base_url('assets/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -153,8 +153,17 @@ desired effect
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="<?= base_url('admin/kategori'); ?>">Kategori Produk Lelang</a></li>
-							<li><a href="<?= base_url('admin/produk'); ?>">Katalog</a></li>
+						<?php
+						if ($role === "auctioner") {
+							?>
+								<li><a href="<?= base_url('admin/produk'); ?>">Katalog Lelang</a></li>
+						<?php
+						} else {
+							?>
+								<li><a href="<?= base_url('admin/kategori'); ?>">Kategori Produk Lelang</a></li>
+							<?php
+						}
+						?>
 						</ul>
 					</li>
 				</ul>
@@ -168,7 +177,7 @@ desired effect
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					<?= $contentHeader;?>
+					<?= $contentHeader; ?>
 					<!-- <small>it all starts here</small> -->
 				</h1>
 				<!-- Use breadcrumb later
