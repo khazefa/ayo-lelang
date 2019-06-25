@@ -28,8 +28,9 @@ class Produk extends Back_Controller
 	{
         $rs = array();
 		$arrWhere = array();
-		$arrOrder = array('nama_produk'=>'ASC');
+		$arrOrder = array('p.nama_lelang'=>'ASC');
 		$limit = 0;
+		$id_pelelang = (int) $this->session->userdata('accBid');
 		
 		$this->global['pageTitle'] = 'Produk';
 		$this->global['contentHeader'] = 'Produk';
@@ -37,7 +38,8 @@ class Produk extends Back_Controller
 		$this->global['name'] = $this->accName;
 		$this->global['role'] = $this->accRole;
 
-		$rs = $this->MProduk->get_data_join_kategori($arrWhere, $arrOrder, $limit);
+		$arrWhere = array('p.id_pelelang' => $id_pelelang);
+		$rs = $this->MProduk->get_data_join_data($arrWhere, $arrOrder, $limit);
         $data['records'] = $rs;
 		$this->digiAdminLayout($data, $this->view_dir.'index', $this->global);
     }
