@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 25, 2019 at 07:07 AM
+-- Generation Time: Jun 25, 2019 at 07:29 AM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
@@ -140,6 +140,14 @@ CREATE TABLE `pelelang` (
   `tgl_daftar_pelelang` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `pelelang`
+--
+
+INSERT INTO `pelelang` (`id_pelelang`, `nama_pelelang`, `akun_pelelang`, `sandi_pelelang`, `email_pelelang`, `telepon_pelelang`, `status_pelelang`, `alamat_pelelang`, `tgl_daftar_pelelang`) VALUES
+(1, 'Fajar Hidayati', 'auctioner01', 'a62657dc10df0e8b98a651cb19e465f9a131087a', 'auctioner01@example.com', '08129999999', 1, 'Apartemen Ula Ilu Tower Melati Lantai 8 No.44\r\nJl. Kacang Kapri Muda Kav. 13\r\nUtan Kayu Selatan, Matraman, Jakarta Timur, Indonesia, 13120', '2019-06-20 00:00:00'),
+(2, 'Laisa ahza fathia akbar', 'auctioner02', 'c493d328a59c1aa1a091af2b2db30e40281d8f4b', 'auctioner02@example.com', '08129999876', 1, 'Jl. Cinta Boulevard No.3 RT 07/02\r\nBintaro, Pesanggrahan, Jaksel, 12330', '2019-06-21 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -269,7 +277,7 @@ ALTER TABLE `order_lelang`
 -- AUTO_INCREMENT for table `pelelang`
 --
 ALTER TABLE `pelelang`
-  MODIFY `id_pelelang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pelelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `peserta`
