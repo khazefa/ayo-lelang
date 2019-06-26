@@ -114,3 +114,12 @@ $route['admin/pelelang/edit/(:any)'] = 'admin/Pelelang/edit/$1';
 $route['admin/pelelang/profil/(:any)'] = 'admin/Pelelang/profil/$1';
 $route['admin/pelelang/update'] = 'admin/Pelelang/update';
 $route['admin/pelelang/delete/(:any)'] = 'admin/Pelelang/delete/$1';
+
+/* Routing Peserta */
+$route['admin/peserta'] = 'admin/Peserta';
+$route['admin/peserta/add'] = 'admin/Peserta/add';
+$route['admin/peserta/create'] = 'admin/Peserta/create';
+$route['admin/peserta/edit/(:any)'] = 'admin/Peserta/edit/$1';
+$route['admin/peserta/profil/(:any)'] = 'admin/Peserta/profil/$1';
+$route['admin/peserta/update'] = 'admin/Peserta/update';
+$route['admin/peserta/delete/(:any)'] = 'admin/Peserta/delete/$1';
