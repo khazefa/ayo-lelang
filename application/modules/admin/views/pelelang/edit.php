@@ -13,7 +13,7 @@
 				</div>
 				<!-- /.box-header -->
 				<form class="form-horizontal" action="<?php echo base_url('admin/pelelang/update'); ?>" method="POST" role="form">
-					<input type="hidden" name="fid" id="fid" value="<?= $records[0]['nama_pelelang']; ?>">
+					<input type="hidden" name="fid" id="fid" value="<?= $records[0]['akun_pelelang']; ?>">
 					<div class="box-body">
 						<p class="text-success text-center">
 							<?php
@@ -70,6 +70,21 @@
 							<label class="col-sm-3 control-label">Alamat</label>
 							<div class="col-sm-6">
 								<textarea id="falamat" name="falamat" class="form-control"><?= $records[0]['alamat_pelelang']; ?></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Status</label>
+							<div class="col-sm-4">
+								<select name="fstatus" id="fstatus" class="form-control">
+									<option value="" selected>Pilih</option>
+									<?php
+										$status_a = (int) $records[0]['status_pelelang'] === 1 ? 'selected' : '';
+										$status_n = (int) $records[0]['status_pelelang'] === 0 ? 'selected' : '';
+
+										echo '<option value="1" ' . $status_a . '>Active</option> ';
+										echo '<option value="0" ' . $status_n . '>Deactive</option> ';
+									?>
+								</select>
 							</div>
 						</div>
 					</div>
