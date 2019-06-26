@@ -96,3 +96,21 @@ $route['admin/biaya-kirim/create'] = 'admin/BiayaKirim/create';
 $route['admin/biaya-kirim/edit/(:any)'] = 'admin/BiayaKirim/edit/$1';
 $route['admin/biaya-kirim/update'] = 'admin/BiayaKirim/update';
 $route['admin/biaya-kirim/delete/(:any)'] = 'admin/BiayaKirim/delete/$1';
+
+/* Routing Akun */
+$route['admin/akun'] = 'admin/Akun';
+$route['admin/akun/add'] = 'admin/Akun/add';
+$route['admin/akun/create'] = 'admin/Akun/create';
+$route['admin/akun/edit/(:any)'] = 'admin/Akun/edit/$1';
+$route['admin/akun/profil/(:any)'] = 'admin/Akun/profil/$1';
+$route['admin/akun/update'] = 'admin/Akun/update';
+$route['admin/akun/delete/(:any)'] = 'admin/Akun/delete/$1';
+
+/* Routing Pelelang */
+$route['admin/pelelang'] = 'admin/Pelelang';
+$route['admin/pelelang/add'] = 'admin/Pelelang/add';
+$route['admin/pelelang/create'] = 'admin/Pelelang/create';
+$route['admin/pelelang/edit/(:any)'] = 'admin/Pelelang/edit/$1';
+$route['admin/pelelang/profil/(:any)'] = 'admin/Pelelang/profil/$1';
+$route['admin/pelelang/update'] = 'admin/Pelelang/update';
+$route['admin/pelelang/delete/(:any)'] = 'admin/Pelelang/delete/$1';
