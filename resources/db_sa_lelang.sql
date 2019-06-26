@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 25, 2019 at 11:01 PM
+-- Generation Time: Jun 26, 2019 at 07:37 AM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
@@ -122,8 +122,15 @@ CREATE TABLE `lelang` (
   `waktu_mulai` datetime NOT NULL,
   `waktu_selesai` datetime NOT NULL,
   `keterangan` text NOT NULL,
-  `status_lelang` enum('active','end') NOT NULL
+  `status_lelang` enum('active','end') NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `lelang`
+--
+
+INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, `gambar_produk`, `harga_awal`, `harga_maksimal`, `waktu_mulai`, `waktu_selesai`, `keterangan`, `status_lelang`) VALUES
+(1, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active');
 
 -- --------------------------------------------------------
 
@@ -290,6 +297,12 @@ ALTER TABLE `kategori`
 --
 ALTER TABLE `kota`
   MODIFY `id_kota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `lelang`
+--
+ALTER TABLE `lelang`
+  MODIFY `id_lelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_lelang`
