@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 26, 2019 at 07:37 AM
+-- Generation Time: Jun 26, 2019 at 08:27 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
@@ -171,7 +171,8 @@ CREATE TABLE `pelelang` (
 
 INSERT INTO `pelelang` (`id_pelelang`, `nama_pelelang`, `akun_pelelang`, `sandi_pelelang`, `email_pelelang`, `telepon_pelelang`, `status_pelelang`, `alamat_pelelang`, `tgl_daftar_pelelang`) VALUES
 (1, 'Fajar Hidayati', 'auctioner01', 'a62657dc10df0e8b98a651cb19e465f9a131087a', 'auctioner01@example.com', '08129999999', 1, 'Apartemen Ula Ilu Tower Melati Lantai 8 No.44\r\nJl. Kacang Kapri Muda Kav. 13\r\nUtan Kayu Selatan, Matraman, Jakarta Timur, Indonesia, 13120', '2019-06-20 00:00:00'),
-(2, 'Laisa ahza fathia akbar', 'auctioner02', 'c493d328a59c1aa1a091af2b2db30e40281d8f4b', 'auctioner02@example.com', '08129999876', 1, 'Jl. Cinta Boulevard No.3 RT 07/02\r\nBintaro, Pesanggrahan, Jaksel, 12330', '2019-06-21 00:00:00');
+(2, 'Laisa Ahza', 'auctioner02', 'c493d328a59c1aa1a091af2b2db30e40281d8f4b', 'auctioner02@example.com', '08129999876', 1, 'Jl. Cinta Boulevard No.3 RT 07/02\r\nBintaro, Pesanggrahan, Jaksel, 12330', '2019-06-21 00:00:00'),
+(3, 'Udin Komarudin', 'auctioner03', '7ab3494a54d74915d4ca3baf5922bbb1085ec571', 'auctioner03@example.com', '081297373932', 0, 'Perumahan Griya Mandala, Jl. Kehormatan Blok A No.19 Rt.002 Rw.08\r\nDuri Kepa, Kebon Jeruk, Jakarta Barat, Indonesia, 11510', '2019-06-26 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -190,6 +191,13 @@ CREATE TABLE `peserta` (
   `alamat_peserta` text NOT NULL,
   `tgl_daftar_peserta` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `peserta`
+--
+
+INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_peserta`, `email_peserta`, `telepon_peserta`, `status_peserta`, `alamat_peserta`, `tgl_daftar_peserta`) VALUES
+(1, 'Rudiansyah Putra', 'rudiansyah123', 'rudiansyah123', 'rudiansyah123@example.com', '085782363873', 1, 'Jl Anggrek 3 No 2 Kayu Putih Jakarta Timur', '2019-06-24 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -314,13 +322,13 @@ ALTER TABLE `order_lelang`
 -- AUTO_INCREMENT for table `pelelang`
 --
 ALTER TABLE `pelelang`
-  MODIFY `id_pelelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pelelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `peserta`
 --
 ALTER TABLE `peserta`
-  MODIFY `id_peserta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_peserta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
