@@ -106,7 +106,13 @@ desired effect
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">Profile</a>
+										<?php
+										if ($this->session->userdata('accRole') === "admin") {
+											echo '<a href="' . base_url("admin/akun/profil/") . $this->session->userdata("accKey") . '" class="btn btn-default btn-flat">Profile</a>';
+										} else {
+											echo '<a href="' . base_url("admin/pelelang/profil/") . $this->session->userdata("accKey") . '" class="btn btn-default btn-flat">Profile</a>';
+										}
+										?>
 									</div>
 									<div class="pull-right">
 										<a href="<?= base_url('admin/signout'); ?>" class="btn btn-default btn-flat">Sign out</a>
