@@ -42,15 +42,18 @@ class Pelelang extends Back_Controller
 		$this->digiAdminLayout($data, $this->view_dir . 'create', $this->global);
 	}
 
-	public function insert()
+	public function create()
 	{
 		$fusername = $this->input->post('fusername', TRUE);
 		$fpassword = $this->input->post('fpassword', TRUE);
 		$password = sha1($fpassword);
 		$fnama = $this->input->post('fnama', TRUE);
 		$femail = $this->input->post('femail', TRUE);
+		$ftelepon = $this->input->post('ftelepon', TRUE);
+		$falamat = $this->input->post('falamat', TRUE);
+		$tgl_daftar = date('Y-m-d');
 
-		$dataInfo = array('akun_pelelang' => $fusername, 'sandi_pelelang' => $password, 'nama_pelelang' => $fnama, 'email_pelelang' => $femail);
+		$dataInfo = array('akun_pelelang' => $fusername, 'sandi_pelelang' => $password, 'nama_pelelang' => $fnama, 'email_pelelang' => $femail, 'telepon_pelelang' => $ftelepon, 'alamat_pelelang' => $falamat, 'tgl_daftar_pelelang' => $tgl_daftar);
 		$result = $this->MPelelang->insert_data($dataInfo);
 
 		if ($result > 0) {
