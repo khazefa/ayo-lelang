@@ -49,9 +49,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'store/Site';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+/** ----------------------------------------------------------------------- */
+/** Store Controller */
+/** ----------------------------------------------------------------------- */
+
+/* Routing Home */
+$route['home'] = 'store/Site';
+$route['signin'] = 'store/Auth/check';
+
+/** ----------------------------------------------------------------------- */
+/** End Store Controller */
+/** ----------------------------------------------------------------------- */
+
+/** ----------------------------------------------------------------------- */
+/** Admin Controller */
+/** ----------------------------------------------------------------------- */
 
 /* Routing Sign In */
 $route['admin'] = 'admin/Auth';
@@ -60,7 +76,6 @@ $route['admin/check'] = 'admin/Auth/check';
 $route['admin/reset-password'] = 'admin/Auth/reset';
 $route['admin/signout'] = 'admin/Auth/signout';
 /* End Routing Sign In */
-
 
 /* Routing Dashboard */
 $route['admin/dashboard'] = 'admin/Site';
@@ -123,3 +138,7 @@ $route['admin/peserta/edit/(:any)'] = 'admin/Peserta/edit/$1';
 $route['admin/peserta/profil/(:any)'] = 'admin/Peserta/profil/$1';
 $route['admin/peserta/update'] = 'admin/Peserta/update';
 $route['admin/peserta/delete/(:any)'] = 'admin/Peserta/delete/$1';
+
+/** ----------------------------------------------------------------------- */
+/** End Admin Controller */
+/** ----------------------------------------------------------------------- */
