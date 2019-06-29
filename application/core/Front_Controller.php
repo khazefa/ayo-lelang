@@ -23,6 +23,14 @@ class Front_Controller extends MY_Controller
 		//check for Session
 		//load session library
 		$this->load->library('session');
+		$this->load->model('store/Kategori_model', 'MKategori');
+
+		$rs = array();
+		$arrWhere = array();
+		$limit = 0;
+		
+		$rs_categories = $this->MKategori->get_data($arrWhere, array('nama_kategori' => 'ASC'), $limit);
+		$this->global['categories'] = $rs_categories;
 	}
 	/**
 	 * On browser back button hit
@@ -55,7 +63,6 @@ class Front_Controller extends MY_Controller
 			$this->uEmail = $this->session->userdata('uEmail');
 
 			$this->global['name'] = $this->uName;
-			$this->global['categories'] = array();
 		}
 	}
 }
