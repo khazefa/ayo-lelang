@@ -101,8 +101,31 @@
 						</ul>
 						<ul class="nav navbar-nav">
 							<?php
-							if ($this->session->userdata('signed_in')) { } else {
+							if ($this->session->userdata('signed_in')) {
 								?>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= $name; ?></b> <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li class="header">Your access link</li>
+										<li>
+											<ul class="menu">
+												<li>
+													<a href="#">
+														<i class="fa fa-user text-aqua"></i> Profile
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<i class="fa fa-sign-out text-aqua"></i> Logout
+													</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							<?php
+						} else {
+							?>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
 									<ul id="login-dp" class="dropdown-menu">
