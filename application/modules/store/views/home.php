@@ -54,135 +54,38 @@
 			<h3 class="box-title">Katalog Lelang Pekan Ini</h3>
 		</div>
 		<div class="box-body">
-			<div class="col-md-3">
-				<div class="box box-warning box-solid">
-					<div class="box-header with-border">
-						<h3 class="box-title wrapping-text">Xiaomi A2</h3>
-						<!-- /.box-tools -->
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<a href="#">
-							<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/xiaomi_a2.jpeg'); ?>" alt="Photo">
-						</a>
-					</div>
-					<div class="box-footer">
-						<div class="pull-left">
-							<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
+			<?php
+			foreach ($records_produk as $rp) {
+				?>
+				<div class="col-md-3">
+					<div class="box box-warning box-solid">
+						<div class="box-header with-border">
+							<h3 class="box-title wrapping-text"><?= $rp['nama_lelang']; ?></h3>
+							<!-- /.box-tools -->
 						</div>
-						<div class="pull-right">
-							<button type="button" class="btn btn-danger btn-block">Bid Now!</button>
+						<!-- /.box-header -->
+						<div class="box-body">
+							<a href="#">
+								<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar_produk']); ?>" alt="<?= $rp['nama_lelang']; ?>">
+							</a>
 						</div>
+						<div class="box-footer">
+							<div class="pull-left">
+								<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
+							</div>
+							<div class="pull-right">
+								<button type="button" class="btn btn-danger btn-block">Bid Now!</button>
+							</div>
+						</div>
+						<!-- /.box-body -->
 					</div>
-					<!-- /.box-body -->
+					<!-- /.box -->
 				</div>
-				<!-- /.box -->
-			</div>
-			<!-- /.col -->
+				<!-- /.col -->
+			<?php
+			}
+			?>
 
-			<div class="col-md-3">
-				<div class="box box-warning box-solid">
-					<div class="box-header with-border">
-						<h3 class="box-title">Xiaomi A2</h3>
-						<!-- /.box-tools -->
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<a href="#">
-							<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/xiaomi_a2.jpeg'); ?>" alt="Photo">
-						</a>
-					</div>
-					<div class="box-footer">
-						<div class="pull-left">
-							<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
-						</div>
-						<div class="pull-right">
-							<button type="button" class="btn btn-danger btn-block">Bid Now!</button>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</div>
-				<!-- /.box -->
-			</div>
-			<!-- /.col -->
-
-			<div class="col-md-3">
-				<div class="box box-warning box-solid">
-					<div class="box-header with-border">
-						<h3 class="box-title">Xiaomi A2</h3>
-						<!-- /.box-tools -->
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<a href="#">
-							<img class="img-responsive img-carbox" src="https://via.placeholder.com/240x480.webp/09f/fff" alt="Photo">
-						</a>
-					</div>
-					<div class="box-footer">
-						<div class="pull-left">
-							<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
-						</div>
-						<div class="pull-right">
-							<button type="button" class="btn btn-danger btn-block">Bid Now!</button>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</div>
-				<!-- /.box -->
-			</div>
-			<!-- /.col -->
-
-			<div class="col-md-3">
-				<div class="box box-warning box-solid">
-					<div class="box-header with-border">
-						<h3 class="box-title">Xiaomi A2</h3>
-						<!-- /.box-tools -->
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<a href="#">
-							<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/xiaomi_a2.jpeg'); ?>" alt="Photo">
-						</a>
-					</div>
-					<div class="box-footer">
-						<div class="pull-left">
-							<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
-						</div>
-						<div class="pull-right">
-							<button type="button" class="btn btn-danger btn-block">Bid Now!</button>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</div>
-				<!-- /.box -->
-			</div>
-			<!-- /.col -->
-
-			<div class="col-md-3">
-				<div class="box box-warning box-solid">
-					<div class="box-header with-border">
-						<h3 class="box-title">Xiaomi A2</h3>
-						<!-- /.box-tools -->
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<a href="#">
-							<img class="img-responsive img-carbox" src="https://via.placeholder.com/240x480.webp/09f/fff" alt="Photo">
-						</a>
-					</div>
-					<div class="box-footer">
-						<div class="pull-left">
-							<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
-						</div>
-						<div class="pull-right">
-							<button type="button" class="btn btn-danger btn-block">Bid Now!</button>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</div>
-				<!-- /.box -->
-			</div>
-			<!-- /.col -->
 		</div>
 		<!-- /.box-body -->
 	</div>
