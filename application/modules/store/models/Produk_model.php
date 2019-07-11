@@ -29,7 +29,7 @@ class Produk_model extends CI_Model
     }
 
     // This function used to get list data by this table only, not join table
-    function get_data($arrWhere = array(), $arrOrder = array(), $limit = 0){
+    function get_data($arrWhere = array(), $arrOrder = array(), $limit = 0, $start){
         $rs = array();
         //Flush Param
         $this->db->flush_cache();
@@ -41,7 +41,7 @@ class Produk_model extends CI_Model
             // $rs = array();
             //Limit
 			if ($limit > 0){
-				$this->db->limit($limit);
+				$this->db->limit($limit, $start);
 			}
         
 			//Order By
@@ -72,10 +72,10 @@ class Produk_model extends CI_Model
                     }
                 }
             }
-			
+
 			//Limit
-			if ($limit > 0){
-				$this->db->limit($limit);
+			if ($limit > 0) {
+				$this->db->limit($limit, $start);
 			}
         
 			//Order By
