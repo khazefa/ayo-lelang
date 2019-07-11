@@ -19,6 +19,8 @@
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/skins/_all-skins.min.css'); ?>">
+	
+	<link rel="shortcut icon" href="<?= base_url('assets/img/ic-auction.png'); ?>">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,7 +60,7 @@
 								<ul class="dropdown-menu" role="menu">
 									<?php
 									foreach ($categories as $rk) {
-										echo '<li><a href="' . $rk['id_kategori'] . '">' . $rk['nama_kategori'] . '</a></li>';
+										echo '<li><a href="kategori/' . $rk['alias_kategori'] . '">' . $rk['nama_kategori'] . '</a></li>';
 									}
 									?>
 								</ul>
@@ -124,8 +126,8 @@
 									</ul>
 								</li>
 							<?php
-						} else {
-							?>
+							} else {
+								?>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
 									<ul id="login-dp" class="dropdown-menu">
@@ -160,8 +162,8 @@
 									</ul>
 								</li>
 							<?php
-						}
-						?>
+							}
+							?>
 						</ul>
 					</div>
 					<!-- /.navbar-custom-menu -->
