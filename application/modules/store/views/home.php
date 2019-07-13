@@ -54,38 +54,41 @@
 			<h3 class="box-title">Katalog Lelang Pekan Ini</h3>
 		</div>
 		<div class="box-body">
-			<?php
-			foreach ($records_produk as $rp) {
-				?>
-				<div class="col-md-3">
-					<div class="box box-warning box-solid">
-						<div class="box-header with-border">
-							<h3 class="box-title wrapping-text"><?= $rp['nama_lelang']; ?></h3>
-							<!-- /.box-tools -->
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							<a href="#">
-								<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar_produk']); ?>" alt="<?= $rp['nama_lelang']; ?>">
-							</a>
-						</div>
-						<div class="box-footer">
-							<div class="pull-left">
-								<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
+			<div id="postsList">
+				<?php
+				foreach ($records_produk as $rp) {
+					?>
+					<div class="col-md-3">
+						<div class="box box-warning box-solid">
+							<div class="box-header with-border">
+								<h3 class="box-title wrapping-text"><?= $rp['nama_lelang']; ?></h3>
+								<!-- /.box-tools -->
 							</div>
-							<div class="pull-right">
-								<button type="button" class="btn btn-danger btn-block">Bid Now!</button>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<a href="#">
+									<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar_produk']); ?>" alt="<?= $rp['nama_lelang']; ?>">
+								</a>
 							</div>
+							<div class="box-footer">
+								<div class="pull-left">
+									<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
+								</div>
+								<div class="pull-right">
+									<button type="button" class="btn btn-danger btn-block">Bid Now!</button>
+								</div>
+							</div>
+							<!-- /.box-body -->
 						</div>
-						<!-- /.box-body -->
+						<!-- /.box -->
 					</div>
-					<!-- /.box -->
-				</div>
-				<!-- /.col -->
-			<?php
-			}
-			?>
-
+					<!-- /.col -->
+				<?php
+				}
+				?>
+			</div>
+			<!-- Paginate -->
+			<div id='pagination'></div>
 		</div>
 		<!-- /.box-body -->
 	</div>
@@ -94,3 +97,48 @@
 <!-- /.content -->
 </div>
 <!-- /.container -->
+
+<script type="text/javascript">
+	// A $( document ).ready() block.
+	$(document).ready(function() {
+		$('#pagination').on('click', 'a', function(e) {
+			e.preventDefault();
+			var pageno = $(this).attr('data-ci-pagination-page');
+			loadPagination(pageno);
+		});
+
+		loadPagination(0);
+
+		function loadPagination(pagno) {
+			$.ajax({
+				url: '/home/list_json/' + pagno,
+				type: 'get',
+				dataType: 'json',
+				success: function(response) {
+					$('#pagination').html(response.pagination);
+					createTable(response.result, response.row);
+				}
+			});
+		}
+
+		function createTable(result, sno) {
+			sno = Number(sno);
+			$('#postsList tbody').empty();
+			for (index in result) {
+				var id = result[index].id;
+				var title = result[index].title;
+				var content = result[index].slug;
+				content = content.substr(0, 60) + " ...";
+				var link = result[index].slug;
+				sno += 1;
+
+				var tr = "<tr>";
+				tr += "<td>" + sno + "</td>";
+				tr += "<td><a href='" + link + "' target='_blank' >" + title + "</a></td>";
+				tr += "</tr>";
+				$('#postsList tbody').append(tr);
+
+			}
+		}
+	});
+</script>
