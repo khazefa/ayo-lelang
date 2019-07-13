@@ -26,7 +26,27 @@ class Produk_model extends CI_Model
         $this->db->from($this->tbl_produk);
         // $this->db->where('is_deleted', 0);
         return $this->db->count_all_results();
-    }
+	}
+
+	// This function used to get count data by this table
+	function count_all_by($arrWhere = array())
+	{
+		$total = 0;
+		//Flush Param
+		$this->db->flush_cache();
+		$this->db->from($this->tbl_produk);
+
+		if (!empty($arrWhere)) {
+			foreach ($arrWhere as $strField => $strValue) {
+				$this->db->where($strField, $strValue);
+			}
+			$total = $this->db->count_all_results();
+		} else {
+			$total = $this->db->count_all_results();
+		}
+
+		return $total;
+	}
 
     // This function used to get list data by this table only, not join table
     function get_data($arrWhere = array(), $arrOrder = array(), $limit = 0, $start = 0){
