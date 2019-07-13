@@ -54,9 +54,9 @@
 			<h3 class="box-title">Katalog Lelang Pekan Ini</h3>
 		</div>
 		<div class="box-body">
-			<div id="postsList">
+			<div class="row">
 				<?php
-				foreach ($records_produk as $rp) {
+				foreach ($rs_produk as $rp) {
 					?>
 					<div class="col-md-3">
 						<div class="box box-warning box-solid">
@@ -88,7 +88,12 @@
 				?>
 			</div>
 			<!-- Paginate -->
-			<div id='pagination'></div>
+			<div class="row">
+				<div class="col">
+					<!--Tampilkan pagination-->
+					<?php echo $pagination; ?>
+				</div>
+			</div>
 		</div>
 		<!-- /.box-body -->
 	</div>
@@ -100,6 +105,7 @@
 
 <script type="text/javascript">
 	// A $( document ).ready() block.
+	/*
 	$(document).ready(function() {
 		$('#pagination').on('click', 'a', function(e) {
 			e.preventDefault();
@@ -141,4 +147,5 @@
 			}
 		}
 	});
+	*/
 </script>
