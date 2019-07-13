@@ -59,6 +59,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 /* Routing Home */
 $route['home'] = 'store/Site';
+$route['home/list_json/(:any)'] = 'store/Site/list_json/$1';
 $route['signin'] = 'store/Auth/check';
 $route['tata-cara-lelang'] = 'store/Site/tata_cara_lelang';
 
