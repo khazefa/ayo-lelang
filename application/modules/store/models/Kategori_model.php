@@ -10,7 +10,7 @@ class Kategori_model extends CI_Model
 {
     protected $tbl_kategori = 'kategori';
     protected $primKey = 'id_kategori';
-    protected $indexKey = 'id_kategori';
+    protected $indexKey = 'alias_kategori';
     protected $order = array('nama_kategori' => 'asc'); // default order
 
     function __construct()
@@ -124,11 +124,11 @@ class Kategori_model extends CI_Model
      * @param number $id : This is id
      * @return array $result : This is data information
      */
-    function get_data_info($id)
+    function get_data_info($key)
     {
         $this->db->select('*');
         $this->db->from($this->tbl_kategori);
-        $this->db->where($this->primKey, $id);
+        $this->db->where($this->indexKey, $key);
         $query = $this->db->get();
         
         return $query->result_array();
