@@ -23,7 +23,7 @@ class Site extends Front_Controller
 	/**
 	 * Show Front interface
 	 */
-	public function index($start_from = 0)
+	public function index()
 	{
 		$this->global['pageTitle'] = 'Lelang Barang Online';
 		$this->global['contentTitle'] = 'Lelang Barang Online';
