@@ -66,6 +66,10 @@ $route['home/list_json/(:any)'] = 'store/Site/list_json/$1';
 $route['signin'] = 'store/Auth/check';
 $route['tata-cara-lelang'] = 'store/Site/tata_cara_lelang';
 
+$route['kategori'] = 'store/Kategori';
+$route['kategori/(:any)'] = 'store/Kategori/index/$1';
+$route['kategori/(:any)/(:num)'] = 'store/Kategori/index/$1/$2';
+
 /** ----------------------------------------------------------------------- */
 /** End Store Controller */
 /** ----------------------------------------------------------------------- */
