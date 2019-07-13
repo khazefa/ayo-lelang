@@ -60,7 +60,7 @@
 								<ul class="dropdown-menu" role="menu">
 									<?php
 									foreach ($categories as $rk) {
-										echo '<li><a href="kategori/' . $rk['alias_kategori'] . '">' . $rk['nama_kategori'] . '</a></li>';
+										echo '<li><a href="'.base_url().'kategori/' . $rk['alias_kategori'] . '">' . $rk['nama_kategori'] . '</a></li>';
 									}
 									?>
 								</ul>
