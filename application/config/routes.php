@@ -80,7 +80,7 @@ $route['signout'] = 'store/Auth/signout';
 $route['peserta'] = 'store/Peserta';
 $route['peserta/registrasi'] = 'store/Peserta/registrasi';
 $route['peserta/submit'] = 'store/Peserta/insert_data';
-$route['peserta/profil/(:any)'] = 'store/Peserta/profil/$1';
+$route['peserta/profil'] = 'store/Peserta/profil';
 $route['peserta/update'] = 'store/Peserta/modify_data';
 
 /** ----------------------------------------------------------------------- */
