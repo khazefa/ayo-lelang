@@ -64,11 +64,17 @@ $route['(:num)'] = 'store/Site';
 // $route['page/(:num)'] = 'store/Site/index/$1';
 $route['home/list_json/(:any)'] = 'store/Site/list_json/$1';
 $route['signin'] = 'store/Auth/check';
+
 $route['tata-cara-lelang'] = 'store/Site/tata_cara_lelang';
 
 $route['kategori'] = 'store/Kategori';
 $route['kategori/(:any)'] = 'store/Kategori/index/$1';
 $route['kategori/(:any)/(:num)'] = 'store/Kategori/index/$1/$2';
+
+/* Routing Peserta */
+$route['peserta'] = 'store/Peserta';
+$route['peserta/registrasi'] = 'store/Peserta/registrasi';
+$route['peserta/profil/(:any)'] = 'store/Peserta/profile/$1';
 
 /** ----------------------------------------------------------------------- */
 /** End Store Controller */
