@@ -132,7 +132,22 @@ class Kategori_model extends CI_Model
         $query = $this->db->get();
         
         return $query->result_array();
-    }
+	}
+
+	/**
+	 * This function used to get data information by id
+	 * @param number $id : This is id
+	 * @return array $result : This is data information
+	 */
+	function get_data_info2($id)
+	{
+		$this->db->select('*');
+		$this->db->from($this->tbl_kategori);
+		$this->db->where($this->primKey, $id);
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
     
     /**
      * This function is used to add new data to system
