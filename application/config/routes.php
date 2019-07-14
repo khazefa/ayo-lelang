@@ -72,6 +72,9 @@ $route['kategori'] = 'store/Kategori';
 $route['kategori/(:any)'] = 'store/Kategori/index/$1';
 $route['kategori/(:any)/(:num)'] = 'store/Kategori/index/$1/$2';
 
+$route['produk'] = 'store/Produk';
+$route['produk/detail/(:any)'] = 'store/Produk/detail/$1';
+
 /* Routing Auth */
 $route['signin'] = 'store/Auth/check';
 $route['signout'] = 'store/Auth/signout';
