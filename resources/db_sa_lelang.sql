@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 26, 2019 at 08:27 PM
+-- Generation Time: Jul 14, 2019 at 11:44 AM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
@@ -130,7 +130,13 @@ CREATE TABLE `lelang` (
 --
 
 INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, `gambar_produk`, `harga_awal`, `harga_maksimal`, `waktu_mulai`, `waktu_selesai`, `keterangan`, `status_lelang`) VALUES
-(1, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active');
+(1, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
+(2, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
+(3, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
+(4, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
+(5, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
+(6, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
+(7, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active');
 
 -- --------------------------------------------------------
 
@@ -186,18 +192,19 @@ CREATE TABLE `peserta` (
   `akun_peserta` varchar(25) NOT NULL,
   `sandi_peserta` varchar(64) NOT NULL,
   `email_peserta` varchar(100) NOT NULL,
-  `telepon_peserta` varchar(32) NOT NULL,
-  `status_peserta` tinyint(1) NOT NULL,
+  `telepon_peserta` varchar(32) DEFAULT NULL,
   `alamat_peserta` text NOT NULL,
-  `tgl_daftar_peserta` datetime NOT NULL
+  `tgl_daftar_peserta` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status_peserta` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `peserta`
 --
 
-INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_peserta`, `email_peserta`, `telepon_peserta`, `status_peserta`, `alamat_peserta`, `tgl_daftar_peserta`) VALUES
-(1, 'Rudiansyah Putra', 'rudiansyah123', 'rudiansyah123', 'rudiansyah123@example.com', '085782363873', 1, 'Jl Anggrek 3 No 2 Kayu Putih Jakarta Timur', '2019-06-24 00:00:00');
+INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_peserta`, `email_peserta`, `telepon_peserta`, `alamat_peserta`, `tgl_daftar_peserta`, `status_peserta`) VALUES
+(1, 'Hyde Lawless', 'hydelaw', '6cf50439ff6959475621f3a762fcc9b2cf62b503', 'hydelaw@email.com', '081299998878', 'Jl Shinjuku Kosakabe No 07', '2019-07-14 10:28:38', 1),
+(2, 'Jay Weinberg', 'jaywein', 'd70fa9ddea6eb70c28bf0f75ec5107614786129b', 'jaywein@example.com', '081276765454', 'Jl Core Sana No 08', '2019-07-14 10:32:14', 1);
 
 -- --------------------------------------------------------
 
@@ -310,7 +317,7 @@ ALTER TABLE `kota`
 -- AUTO_INCREMENT for table `lelang`
 --
 ALTER TABLE `lelang`
-  MODIFY `id_lelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_lelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_lelang`
@@ -328,7 +335,7 @@ ALTER TABLE `pelelang`
 -- AUTO_INCREMENT for table `peserta`
 --
 ALTER TABLE `peserta`
-  MODIFY `id_peserta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_peserta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
