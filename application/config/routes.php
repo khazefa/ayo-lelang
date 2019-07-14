@@ -63,18 +63,25 @@ $route['(:num)'] = 'store/Site';
 // $route['page/(:num)'] = 'store/Site';
 // $route['page/(:num)'] = 'store/Site/index/$1';
 $route['home/list_json/(:any)'] = 'store/Site/list_json/$1';
-$route['signin'] = 'store/Auth/check';
 
+/* Routing Pages */
 $route['tata-cara-lelang'] = 'store/Site/tata_cara_lelang';
 
+/* Routing Produk */
 $route['kategori'] = 'store/Kategori';
 $route['kategori/(:any)'] = 'store/Kategori/index/$1';
 $route['kategori/(:any)/(:num)'] = 'store/Kategori/index/$1/$2';
 
+/* Routing Auth */
+$route['signin'] = 'store/Auth/check';
+$route['signout'] = 'store/Auth/signout';
+
 /* Routing Peserta */
 $route['peserta'] = 'store/Peserta';
 $route['peserta/registrasi'] = 'store/Peserta/registrasi';
-$route['peserta/profil/(:any)'] = 'store/Peserta/profile/$1';
+$route['peserta/submit'] = 'store/Peserta/insert_data';
+$route['peserta/profil/(:any)'] = 'store/Peserta/profil/$1';
+$route['peserta/update'] = 'store/Peserta/modify_data';
 
 /** ----------------------------------------------------------------------- */
 /** End Store Controller */
