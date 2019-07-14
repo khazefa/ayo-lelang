@@ -26,6 +26,10 @@ class Auth extends Front_Controller
 			redirect('peserta/profil');
 			exit;
 		} else {
+			if ($this->session->userdata('login_remember')) {
+				redirect('peserta/profil');
+				exit;
+			}
 			redirect('peserta/registrasi');
 			exit;
 		}
@@ -43,29 +47,39 @@ class Auth extends Front_Controller
 		$input = $this->input->post(null, true);
 		$email = filter_var($input['login_email'], FILTER_SANITIZE_EMAIL);
 		$password = filter_var($input['login_password'], FILTER_SANITIZE_STRING);
+		$remember = $input['login_remember'];
 
-		if ($email && $password) {
-			$result = $this->MAuth->auth_email($email, $password);
-
-			if ( count($result) > 0 ) {
-				foreach ($result as $res) {
-					$sessionArray = array(
-						'uBid' => $res->id_peserta,
-						'uKey' => $res->akun_peserta,
-						'uEmail' => $res->email_peserta,
-						'uName' => $res->nama_peserta,
-						'signed_in' => TRUE
-					);
-				}
-				$this->session->set_userdata($sessionArray);
-				redirect('/peserta/profil');
-			} else {
-				setFlashData('error_login', 'Email atau Password yang Anda input tidak benar.');
-				redirect('/');
-			}
+		if ($this->session->userdata('login_remember')) {
+			redirect('/peserta/profil');
+			exit;
 		} else {
-			setFlashData('error_login', 'Harap input Email dan Password Anda.');
-			redirect('/');
+			if ($email && $password) {
+				$result = $this->MAuth->auth_email($email, $password);
+
+				if (count($result) > 0) {
+					foreach ($result as $res) {
+						$sessionArray = array(
+							'uBid' => $res->id_peserta,
+							'uKey' => $res->akun_peserta,
+							'uEmail' => $res->email_peserta,
+							'uName' => $res->nama_peserta,
+							'signed_in' => TRUE,
+							'remember_me' => $remember ? TRUE : FALSE
+						);
+					}
+					$this->session->set_userdata($sessionArray);
+					redirect('/peserta/profil');
+					exit;
+				} else {
+					setFlashData('error_login', 'Email atau Password yang Anda input tidak benar.');
+					redirect('/');
+					exit;
+				}
+			} else {
+				setFlashData('error_login', 'Harap input Email dan Password Anda.');
+				redirect('/');
+				exit;
+			}
 		}
 	}
 
@@ -76,5 +90,6 @@ class Auth extends Front_Controller
 	{
 		$this->session->sess_destroy();
 		redirect('/', true);
+		exit;
 	}
 }
