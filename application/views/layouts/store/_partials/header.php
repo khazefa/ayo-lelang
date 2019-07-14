@@ -105,19 +105,19 @@
 							<?php
 							if ($this->session->userdata('signed_in')) {
 								?>
-								<li class="dropdown">
+								<li class="dropdown notifications-menu">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= $name; ?></b> <span class="caret"></span></a>
-									<ul class="dropdown-menu">
+									<ul id="login-dp" class="dropdown-menu">
 										<li class="header">Your access link</li>
 										<li>
 											<ul class="menu">
 												<li>
-													<a href="#">
-														<i class="fa fa-user text-aqua"></i> Profile
+													<a href="<?= base_url('peserta/profil'); ?>">
+														<i class="fa fa-user text-aqua"></i> Profil
 													</a>
 												</li>
 												<li>
-													<a href="#">
+													<a href="<?= base_url('signout'); ?>">
 														<i class="fa fa-sign-out text-aqua"></i> Logout
 													</a>
 												</li>
@@ -151,7 +151,7 @@
 														</div>
 														<div class="checkbox">
 															<label>
-																<input type="checkbox"> tetap login
+																<input type="checkbox" name="login_remember"> tetap login
 															</label>
 														</div>
 													</form>
