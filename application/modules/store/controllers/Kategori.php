@@ -36,7 +36,7 @@ class Kategori extends Front_Controller
 		$this->global['name'] = $this->uName;
 
 		if ($cat != "") $arrWhere['id_kategori'] = $rs_kategori[0]["id_kategori"];
-		$per_page = 4;
+		$per_page = 8;
 		$total = $this->MProduk->count_all_by($arrWhere); //total row;
 
 		//konfigurasi pagination
