@@ -33,7 +33,7 @@ class Site extends Front_Controller
 		$arrWhere = array();
 
 		$per_page = 4;
-		$total = $this->MProduk->count_all(); //total row;
+		$total = $this->MProduk->count_all_lelang(TRUE, NULL, NULL); //total row;
 
 		//konfigurasi pagination
 		$config = array();
@@ -75,7 +75,7 @@ class Site extends Front_Controller
 			$offset = $this->uri->segment(1);
 		}
 
-		$rs_produk = $this->MProduk->get_data($arrWhere, array('waktu_selesai' => 'ASC'), $per_page, $offset);
+		$rs_produk = $this->MProduk->get_data_lelang(TRUE, NULL, NULL, array('waktu_selesai' => 'ASC'), $per_page, $offset);
 		$data['rs_produk'] = $rs_produk;
 		$data['pagination'] = $this->pagination->create_links();
 
