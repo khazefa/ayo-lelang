@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 14, 2019 at 11:44 AM
+-- Generation Time: Jul 14, 2019 at 01:37 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
@@ -130,13 +130,13 @@ CREATE TABLE `lelang` (
 --
 
 INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, `gambar_produk`, `harga_awal`, `harga_maksimal`, `waktu_mulai`, `waktu_selesai`, `keterangan`, `status_lelang`) VALUES
-(1, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
-(2, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
-(3, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
-(4, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
-(5, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
-(6, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active'),
-(7, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpeg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-01 00:00:00', 'Xiaomi A2 China', 'active');
+(1, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Xiaomi A2 China', 'active'),
+(2, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Xiaomi A2 China', 'active'),
+(3, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Xiaomi A2 China', 'active'),
+(4, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Xiaomi A2 China', 'active'),
+(5, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Xiaomi A2 China', 'active'),
+(6, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Xiaomi A2 China', 'active'),
+(7, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Xiaomi A2 China', 'active');
 
 -- --------------------------------------------------------
 
