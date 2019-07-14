@@ -32,7 +32,7 @@ class Site extends Front_Controller
 		$rs_produk = array();
 		$arrWhere = array();
 
-		$per_page = 4;
+		$per_page = 12;
 		$total = $this->MProduk->count_all_lelang(TRUE, NULL, NULL); //total row;
 
 		//konfigurasi pagination
