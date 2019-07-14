@@ -51,7 +51,7 @@
 <section class="content">
 	<div class="box box-solid">
 		<div class="box-header with-border text-center">
-			<h3 class="box-title">Katalog Lelang Pekan Ini</h3>
+			<h3 class="box-title">Katalog Lelang Hari Ini</h3>
 		</div>
 		<div class="box-body">
 			<div class="row">
