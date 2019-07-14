@@ -134,15 +134,17 @@
 										<li>
 											<div class="row">
 												<div class="col-md-12">
-													<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+													<p class="login-box-msg">
+														<?= empty($this->session->flashdata('error_login')) ? '' : '<span class="text-danger">' . $this->session->flashdata('error_login') . '</span>'; ?>
+													</p>
+													<form class="form" role="form" method="post" action="<?= base_url('signin'); ?>" accept-charset="UTF-8" id="login-nav">
 														<div class="form-group">
 															<label class="sr-only" for="login_email">Email</label>
-															<input type="email" class="form-control" id="login_email" placeholder="Email" required>
+															<input type="email" class="form-control" id="login_email" name="login_email" placeholder="Email" required="required">
 														</div>
 														<div class="form-group">
 															<label class="sr-only" for="login_password">Password</label>
-															<input type="password" class="form-control" id="login_password" placeholder="Password" required>
-															<div class="help-block text-right"><a href="">Lupa password ?</a></div>
+															<input type="password" class="form-control" id="login_password" name="login_password" placeholder="Password" required="required">
 														</div>
 														<div class="form-group">
 															<button type="submit" class="btn btn-primary btn-block">Sign in</button>
