@@ -7,8 +7,12 @@
 			<div class="box-body">
 
 				<div class="col-md-6">
+					<p class="login-box-msg">
+						<?= empty($this->session->flashdata('success')) ? '' : '<span class="text-success">' . $this->session->flashdata('success') . '</span>'; ?>
+						<?= empty($this->session->flashdata('error')) ? '' : '<span class="text-danger">' . $this->session->flashdata('error') . '</span>'; ?>
+					</p>
 					<!-- form start -->
-					<form class="form-horizontal">
+					<form method="POST" action="<?= base_url('peserta/submit'); ?>" class="form-horizontal">
 						<div class="box-body">
 							<div class="form-group">
 								<label for="reg_nama" class="col-sm-3 control-label">Nama Lengkap <span class="text-danger">*</span></label>
