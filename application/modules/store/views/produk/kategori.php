@@ -18,7 +18,7 @@
 								</div>
 								<!-- /.box-header -->
 								<div class="box-body">
-									<a href="#">
+									<a href="<?= base_url('produk/detail/' . $rp['id_lelang']); ?>">
 										<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar_produk']); ?>" alt="<?= $rp['nama_lelang']; ?>">
 									</a>
 								</div>
@@ -38,13 +38,13 @@
 					<?php
 					}
 				} else {
-				?>
+					?>
 					<div class="col-md-12">
 						<div class="alert alert-info">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							Maaf belum ada produk untuk dilelang pada kategori ini.
 						</div>
-						
+
 					</div>
 				<?php
 				}
