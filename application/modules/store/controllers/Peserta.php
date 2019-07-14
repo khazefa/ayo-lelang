@@ -98,4 +98,40 @@ class Peserta extends Front_Controller
 			$this->registrasi();
 		}
 	}
+
+	/**
+	 * Modify Users
+	 */
+	public function modify_data()
+	{
+		$reg_nama = $this->input->post('reg_nama', TRUE);
+		$reg_email = $this->input->post('reg_email', TRUE);
+		$reg_username = $this->input->post('reg_username', TRUE);
+		$reg_password = $this->input->post('reg_password', TRUE);
+		$reg_address = $this->input->post('reg_address', TRUE);
+		$reg_phone = $this->input->post('reg_phone', TRUE);
+
+		if (!empty($reg_password)) {
+			$password = sha1($reg_password);
+			$dataInfo = array(
+				'nama_peserta' => $reg_nama, 'sandi_peserta' => $password,
+				'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address
+			);
+		} else {
+			$dataInfo = array(
+				'nama_peserta' => $reg_nama,
+				'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address
+			);
+		}
+
+		$result = $this->MPeserta->update_data($dataInfo, $reg_username);
+
+		if ($result > 0) {
+			setFlashData('success', 'Informasi Akun Anda telah sukses diubah');
+			redirect('peserta/profil');
+		} else {
+			setFlashData('error', 'Informasi Akun Anda gagal diubah');
+			redirect('peserta/profil');
+		}
+	}
 }
