@@ -67,7 +67,7 @@
 								</div>
 								<!-- /.box-header -->
 								<div class="box-body">
-									<a href="#">
+									<a href="<?= base_url('produk/detail/'.$rp['id_lelang']); ?>">
 										<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar_produk']); ?>" alt="<?= $rp['nama_lelang']; ?>">
 									</a>
 								</div>
