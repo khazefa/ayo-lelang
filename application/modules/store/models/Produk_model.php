@@ -29,6 +29,20 @@ class Produk_model extends CI_Model
 	}
 
 	// This function used to get count data by this table
+	function count_all_lelang($isToday = FALSE, $startDate = NULL, $endDate = NULL)
+	{
+		$this->db->from($this->tbl_produk);
+
+		if ($isToday) {
+			$this->db->where("NOW() BETWEEN waktu_mulai AND waktu_selesai");
+		} else {
+			$this->db->where("NOW() BETWEEN '{$startDate}' AND '{$endDate}'");
+		}
+		
+		return $this->db->count_all_results();
+	}
+
+	// This function used to get count data by this table
 	function count_all_by($arrWhere = array())
 	{
 		$total = 0;
@@ -110,7 +124,40 @@ class Produk_model extends CI_Model
         }
         
         return $rs;
-    }
+	}
+
+	// This function used to get list data by this table only, not join table
+	function get_data_lelang($isToday = FALSE, $startDate = NULL, $endDate = NULL, $arrOrder = array(), $limit = 0, $start = 0)
+	{
+		$rs = array();
+		//Flush Param
+		$this->db->flush_cache();
+
+		$this->db->select('*');
+		$this->db->from($this->tbl_produk);
+
+		if ( $isToday ) {
+			$this->db->where("NOW() BETWEEN waktu_mulai AND waktu_selesai");
+		} else {
+			$this->db->where("NOW() BETWEEN '{$startDate}' AND '{$endDate}'");
+		}
+
+		//Limit
+		if ($limit > 0) {
+			$this->db->limit($limit, $start);
+		}
+
+		//Order By
+		if (count($arrOrder) > 0) {
+			foreach ($arrOrder as $strField => $strValue) {
+				$this->db->order_by($strField, $strValue);
+			}
+		}
+		$query = $this->db->get();
+		$rs = $query->result_array();
+
+		return $rs;
+	}
 
     // This function used to get list data by this table only, not join table
     function get_data_join_data($arrWhere = array(), $arrOrder = array(), $limit = 0){
