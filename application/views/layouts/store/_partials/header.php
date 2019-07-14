@@ -19,7 +19,7 @@
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/skins/_all-skins.min.css'); ?>">
-	
+
 	<link rel="shortcut icon" href="<?= base_url('assets/img/ic-auction.png'); ?>">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -60,7 +60,7 @@
 								<ul class="dropdown-menu" role="menu">
 									<?php
 									foreach ($categories as $rk) {
-										echo '<li><a href="'.base_url().'kategori/' . $rk['alias_kategori'] . '">' . $rk['nama_kategori'] . '</a></li>';
+										echo '<li><a href="' . base_url() . 'kategori/' . $rk['alias_kategori'] . '">' . $rk['nama_kategori'] . '</a></li>';
 									}
 									?>
 								</ul>
@@ -136,26 +136,26 @@
 												<div class="col-md-12">
 													<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
 														<div class="form-group">
-															<label class="sr-only" for="exampleInputEmail2">Email address</label>
-															<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+															<label class="sr-only" for="login_email">Email</label>
+															<input type="email" class="form-control" id="login_email" placeholder="Email" required>
 														</div>
 														<div class="form-group">
-															<label class="sr-only" for="exampleInputPassword2">Password</label>
-															<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-															<div class="help-block text-right"><a href="">Forget the password ?</a></div>
+															<label class="sr-only" for="login_password">Password</label>
+															<input type="password" class="form-control" id="login_password" placeholder="Password" required>
+															<div class="help-block text-right"><a href="">Lupa password ?</a></div>
 														</div>
 														<div class="form-group">
 															<button type="submit" class="btn btn-primary btn-block">Sign in</button>
 														</div>
 														<div class="checkbox">
 															<label>
-																<input type="checkbox"> keep me logged-in
+																<input type="checkbox"> tetap login
 															</label>
 														</div>
 													</form>
 												</div>
 												<div class="bottom text-center">
-													New here ? <a href="#"><b>Join Us</b></a>
+													Belum bergabung ? <a href="<?= base_url('peserta/registrasi'); ?>"><b>Registrasi</b></a>
 												</div>
 											</div>
 										</li>
