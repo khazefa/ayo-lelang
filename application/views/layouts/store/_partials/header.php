@@ -117,6 +117,16 @@
 													</a>
 												</li>
 												<li>
+													<a href="<?= base_url('peserta/status-bid'); ?>">
+														<i class="fa fa-gavel text-aqua"></i> Status Bid
+													</a>
+												</li>
+												<li>
+													<a href="<?= base_url('peserta/invoice'); ?>">
+														<i class="fa fa-file-text-o text-aqua"></i> Invoice
+													</a>
+												</li>
+												<li>
 													<a href="<?= base_url('signout'); ?>">
 														<i class="fa fa-sign-out text-aqua"></i> Logout
 													</a>
