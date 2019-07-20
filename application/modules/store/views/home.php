@@ -84,7 +84,7 @@
 										<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
 									</div>
 									<div class="pull-right">
-										<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#modal-bid" data-id="<?= $id; ?>" data-price="<?= $price; ?>">Bid Now!</button>
+										<button type="button" class="btn btn-danger btn-block btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $id; ?>" data-price="<?= $price; ?>">Bid Now!</button>
 									</div>
 								</div>
 								<!-- /.box-body -->
