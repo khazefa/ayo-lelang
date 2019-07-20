@@ -48,8 +48,7 @@
 	<script src="<?= base_url('assets/fastclick/lib/fastclick.js'); ?>"></script>
 	<!-- AdminLTE App -->
 	<script src="<?= base_url('assets/js/adminlte.min.js'); ?>"></script>
-	<!-- AdminLTE for demo purposes -->
-	<!-- <script src="../../dist/js/demo.js"></script> -->
+	<script src="<?= base_url('assets/js/custom.js'); ?>"></script>
 	</body>
 
 	</html>
