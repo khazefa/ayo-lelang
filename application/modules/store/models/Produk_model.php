@@ -24,7 +24,7 @@ class Produk_model extends CI_Model
     function count_all()
     {
         $this->db->from($this->tbl_produk);
-        // $this->db->where('is_deleted', 0);
+        $this->db->where('status_lelang', 'active');
         return $this->db->count_all_results();
 	}
 
@@ -32,6 +32,7 @@ class Produk_model extends CI_Model
 	function count_all_lelang($isToday = FALSE, $startDate = NULL, $endDate = NULL)
 	{
 		$this->db->from($this->tbl_produk);
+        $this->db->where('status_lelang', 'active');
 
 		if ($isToday) {
 			$this->db->where("NOW() BETWEEN waktu_mulai AND waktu_selesai");
@@ -49,6 +50,7 @@ class Produk_model extends CI_Model
 		//Flush Param
 		$this->db->flush_cache();
 		$this->db->from($this->tbl_produk);
+        $this->db->where('status_lelang', 'active');
 
 		if (!empty($arrWhere)) {
 			foreach ($arrWhere as $strField => $strValue) {
@@ -70,6 +72,7 @@ class Produk_model extends CI_Model
         
         $this->db->select('*');
         $this->db->from($this->tbl_produk);
+        $this->db->where('status_lelang', 'active');
 
         if(empty($arrWhere)){
             // $rs = array();
@@ -135,6 +138,7 @@ class Produk_model extends CI_Model
 
 		$this->db->select('*');
 		$this->db->from($this->tbl_produk);
+        $this->db->where('status_lelang', 'active');
 
 		if ( $isToday ) {
 			$this->db->where("NOW() BETWEEN waktu_mulai AND waktu_selesai");
