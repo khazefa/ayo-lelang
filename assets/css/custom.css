@@ -147,3 +147,15 @@ h1.heading {
 /**
 * End Products Grid
 */
+
+/**
+* Site Session Info
+*/
+.session-box-msg {
+	font-size: 12px;
+	width: 100%;
+	word-wrap: break-word;
+}
+/**
+* End Site Session Info
+*/
