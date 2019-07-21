@@ -8,6 +8,8 @@
 
 class Auth extends Front_Controller
 {
+	private $view_dir = 'store/peserta';
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -30,9 +32,22 @@ class Auth extends Front_Controller
 				redirect('peserta/profil');
 				exit;
 			}
-			redirect('peserta/registrasi');
+			redirect('login');
 			exit;
 		}
+	}
+
+	/**
+	 * Show Login Form
+	 */
+	public function login()
+	{
+		$this->global['pageTitle'] = 'Login Peserta';
+		$this->global['contentTitle'] = 'Login Peserta';
+		$this->global['name'] = $this->uName;
+
+		$data = array();
+		$this->digiLayout($data, $this->view_dir . "/login", $this->global);
 	}
 
 	/**
@@ -47,7 +62,7 @@ class Auth extends Front_Controller
 		$input = $this->input->post(null, true);
 		$email = filter_var($input['login_email'], FILTER_SANITIZE_EMAIL);
 		$password = filter_var($input['login_password'], FILTER_SANITIZE_STRING);
-		$remember = $input['login_remember'];
+		$remember = isset($input['login_remember']) ? $input['login_remember'] : false;
 
 		if ($this->session->userdata('login_remember')) {
 			redirect('/peserta/profil');
@@ -72,12 +87,12 @@ class Auth extends Front_Controller
 					exit;
 				} else {
 					setFlashData('error_login', 'Email atau Password yang Anda input tidak benar.');
-					redirect('/');
+					redirect('login');
 					exit;
 				}
 			} else {
 				setFlashData('error_login', 'Harap input Email dan Password Anda.');
-				redirect('/');
+				redirect('login');
 				exit;
 			}
 		}
