@@ -1,6 +1,6 @@
 <!-- Main content -->
 <section class="content">
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<div class="list-group">
 			<a href="<?= base_url('peserta/profil'); ?>" class="list-group-item"><i class="fa fa-user"></i> Profil</a>
 			<a href="<?= base_url('peserta/status-bid'); ?>" class="list-group-item active">
@@ -11,7 +11,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-9">
+	<div class="col-md-10">
 		<div class="box box-solid">
 			<div class="box-header with-border text-center">
 				<h3 class="box-title"><?= $contentTitle; ?></h3>
@@ -27,6 +27,7 @@
 									<th>Item</th>
 									<th>Bid Price</th>
 									<th>Bid Time</th>
+									<th>Bid Type</th>
 									<th>Bid Status</th>
 									<th>Actions</th>
 								</tr>
@@ -40,6 +41,7 @@
 									$item_name = $r['item_name'];
 									$item_img = $r['item_img'];
 									$foto = '<img src="' . base_url() . '/uploads/products/' . $item_img . '" width="100px">';
+									$bid_type = strtoupper($r['bid_type']);
 									$bid_price = (int) $r['bid_price'];
 									$bid_price_rp = "Rp. " . format_rupiah($bid_price);
 									$bid_time = date('d/m/Y H:i:s', strtotime($r['bid_time']));
@@ -48,12 +50,18 @@
 									$bid_button = "";
 									$bid_button .= '<a class="btn btn-danger btn-sm" href="' . base_url('bid/delete/') . $id . '"><i class="fa fa-trash"></i> Del</a>';
 
-									if ($bid_status !== "REJECTED") {
-										$bid_button .= ' <a class="btn btn-warning btn-sm btn-up-bid" data-toggle="modal" data-target="#modal-up-bid" data-id="' . $id . '" data-price="' . $bid_price . '"><i class="fa fa-hand-o-up"></i> Up</a>';
-									}
+									if ($bid_type === "BIN") {
+										if ($bid_status === "ACCEPTED") {
+											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('bid/pay/') . $id . '"><i class="fa fa-money"></i> Pay</a>';
+										}
+									} elseif ($bid_type === "BID") {
+										if ($bid_status !== "REJECTED") {
+											$bid_button .= ' <a class="btn btn-warning btn-sm btn-up-bid" data-toggle="modal" data-target="#modal-up-bid" data-id="' . $id . '" data-price="' . $bid_price . '"><i class="fa fa-hand-o-up"></i> Up</a>';
+										}
 
-									if ( $bid_status === "ACCEPTED" ) {
-										$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('bid/pay/') . $id . '"><i class="fa fa-money"></i> Pay</a>';
+										if ($bid_status === "ACCEPTED") {
+											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('bid/pay/') . $id . '"><i class="fa fa-money"></i> Pay</a>';
+										}
 									}
 
 									echo '<tr>';
@@ -61,6 +69,7 @@
 									echo '<td>' . $item_name . '</td>';
 									echo '<td>' . $bid_price_rp . '</td>';
 									echo '<td>' . $bid_time . '</td>';
+									echo '<td>' . $bid_type . '</td>';
 									echo '<td>' . $bid_status . '</td>';
 									echo '<td>' . $bid_button . '</td>';
 									echo '</tr>';
