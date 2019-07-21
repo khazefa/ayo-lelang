@@ -76,15 +76,25 @@ $route['produk'] = 'store/Produk';
 $route['produk/detail/(:any)'] = 'store/Produk/detail/$1';
 
 /* Routing Auth */
+$route['login'] = 'store/Auth/login';
 $route['signin'] = 'store/Auth/check';
 $route['signout'] = 'store/Auth/signout';
 
 /* Routing Peserta */
 $route['peserta'] = 'store/Peserta';
 $route['peserta/registrasi'] = 'store/Peserta/registrasi';
-$route['peserta/submit'] = 'store/Peserta/insert_data';
 $route['peserta/profil'] = 'store/Peserta/profil';
+$route['peserta/status-bid'] = 'store/Peserta/status_bid';
+$route['peserta/submit'] = 'store/Peserta/insert_data';
 $route['peserta/update'] = 'store/Peserta/modify_data';
+
+/* Routing Bid */
+$route['bid'] = 'store/Bid';
+$route['bid/add'] = 'store/Bid/insert_data';
+$route['bid/detail'] = 'store/Bid/detail';
+$route['bid/update'] = 'store/Bid/modify_data';
+$route['bid/total'] = 'store/Bid/total';
+$route['bid/total/item/(:any)'] = 'store/Bid/total_by_item';
 
 /** ----------------------------------------------------------------------- */
 /** End Store Controller */
