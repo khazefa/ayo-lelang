@@ -15,7 +15,7 @@ foreach ($records_peserta as $rp) {
 ?>
 <!-- Main content -->
 <section class="content">
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<div class="list-group">
 			<a href="<?= base_url('peserta/profil'); ?>" class="list-group-item active"><i class="fa fa-user"></i> Profil</a>
 			<a href="<?= base_url('peserta/status-bid'); ?>" class="list-group-item">
@@ -26,7 +26,7 @@ foreach ($records_peserta as $rp) {
 		</div>
 	</div>
 
-	<div class="col-md-9">
+	<div class="col-md-10">
 		<div class="box box-solid">
 			<div class="box-header with-border text-center">
 				<h3 class="box-title"><?= $contentTitle; ?></h3>
