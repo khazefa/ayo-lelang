@@ -90,7 +90,8 @@ $route['peserta/update'] = 'store/Peserta/modify_data';
 
 /* Routing Bid */
 $route['bid'] = 'store/Bid';
-$route['bid/add'] = 'store/Bid/insert_data';
+$route['bid/add'] = 'store/Bid/insert_data_bid';
+$route['bid/order'] = 'store/Bid/insert_data_bin';
 $route['bid/detail'] = 'store/Bid/detail';
 $route['bid/update'] = 'store/Bid/modify_data';
 $route['bid/up'] = 'store/Bid/up_data';
