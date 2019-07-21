@@ -38,8 +38,7 @@ $(function () {
 	$(".btn-bin").on('click', function (e) {
 		e.preventDefault();
 		let item_id = $(this).data('id');
-		let url = "bid/order";
-		let base_url = window.location.origin;
+		let url = base_url + "bid/order";
 
 		// Abort any pending request
 		if (request) {
@@ -58,7 +57,7 @@ $(function () {
 			if (jqXHR.status === false) {
 				window.location.replace(base_url);
 			} else {
-				window.location.replace("peserta/status-bid");
+				window.location.replace(base_url + "peserta/status-bid");
 			}
 		});
 
