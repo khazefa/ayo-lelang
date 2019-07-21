@@ -96,9 +96,9 @@ class Bid extends Front_Controller
 	{
 		$result = $this->MBid->delete_data($fid);
 		if ($result > 0) {
-			setFlashData('success', 'Data is successfully deleted');
+			setFlashData('success', 'Bid Anda telah dibatalkan');
 		} else {
-			setFlashData('error', 'Failed to delete data');
+			setFlashData('error', 'Gagal membatalkan Bid Anda');
 		}
 		redirect('peserta/status-bid');
 	}
