@@ -93,6 +93,8 @@ $route['bid'] = 'store/Bid';
 $route['bid/add'] = 'store/Bid/insert_data';
 $route['bid/detail'] = 'store/Bid/detail';
 $route['bid/update'] = 'store/Bid/modify_data';
+$route['bid/up'] = 'store/Bid/up_data';
+$route['bid/delete/(:num)'] = 'store/Bid/del_data/$1';
 $route['bid/total'] = 'store/Bid/total';
 $route['bid/total/item/(:any)'] = 'store/Bid/total_by_item';
 
