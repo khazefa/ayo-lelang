@@ -85,7 +85,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Keterangan <span class="text-danger">*</span></label>
 							<div class="col-sm-6">
-								<textarea id="fketerangan" name="fketerangan" class="form-control"><?= $records[0]['keterangan']; ?></textarea>
+								<textarea id="fketerangan" name="fketerangan" class="form-control" rows="5"><?= $records[0]['keterangan']; ?></textarea>
 							</div>
 						</div>
 						<div class="form-group">
@@ -93,7 +93,7 @@
 							<div class="col-sm-6">
 								<?php
 								if (!empty($records[0]['gambar_produk'])) {
-									echo '<img src="' . base_url("uploads/products/") . $records[0]['gambar_produk'] . '">';
+									echo '<img src="' . base_url("uploads/products/") . $records[0]['gambar_produk'] . '" class="img-responsive">';
 								} else {
 									echo 'No Image';
 								}
