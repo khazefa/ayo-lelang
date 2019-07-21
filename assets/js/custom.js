@@ -31,6 +31,47 @@ $(function () {
 			"min": price	//set minimal price by data
 		});
 	});
+
+	/**
+	 * Submit bin
+	 */
+	$(".btn-bin").on('click', function (e) {
+		e.preventDefault();
+		let item_id = $(this).data('id');
+		let url = "bid/order";
+		let base_url = window.location.origin;
+
+		// Abort any pending request
+		if (request) {
+			request.abort();
+		}
+
+		// Fire off the request to /form.php
+		request = $.ajax({
+			url: url,
+			type: "POST",
+			data: { item_id: item_id }
+		});
+
+		// Callback handler that will be called on success
+		request.done(function (response, textStatus, jqXHR) {
+			if (jqXHR.status === false) {
+				window.location.replace(base_url);
+			} else {
+				window.location.replace("peserta/status-bid");
+			}
+		});
+
+		// Callback handler that will be called on failure
+		request.fail(function (jqXHR, textStatus, errorThrown) {
+			// Log the error to the console
+			console.error(
+				"The following error occurred: " +
+				textStatus, errorThrown
+			);
+		});
+
+	});
 	
 	$("#mdl_bid_forms").on('submit', function (e) { 
 		e.preventDefault();
