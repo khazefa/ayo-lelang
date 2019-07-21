@@ -62,7 +62,7 @@
 						$short_desc = text_shorter($rp['keterangan'], 75);
 						$price = (int) $rp['harga_awal'];
 						$price_idr = format_rupiah($price);
-					?>
+						?>
 						<div class="col-md-3">
 							<div class="box box-warning box-solid">
 								<div class="box-header with-border">
@@ -71,17 +71,17 @@
 								</div>
 								<!-- /.box-header -->
 								<div class="box-body">
-									<a href="<?= base_url('produk/detail/'.$rp['id_lelang']); ?>">
+									<a href="<?= base_url('produk/detail/' . $rp['id_lelang']); ?>">
 										<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar_produk']); ?>" alt="<?= $rp['nama_lelang']; ?>">
 									</a>
-                            		<p class="text-default"><?= $short_desc; ?></p>
+									<p class="text-default"><?= $short_desc; ?></p>
 									<div class="price">
 										<h5>Mulai dari <strong class="text-danger"><?= $price_idr; ?></strong></h5>
 									</div>
 								</div>
 								<div class="box-footer">
 									<div class="pull-left">
-										<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
+										<button type="button" class="btn btn-success btn-block btn-bin" data-id="<?= $id; ?>">Buy It Now!</button>
 									</div>
 									<div class="pull-right">
 										<button type="button" class="btn btn-danger btn-block btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $id; ?>" data-price="<?= $price; ?>">Bid Now!</button>
