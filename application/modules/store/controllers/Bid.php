@@ -16,6 +16,7 @@ class Bid extends Front_Controller
 		$this->isLoggedIn();
 		if ($this->session->userdata('signed_in')) {
 			$this->load->model('store/Tawaran_model', 'MBid');
+			$this->load->model('store/Produk_model', 'MProduk');
 		} else {
 			setFlashData('error', 'Anda harus login terlebih dahulu.');
 			redirect('login');
@@ -35,7 +36,45 @@ class Bid extends Front_Controller
 	/**
 	 * Submit Bid
 	 */
-	public function insert_data()
+	public function insert_data_bin()
+	{
+		$item_id = $this->input->post('item_id', TRUE);
+		$peserta_id = (int) $this->uBid;
+		$peserta_name = $this->uName;
+		$rs_items = $this->MProduk->get_data_info($item_id);
+		$bid_price = (int) $rs_items[0]['harga_maksimal'];
+		$current_date = date('Y-m-d H:i:s');
+
+		$dataInfo = array(
+			'id_peserta' => $peserta_id, 'id_lelang' => $item_id, 'jumlah_tawaran' => $bid_price, 'waktu_tawaran' => $current_date,
+			'tipe_tawaran' => 'bin'
+		);
+
+		$arrWhere = array('id_peserta' => $peserta_id, 'id_lelang' => $item_id);
+		$count = $this->MBid->check_data_exists($arrWhere);
+
+		if ($count > 0) {
+			setFlashData('error', 'Anda sudah melakukan Bid untuk produk tersebut.');
+			echo json_encode(array('status'=>false));
+			// redirect('/');
+		} else {
+			$result = $this->MBid->insert_data($dataInfo);
+			if ($result > 0) {
+				setFlashData('success', $peserta_name . ', Bid Anda telah terinput di sistem kami.');
+				echo json_encode(array('status' => true));
+				// redirect('peserta/status-bid');
+			} else {
+				setFlashData('error', $peserta_name . ', Bid Anda gagal terinput di sistem kami.');
+				echo json_encode(array('status' => false));
+				// redirect('/');
+			}
+		}
+	}
+
+	/**
+	 * Submit Bid
+	 */
+	public function insert_data_bid()
 	{
 		$item_id = $this->input->post('mdl_bid_id', TRUE);
 		$peserta_id = (int) $this->uBid;
@@ -44,7 +83,8 @@ class Bid extends Front_Controller
 		$current_date = date('Y-m-d H:i:s');
 
 		$dataInfo = array(
-			'id_peserta' => $peserta_id, 'id_lelang' => $item_id, 'jumlah_tawaran' => $bid_price, 'waktu_tawaran' => $current_date
+			'id_peserta' => $peserta_id, 'id_lelang' => $item_id, 'jumlah_tawaran' => $bid_price, 'waktu_tawaran' => $current_date, 
+			'tipe_tawaran' => 'bid'
 		);
 
 		$arrWhere = array('id_peserta' => $peserta_id, 'id_lelang' => $item_id);
