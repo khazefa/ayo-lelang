@@ -168,7 +168,7 @@ class Peserta extends Front_Controller
 			}
 
 			$data['records_bid'] = $arr_data;
-			$this->digiLayout($data, $this->view_dir . "/status-bid", $this->global);
+			$this->digiLayout($data, $this->view_dir . "/status_bid", $this->global);
 		} else {
 			$this->registrasi();
 		}
