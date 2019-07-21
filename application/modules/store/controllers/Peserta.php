@@ -15,6 +15,8 @@ class Peserta extends Front_Controller
 		parent::__construct();
 		$this->isLoggedIn();
 		$this->load->model('store/Peserta_model', 'MPeserta');
+		$this->load->model('store/Tawaran_model', 'MBid');
+		$this->load->model('store/Produk_model', 'MProduk');
 	}
 
 	/**
@@ -80,26 +82,6 @@ class Peserta extends Front_Controller
 	}
 
 	/**
-	 * Show Profile Page
-	 */
-	public function profil()
-	{
-		if ($this->session->userdata('signed_in')) {
-			$this->global['pageTitle'] = 'Profil Peserta';
-			$this->global['contentTitle'] = 'Profil Peserta';
-			$this->global['name'] = $this->uName;
-
-			$username = $this->uKey;
-			$rs_peserta = $this->MPeserta->get_data_info($username);
-
-			$data['records_peserta'] = $rs_peserta;
-			$this->digiLayout($data, $this->view_dir . "/profil", $this->global);
-		} else {
-			$this->registrasi();
-		}
-	}
-
-	/**
 	 * Modify Users
 	 */
 	public function modify_data()
@@ -132,6 +114,63 @@ class Peserta extends Front_Controller
 		} else {
 			setFlashData('error', 'Informasi Akun Anda gagal diubah');
 			redirect('peserta/profil');
+		}
+	}
+
+	/**
+	 * Show Profile Page
+	 */
+	public function profil()
+	{
+		if ($this->session->userdata('signed_in')) {
+			$this->global['pageTitle'] = 'Profil Peserta';
+			$this->global['contentTitle'] = 'Profil Peserta';
+			$this->global['name'] = $this->uName;
+
+			$username = $this->uKey;
+			$rs_peserta = $this->MPeserta->get_data_info($username);
+
+			$data['records_peserta'] = $rs_peserta;
+			$this->digiLayout($data, $this->view_dir . "/profil", $this->global);
+		} else {
+			$this->registrasi();
+		}
+	}
+
+	/**
+	 * Show Status Bid Page
+	 */
+	public function status_bid()
+	{
+		if ($this->session->userdata('signed_in')) {
+			$this->global['pageTitle'] = 'Status Bid';
+			$this->global['contentTitle'] = 'Status Bid';
+			$this->global['name'] = $this->uName;
+
+			$peserta_id = $this->uBid;
+			$username = $this->uKey;
+
+			$arrWhere = array('id_peserta' => $peserta_id);
+			$rs_bid = $this->MBid->get_data($arrWhere, array('waktu_tawaran' => 'ASC'), 100, 0);
+			$arr_data = array();
+			foreach ($rs_bid as $rb) {
+				$row['id'] = $rb['id_tawaran'];
+				$row['peserta_id'] = $peserta_id;
+				$row['item_id'] = (int) $rb['id_lelang'];
+				$rs_items = $this->MProduk->get_data_info($row['item_id']);
+				$row['item_name'] = $rs_items[0]['nama_lelang'];
+				$row['item_img'] = $rs_items[0]['gambar_produk'];
+				$row['bid_price'] = $rb['jumlah_tawaran'];
+				$row['bid_time'] = $rb['waktu_tawaran'];
+				$row['bid_status'] = $rb['status_tawaran'];
+
+				array_push($arr_data, $row);
+			}
+
+			$data['records_bid'] = $arr_data;
+			$this->digiLayout($data, $this->view_dir . "/status-bid", $this->global);
+		} else {
+			$this->registrasi();
 		}
 	}
 }
