@@ -16,6 +16,21 @@ $(function () {
 			"min" : price	//set minimal price by data
 		 });
 	});
+
+	/**
+	 * Open modal input up bid price
+	 */
+	$(".btn-up-bid").on('click', function (e) {
+		e.preventDefault();
+		let id = $(this).data('id');
+		let price = $(this).data('price');
+		$("#modal-up-bid .modal-body #mdl_up_bid_id").attr({
+			"value": id
+		});
+		$("#modal-up-bid .modal-body #mdl_up_bid_price").attr({
+			"min": price	//set minimal price by data
+		});
+	});
 	
 	$("#mdl_bid_forms").on('submit', function (e) { 
 		e.preventDefault();
@@ -67,6 +82,17 @@ $(function () {
 		request.always(function () {
 			// Reenable the inputs
 			$inputs.prop("disabled", false);
+		});
+	});
+
+	$(document).ready(function () {
+		$('#grid_status_bid').DataTable({
+			'paging': true,
+			'lengthChange': false,
+			'searching': false,
+			'ordering': true,
+			'info': true,
+			'autoWidth': false
 		});
 	});
 });
