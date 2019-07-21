@@ -19,10 +19,10 @@ foreach ($records_peserta as $rp) {
 		<div class="list-group">
 			<a href="<?= base_url('peserta/profil'); ?>" class="list-group-item active"><i class="fa fa-user"></i> Profil</a>
 			<a href="<?= base_url('peserta/status-bid'); ?>" class="list-group-item">
-			Status Bid
+				<i class="fa fa-gavel"></i> Status Bid
 			</a>
-			<a href="<?= base_url('peserta/invoice'); ?>" class="list-group-item">Invoice</a>
-			<a href="<?= base_url('signout'); ?>" class="list-group-item">Logout</a>
+			<a href="<?= base_url('peserta/invoice'); ?>" class="list-group-item"><i class="fa fa-file-text-o"></i> Invoice</a>
+			<a href="<?= base_url('signout'); ?>" class="list-group-item"><i class="fa fa-sign-out"></i> Logout</a>
 		</div>
 	</div>
 
