@@ -23,7 +23,8 @@
 						<h4 class="modal-title">Input Harga Bid Anda!</h4>
 					</div>
 					<div class="modal-body">
-						<form action="#" id="mdl_bid_form" method="POST" class="form-inline" role="form">
+						<form action="<?= base_url('bid/add'); ?>" id="mdl_bid_form" method="POST" class="form-inline" role="form">
+							<input type="hidden" id="mdl_bid_id" name="mdl_bid_id" value="0">
 							<div class="form-group">
 								<label class="sr-only" for="">Harga Bid</label>
 								<input type="number" class="form-control" id="mdl_bid_price" name="mdl_bid_price" min="5000" required="required" placeholder="Harga Bid">
