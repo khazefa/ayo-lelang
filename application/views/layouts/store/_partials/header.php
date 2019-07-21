@@ -144,9 +144,6 @@
 										<li>
 											<div class="row">
 												<div class="col-md-12">
-													<p class="login-box-msg">
-														<?= empty($this->session->flashdata('error_login')) ? '' : '<span class="text-danger">' . $this->session->flashdata('error_login') . '</span>'; ?>
-													</p>
 													<form class="form" role="form" method="post" action="<?= base_url('signin'); ?>" accept-charset="UTF-8" id="login-nav">
 														<div class="form-group">
 															<label class="sr-only" for="login_email">Email</label>
@@ -187,16 +184,7 @@
 		<div class="content-wrapper">
 			<div class="container">
 				<!-- Content Header (Page header) -->
-				<!--
 				<section class="content-header">
-					<h1>
-						Top Navigation
-						<small>Example 2.0</small>
-					</h1>
-					<ol class="breadcrumb">
-						<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-						<li><a href="#">Layout</a></li>
-						<li class="active">Top Navigation</li>
-					</ol>
+					<?= empty($this->session->flashdata('success')) ? '' : '<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $this->session->flashdata('success') . '</div>'; ?>
+					<?= empty($this->session->flashdata('error')) ? '' : '<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $this->session->flashdata('error') . '</div>'; ?>
 				</section>
-				-->
