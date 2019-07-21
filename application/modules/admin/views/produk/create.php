@@ -24,10 +24,10 @@
 									<?php echo $error; ?>
 								</div>
 							<?php
-						}
-						$success = $this->session->flashdata('success');
-						if ($success) {
-							?>
+							}
+							$success = $this->session->flashdata('success');
+							if ($success) {
+								?>
 								<div class="alert alert-success alert-dismissable">
 									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 									<?php echo $success; ?>
@@ -80,7 +80,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Keterangan <span class="text-danger">*</span></label>
 							<div class="col-sm-6">
-								<textarea id="fketerangan" name="fketerangan" class="form-control" placeholder="Keterangan"></textarea>
+								<textarea id="fketerangan" name="fketerangan" class="form-control" rows="5" placeholder="Keterangan"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
