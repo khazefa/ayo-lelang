@@ -34,10 +34,6 @@ foreach ($records_peserta as $rp) {
 			<div class="box-body">
 
 				<div class="col-md-6">
-					<p class="session-box-msg">
-						<?= empty($this->session->flashdata('success')) ? '' : '<span class="text-success">' . $this->session->flashdata('success') . '</span>'; ?>
-						<?= empty($this->session->flashdata('error')) ? '' : '<span class="text-danger">' . $this->session->flashdata('error') . '</span>'; ?>
-					</p>
 					<!-- form start -->
 					<form method="POST" action="<?= base_url('peserta/update'); ?>" class="form-horizontal">
 						<div class="box-body">
