@@ -32,7 +32,7 @@
 								</div>
 								<div class="box-footer">
 									<div class="pull-left">
-										<button type="button" class="btn btn-success btn-block">Buy It Now!</button>
+										<button type="button" class="btn btn-success btn-block btn-bin" data-id="<?= $id; ?>">Buy It Now!</button>
 									</div>
 									<div class="pull-right">
 										<button type="button" class="btn btn-danger btn-block btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $id; ?>" data-price="<?= $price; ?>">Bid Now!</button>
