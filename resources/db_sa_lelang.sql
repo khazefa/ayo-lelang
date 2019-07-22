@@ -2,14 +2,12 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jul 20, 2019 at 11:24 AM
--- Server version: 5.7.26
--- PHP Version: 5.6.40
+-- Host: localhost:3306
+-- Generation Time: Jul 22, 2019 at 11:49 PM
+-- Server version: 5.7.25
+-- PHP Version: 7.1.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,18 +26,15 @@ SET time_zone = "+00:00";
 -- Table structure for table `akun`
 --
 
-DROP TABLE IF EXISTS `akun`;
-CREATE TABLE IF NOT EXISTS `akun` (
-  `id_akun` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `akun` (
+  `id_akun` int(11) NOT NULL,
   `nama_akun` varchar(25) NOT NULL,
   `sandi_akun` varchar(64) NOT NULL,
   `nama_lengkap_akun` varchar(100) NOT NULL,
   `email_akun` varchar(100) NOT NULL,
   `level_akun` enum('admin','staff') NOT NULL,
-  `status_akun` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_akun`),
-  UNIQUE KEY `user_email` (`email_akun`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `status_akun` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `akun`
@@ -54,13 +49,11 @@ INSERT INTO `akun` (`id_akun`, `nama_akun`, `sandi_akun`, `nama_lengkap_akun`, `
 -- Table structure for table `biaya_kirim`
 --
 
-DROP TABLE IF EXISTS `biaya_kirim`;
-CREATE TABLE IF NOT EXISTS `biaya_kirim` (
-  `id_biaya_kirim` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `biaya_kirim` (
+  `id_biaya_kirim` int(11) NOT NULL,
   `id_kota` int(11) NOT NULL,
-  `jumlah_biaya_kirim` int(6) NOT NULL,
-  PRIMARY KEY (`id_biaya_kirim`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `jumlah_biaya_kirim` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `biaya_kirim`
@@ -77,15 +70,12 @@ INSERT INTO `biaya_kirim` (`id_biaya_kirim`, `id_kota`, `jumlah_biaya_kirim`) VA
 -- Table structure for table `kategori`
 --
 
-DROP TABLE IF EXISTS `kategori`;
-CREATE TABLE IF NOT EXISTS `kategori` (
-  `id_kategori` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `kategori` (
+  `id_kategori` int(5) NOT NULL,
   `alias_kategori` varchar(100) NOT NULL,
   `nama_kategori` varchar(100) NOT NULL,
-  `deskripsi_kategori` text NOT NULL,
-  PRIMARY KEY (`id_kategori`),
-  UNIQUE KEY `alias_kategori` (`alias_kategori`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `deskripsi_kategori` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kategori`
@@ -101,12 +91,10 @@ INSERT INTO `kategori` (`id_kategori`, `alias_kategori`, `nama_kategori`, `deskr
 -- Table structure for table `kota`
 --
 
-DROP TABLE IF EXISTS `kota`;
-CREATE TABLE IF NOT EXISTS `kota` (
-  `id_kota` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_kota` varchar(150) NOT NULL,
-  PRIMARY KEY (`id_kota`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE `kota` (
+  `id_kota` int(11) NOT NULL,
+  `nama_kota` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kota`
@@ -123,9 +111,8 @@ INSERT INTO `kota` (`id_kota`, `nama_kota`) VALUES
 -- Table structure for table `lelang`
 --
 
-DROP TABLE IF EXISTS `lelang`;
-CREATE TABLE IF NOT EXISTS `lelang` (
-  `id_lelang` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lelang` (
+  `id_lelang` int(11) NOT NULL,
   `id_kategori` int(11) NOT NULL,
   `id_pelelang` int(11) NOT NULL,
   `nama_lelang` varchar(100) NOT NULL,
@@ -135,9 +122,8 @@ CREATE TABLE IF NOT EXISTS `lelang` (
   `waktu_mulai` datetime NOT NULL,
   `waktu_selesai` datetime NOT NULL,
   `keterangan` text NOT NULL,
-  `status_lelang` enum('active','end') NOT NULL DEFAULT 'active',
-  PRIMARY KEY (`id_lelang`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `status_lelang` enum('active','end') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `lelang`
@@ -150,7 +136,7 @@ INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, 
 (4, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (5, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (6, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(7, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active');
+(7, 1, 1, 'Xiaomi A3 China', 'xiaomi_a2.jpg', 2200000, 5000000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active');
 
 -- --------------------------------------------------------
 
@@ -158,16 +144,13 @@ INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, 
 -- Table structure for table `order_lelang`
 --
 
-DROP TABLE IF EXISTS `order_lelang`;
-CREATE TABLE IF NOT EXISTS `order_lelang` (
-  `id_order` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_lelang` (
+  `id_order` int(11) NOT NULL,
   `notrans_order` varchar(11) NOT NULL,
   `tgl_order` datetime NOT NULL,
   `id_tawaran` int(11) NOT NULL,
   `id_biaya_kirim` int(11) NOT NULL,
-  `status_order` enum('order','paid','sent','received') NOT NULL,
-  PRIMARY KEY (`id_order`),
-  UNIQUE KEY `notrans_order` (`notrans_order`)
+  `status_order` enum('order','paid','sent','received') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -176,9 +159,8 @@ CREATE TABLE IF NOT EXISTS `order_lelang` (
 -- Table structure for table `pelelang`
 --
 
-DROP TABLE IF EXISTS `pelelang`;
-CREATE TABLE IF NOT EXISTS `pelelang` (
-  `id_pelelang` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pelelang` (
+  `id_pelelang` int(11) NOT NULL,
   `nama_pelelang` varchar(100) NOT NULL,
   `akun_pelelang` varchar(25) NOT NULL,
   `sandi_pelelang` varchar(64) NOT NULL,
@@ -186,11 +168,8 @@ CREATE TABLE IF NOT EXISTS `pelelang` (
   `telepon_pelelang` varchar(32) NOT NULL,
   `status_pelelang` tinyint(1) NOT NULL,
   `alamat_pelelang` text NOT NULL,
-  `tgl_daftar_pelelang` datetime NOT NULL,
-  PRIMARY KEY (`id_pelelang`),
-  UNIQUE KEY `akun_pelelang` (`akun_pelelang`),
-  UNIQUE KEY `email_pelelang` (`email_pelelang`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `tgl_daftar_pelelang` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `pelelang`
@@ -207,9 +186,8 @@ INSERT INTO `pelelang` (`id_pelelang`, `nama_pelelang`, `akun_pelelang`, `sandi_
 -- Table structure for table `peserta`
 --
 
-DROP TABLE IF EXISTS `peserta`;
-CREATE TABLE IF NOT EXISTS `peserta` (
-  `id_peserta` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `peserta` (
+  `id_peserta` int(11) NOT NULL,
   `nama_peserta` varchar(100) NOT NULL,
   `akun_peserta` varchar(25) NOT NULL,
   `sandi_peserta` varchar(64) NOT NULL,
@@ -217,17 +195,15 @@ CREATE TABLE IF NOT EXISTS `peserta` (
   `telepon_peserta` varchar(32) DEFAULT NULL,
   `alamat_peserta` text NOT NULL,
   `tgl_daftar_peserta` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status_peserta` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_peserta`),
-  UNIQUE KEY `email_peserta` (`email_peserta`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `status_peserta` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `peserta`
 --
 
 INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_peserta`, `email_peserta`, `telepon_peserta`, `alamat_peserta`, `tgl_daftar_peserta`, `status_peserta`) VALUES
-(1, 'Hyde Lawless', 'hydelaw', '6cf50439ff6959475621f3a762fcc9b2cf62b503', 'hydelaw@email.com', '081299998878', 'Jl Shinjuku Kosakabe No 07', '2019-07-14 10:28:38', 1),
+(1, 'Hyde Lawlesss', 'hydelaw', '6cf50439ff6959475621f3a762fcc9b2cf62b503', 'hydelaw@email.com', '081299998878', 'Jl Shinjuku Kosakabe No 07', '2019-07-14 10:28:38', 1),
 (2, 'Jay Weinberg', 'jaywein', 'd70fa9ddea6eb70c28bf0f75ec5107614786129b', 'jaywein@example.com', '081276765454', 'Jl Core Sana No 08', '2019-07-14 10:32:14', 1);
 
 -- --------------------------------------------------------
@@ -236,17 +212,146 @@ INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_pese
 -- Table structure for table `tawaran`
 --
 
-DROP TABLE IF EXISTS `tawaran`;
-CREATE TABLE IF NOT EXISTS `tawaran` (
+CREATE TABLE `tawaran` (
   `id_tawaran` int(11) NOT NULL,
   `id_peserta` int(11) NOT NULL,
   `id_lelang` int(11) NOT NULL,
   `jumlah_tawaran` int(11) NOT NULL,
   `waktu_tawaran` datetime NOT NULL,
-  `status_tawaran` enum('accepted','unaccepted') NOT NULL,
-  PRIMARY KEY (`id_tawaran`)
+  `tipe_tawaran` enum('bid','bin') NOT NULL,
+  `status_tawaran` enum('accepted','postponed','rejected') NOT NULL DEFAULT 'postponed'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-COMMIT;
+
+--
+-- Dumping data for table `tawaran`
+--
+
+INSERT INTO `tawaran` (`id_tawaran`, `id_peserta`, `id_lelang`, `jumlah_tawaran`, `waktu_tawaran`, `tipe_tawaran`, `status_tawaran`) VALUES
+(1, 1, 3, 2500000, '2019-07-21 08:14:14', 'bid', 'accepted'),
+(3, 1, 1, 4500000, '2019-07-21 19:07:51', 'bin', 'postponed'),
+(4, 1, 4, 4500000, '2019-07-21 19:08:14', 'bin', 'postponed');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `akun`
+--
+ALTER TABLE `akun`
+  ADD PRIMARY KEY (`id_akun`),
+  ADD UNIQUE KEY `user_email` (`email_akun`);
+
+--
+-- Indexes for table `biaya_kirim`
+--
+ALTER TABLE `biaya_kirim`
+  ADD PRIMARY KEY (`id_biaya_kirim`);
+
+--
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id_kategori`),
+  ADD UNIQUE KEY `alias_kategori` (`alias_kategori`);
+
+--
+-- Indexes for table `kota`
+--
+ALTER TABLE `kota`
+  ADD PRIMARY KEY (`id_kota`);
+
+--
+-- Indexes for table `lelang`
+--
+ALTER TABLE `lelang`
+  ADD PRIMARY KEY (`id_lelang`);
+
+--
+-- Indexes for table `order_lelang`
+--
+ALTER TABLE `order_lelang`
+  ADD PRIMARY KEY (`id_order`),
+  ADD UNIQUE KEY `notrans_order` (`notrans_order`);
+
+--
+-- Indexes for table `pelelang`
+--
+ALTER TABLE `pelelang`
+  ADD PRIMARY KEY (`id_pelelang`),
+  ADD UNIQUE KEY `akun_pelelang` (`akun_pelelang`),
+  ADD UNIQUE KEY `email_pelelang` (`email_pelelang`);
+
+--
+-- Indexes for table `peserta`
+--
+ALTER TABLE `peserta`
+  ADD PRIMARY KEY (`id_peserta`),
+  ADD UNIQUE KEY `email_peserta` (`email_peserta`);
+
+--
+-- Indexes for table `tawaran`
+--
+ALTER TABLE `tawaran`
+  ADD PRIMARY KEY (`id_tawaran`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `akun`
+--
+ALTER TABLE `akun`
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `biaya_kirim`
+--
+ALTER TABLE `biaya_kirim`
+  MODIFY `id_biaya_kirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id_kategori` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `kota`
+--
+ALTER TABLE `kota`
+  MODIFY `id_kota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `lelang`
+--
+ALTER TABLE `lelang`
+  MODIFY `id_lelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `order_lelang`
+--
+ALTER TABLE `order_lelang`
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pelelang`
+--
+ALTER TABLE `pelelang`
+  MODIFY `id_pelelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `peserta`
+--
+ALTER TABLE `peserta`
+  MODIFY `id_peserta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tawaran`
+--
+ALTER TABLE `tawaran`
+  MODIFY `id_tawaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
