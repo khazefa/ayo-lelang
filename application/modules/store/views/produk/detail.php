@@ -27,8 +27,8 @@
 						<h3 class="cost">Mulai dari - <span class="text-bold">IDR</span> <?= format_rupiah($rs_produk[0]['harga_awal']); ?></h3>
 						<div class="space-ten"></div>
 						<div class="btn-ground">
-							<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Buy It Now!</button>
-							<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-hand-up"></span> Bid Now!</button>
+							<button type="button" class="btn btn-success btn-bin" data-id="<?= $rs_produk[0]['id_lelang']; ?>"><span class="glyphicon glyphicon-shopping-cart"></span> Buy It Now!</button>
+							<button type="button" class="btn btn-danger btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $rs_produk[0]['id_lelang']; ?>" data-price="<?= $rs_produk[0]['harga_maksimal']; ?>"><span class="glyphicon glyphicon-hand-up"></span> Bid Now!</button>
 						</div>
 					</div>
 				</div>
