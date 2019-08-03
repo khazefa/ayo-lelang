@@ -68,13 +68,23 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Waktu Mulai</label>
 							<div class="col-sm-4">
-								<input type="date" class="form-control" id="fwaktu1" name="fwaktu1" placeholder="mm/dd/yyyy">
+								<div class='input-group date datetimepicker1'>
+									<input type='text' class="form-control" id="fwaktu1" name="fwaktu1" placeholder="2019-01-01 00:00:00" />
+									<span class=" input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Waktu Selesai</label>
 							<div class="col-sm-4">
-								<input type="date" class="form-control" id="fwaktu2" name="fwaktu2" placeholder="mm/dd/yyyy">
+								<div class='input-group date datetimepicker1'>
+									<input type='text' class="form-control" id="fwaktu2" name="fwaktu2" placeholder="2019-01-01 00:00:00" />
+									<span class=" input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
