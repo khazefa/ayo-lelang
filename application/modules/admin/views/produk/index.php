@@ -69,6 +69,18 @@
 									$waktu_selesai = indonesian_date($r['waktu_selesai']);
 									$keterangan = $r['keterangan'];
 									$status = $r['status_lelang'] === "active" ? "Active" : "End";
+
+									$button = '<div class="btn-group" role="group">';
+									$button .= '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Action
+									<span class="caret"></span>
+									</button>';
+									$button .= '<ul class="dropdown-menu">';
+									$button .= '<li><a href="' . base_url('admin/produk/edit/') . $id . '"><i class="mdi mdi-pencil mr-2 text-muted font-18 vertical-middle"></i> Edit</a></li>';
+									$button .= '<li><a href="' . base_url('admin/produk/delete/') . $id . '"><i class="mdi mdi-delete mr-2 text-muted font-18 vertical-middle"></i> Remove</a></li>';
+									$button .= '</ul>';
+									$button .= '</div>';
+
 									echo '<tr>';
 									echo '<td>' . $foto . '</td>';
 									echo '<td>' . $nama . '</td>';
@@ -78,7 +90,7 @@
 									echo '<td>' . $waktu_mulai . '</td>';
 									echo '<td>' . $waktu_selesai . '</td>';
 									echo '<td>' . $status . '</td>';
-									echo '<td><a class="btn btn-warning btn-sm" href="' . base_url('admin/produk/edit/') . $id . '"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-danger btn-sm" href="' . base_url('admin/produk/delete/') . $id . '"><i class="fa fa-trash"></i> Hapus</a></td>';
+									echo '<td>' . $button .'</td>';
 									echo '</tr>';
 								}
 								?>
