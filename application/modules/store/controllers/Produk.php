@@ -16,6 +16,7 @@ class Produk extends Front_Controller
 		$this->isLoggedIn();
 		$this->load->model('store/Kategori_model', 'MKategori');
 		$this->load->model('store/Produk_model', 'MProduk');
+		$this->load->model('store/Pelelang_model', 'MPelelang');
 	}
 
 	/**
@@ -39,6 +40,7 @@ class Produk extends Front_Controller
 
 		$rs_produk = $this->MProduk->get_data_info($fkey);
 		$rs_kategori = $this->MKategori->get_data_info2($rs_produk[0]["id_kategori"]);
+		$rs_pelelang = $this->MPelelang->get_data_info2($rs_produk[0]["id_pelelang"]);
 
 		$this->global['pageTitle'] = 'Lelang ' . $rs_produk[0]["nama_lelang"];
 		$this->global['contentTitle'] = 'Lelang ' . $rs_produk[0]["nama_lelang"];
@@ -46,6 +48,7 @@ class Produk extends Front_Controller
 
 		$data['rs_produk'] = $rs_produk;
 		$data['rs_kategori'] = $rs_kategori;
+		$data['rs_pelelang'] = $rs_pelelang;
 
 		$this->digiLayout($data, $this->view_dir . "/detail", $this->global);
 	}
