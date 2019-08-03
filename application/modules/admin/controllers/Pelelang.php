@@ -164,6 +164,19 @@ class Pelelang extends Back_Controller
 		} else {
 			setFlashData('error', 'Failed to delete data');
 		}
-		redirect('pelelang');
+		redirect('admin/pelelang');
+	}
+
+	public function banned($id = NULL)
+	{
+		$dataInfo = array('status_pelelang' => 0);
+
+		$result = $this->MPelelang->update_data($dataInfo, $id);
+		if ($result == true) {
+			setFlashData('success', 'Account is successfully blocked');
+		} else {
+			setFlashData('error', 'Account is failed to blocked');
+		}
+		redirect('admin/pelelang');
 	}
 }
