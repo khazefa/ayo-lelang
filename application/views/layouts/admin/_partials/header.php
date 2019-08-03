@@ -18,6 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<link rel="stylesheet" href="<?= base_url('assets/Ionicons/css/ionicons.min.css'); ?>">
 	<!-- DataTables -->
 	<link rel="stylesheet" href="<?= base_url('assets/datatables.net-bs/css/dataTables.bootstrap.css'); ?>">
+	<!-- Bootstrap Datetime Picker -->
+	<link rel="stylesheet" href="<?= base_url('assets/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'); ?>">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/AdminLTE.min.css'); ?>">
 	<!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -38,8 +40,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 	<!-- jQuery 3 -->
 	<script src="<?= base_url('assets/jquery/dist/jquery.min.js'); ?>"></script>
+	<!-- Moment JS -->
+	<script src="<?= base_url('assets/moment-js/moment.js'); ?>"></script>
+	<!-- Bootstrap Transition JS -->
+	<script src="<?= base_url('assets/bootstrap/js/transition.js'); ?>"></script>
+	<!-- Bootstrap Collapse JS -->
+	<script src="<?= base_url('assets/bootstrap/js/collapse.js'); ?>"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="<?= base_url('assets/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
+	<!-- Bootstrap Datetime Picker -->
+	<script src="<?= base_url('assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'); ?>"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -163,12 +173,12 @@ desired effect
 								?>
 								<li><a href="<?= base_url('admin/produk'); ?>">Produk Lelang</a></li>
 							<?php
-						} else {
-							?>
+							} else {
+								?>
 								<li><a href="<?= base_url('admin/kategori'); ?>">Kategori Produk Lelang</a></li>
 							<?php
-						}
-						?>
+							}
+							?>
 						</ul>
 					</li>
 					<?php
@@ -188,8 +198,8 @@ desired effect
 						<li><a href="<?= base_url('admin/pelelang'); ?>"><i class="fa fa-users"></i> <span>Daftar Pelelang</span></a></li>
 						<li><a href="<?= base_url('admin/peserta'); ?>"><i class="fa fa-users"></i> <span>Daftar Peserta</span></a></li>
 					<?php
-				}
-				?>
+					}
+					?>
 				</ul>
 				<!-- /.sidebar-menu -->
 			</section>
