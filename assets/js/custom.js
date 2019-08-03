@@ -125,6 +125,38 @@ $(function () {
 		});
 	});
 
+	// CountDownTimer("<?php echo $timer->waktu;?>", 'hari', 'jam', 'menit', 'detik');
+	function CountDownTimer(dt, id1, id2, id3, id4) {
+		var end = new Date(dt);
+
+		var _second = 1000;
+		var _minute = _second * 60;
+		var _hour = _minute * 60;
+		var _day = _hour * 24;
+		var timer;
+
+		function showRemaining() {
+			var now = new Date();
+			var distance = end - now;
+			var distance1 = now - end;
+			if (distance1 > 0) {
+				clearInterval(timer);
+				return;
+			}
+			var days = Math.floor(distance / _day);
+			var hours = Math.floor((distance % _day) / _hour);
+			var minutes = Math.floor((distance % _hour) / _minute);
+			var seconds = Math.floor((distance % _minute) / _second);
+
+			document.getElementById(id1).innerHTML = days + ' Hari';
+			document.getElementById(id2).innerHTML = hours + ' Jam';
+			document.getElementById(id3).innerHTML = minutes + ' Menit';
+			document.getElementById(id4).innerHTML = seconds + ' Detik';
+		}
+
+		timer = setInterval(showRemaining, 1000);
+	}
+
 	$(document).ready(function () {
 		$('#grid_status_bid').DataTable({
 			'paging': true,
