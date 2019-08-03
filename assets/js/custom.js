@@ -126,7 +126,6 @@ $(function () {
 	});
 
 	$(document).ready(function () {
-
 		$('#grid_status_bid').DataTable({
 			'paging': true,
 			'lengthChange': false,
