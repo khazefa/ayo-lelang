@@ -63,13 +63,24 @@
 									$telepon = $r['telepon_peserta'];
 									$status = (int)$r['status_peserta'] === 1 ? "Active" : "Deactive";
 									$tgl_daftar = indonesian_date($r['tgl_daftar_peserta']);
+									$button = '<div class="btn-group" role="group">';
+									$button .= '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																																																			Action
+																																																			<span class="caret"></span>
+																																																			</button>';
+									$button .= '<ul class="dropdown-menu">';
+									$button .= '<li><a href="' . base_url('admin/peserta/edit/') . $id . '"><i class="fa fa-edit"></i> Edit</a></li>';
+									$button .= '<li><a href="' . base_url('admin/peserta/delete/') . $id . '"><i class="fa fa-trash"></i> Remove</a></li>';
+									$button .= '<li><a href="' . base_url('admin/peserta/block/') . $id . '"><i class="fa fa-ban"></i> Block</a></li>';
+									$button .= '</ul>';
+									$button .= '</div>';
 									echo '<tr>';
 									echo '<td>' . $nama . '</td>';
 									echo '<td>' . $email . '</td>';
 									echo '<td>' . $telepon . '</td>';
 									echo '<td>' . $status . '</td>';
 									echo '<td>' . $tgl_daftar . '</td>';
-									echo '<td><a class="btn btn-warning btn-sm" href="' . base_url('admin/peserta/edit/') . $akun . '"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-danger btn-sm" href="' . base_url('admin/peserta/delete/') . $akun . '"><i class="fa fa-trash"></i> Hapus</a></td>';
+									echo '<td>'.$button.'</td>';
 									echo '</tr>';
 								}
 								?>
