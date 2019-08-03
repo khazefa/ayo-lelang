@@ -13,6 +13,21 @@
 						$short_desc = text_shorter($rp['keterangan'], 75);
 						$price = (int) $rp['harga_awal'];
 						$price_idr = format_rupiah($price);
+						// $end_time = date('d/m/Y H:i:s', strtotime($rp['waktu_selesai']));
+
+						$current_date = date('Y-m-d H:i:s');
+						$start_time  = date_create($rp['waktu_mulai']);
+						$end_time = date_create($rp['waktu_selesai']); // waktu sekarang
+						$diff  = date_diff($start_time, $end_time);
+
+						$is_expired = false;
+						if ( ($rp['waktu_mulai'] > $current_date) || ($current_date > $rp['waktu_selesai']) ) 
+						{
+							$is_expired = true;
+						}
+
+						if ( !$is_expired ) 
+						{
 						?>
 						<div class="col-md-3">
 							<div class="box box-warning box-solid">
@@ -25,7 +40,18 @@
 									<a href="<?= base_url('produk/detail/' . $rp['id_lelang']); ?>">
 										<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar_produk']); ?>" alt="<?= $rp['nama_lelang']; ?>">
 									</a>
-									<p class="text-default"><?= $short_desc; ?></p>
+									<p class="text-center">
+										<?php
+										if ((int) $diff->d >= 1) {
+											echo '<strong>Tinggal ' . $diff->d . ' hari ' . $diff->h . ' Jam lagi!</strong>';
+										} else {
+											echo '<strong>Tinggal ' . $diff->h . ' Jam ' . $diff->i . ' Menit lagi!</strong>';
+										}
+										?>
+									</p>
+									<p class="text-center">
+										Lihat <a href="<?= base_url('produk/detail/' . $rp['id_lelang']); ?>"> detail</a> untuk selengkapnya
+									</p>
 									<div class="price">
 										<h5>Mulai dari <strong class="text-danger"><?= $price_idr; ?></strong></h5>
 									</div>
@@ -44,6 +70,7 @@
 						</div>
 						<!-- /.col -->
 					<?php
+						}
 					}
 				} else {
 					?>
