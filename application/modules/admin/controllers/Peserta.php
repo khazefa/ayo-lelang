@@ -164,6 +164,19 @@ class Peserta extends Back_Controller
 		} else {
 			setFlashData('error', 'Failed to delete data');
 		}
-		redirect('pelelang');
+		redirect('admin/peserta');
+	}
+
+	public function banned($id = NULL)
+	{
+		$dataInfo = array('status_peserta' => 0);
+
+		$result = $this->MPeserta->update_data($dataInfo, $id);
+		if ($result == true) {
+			setFlashData('success', 'Account is successfully blocked');
+		} else {
+			setFlashData('error', 'Account is failed to blocked');
+		}
+		redirect('admin/peserta');
 	}
 }
