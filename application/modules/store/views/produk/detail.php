@@ -24,6 +24,17 @@
 						</div>
 						-->
 						<p><?= $rs_produk[0]['keterangan']; ?></p>
+						<hr>
+						Dilelang oleh<br>
+						<span class="col-md-12">
+							<i class="fa fa-user"></i> <?= $rs_pelelang[0]['nama_pelelang']; ?>
+						</span>
+						<span class="col-md-12">
+							<i class="fa fa-home"></i> <?= $rs_pelelang[0]['alamat_pelelang']; ?>
+						</span>
+						<br>
+						<br>
+						<br>
 						<h3 class="cost">Mulai dari - <span class="text-bold">IDR</span> <?= format_rupiah($rs_produk[0]['harga_awal']); ?></h3>
 						<div class="space-ten"></div>
 						<div class="btn-ground">
