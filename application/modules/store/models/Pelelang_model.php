@@ -97,7 +97,7 @@ class Pelelang_model extends CI_Model
 	 */
 	function get_data_info($id)
 	{
-		$this->db->select('id_pelelang, nama_pelelang, akun_pelelang, email_pelelang, telepon_pelelang, status_pelelang, alamat_pelelang, tgl_daftar_pelelang');
+		$this->db->select('id_pelelang, nama_pelelang, akun_pelelang, email_pelelang, telepon_pelelang, status_pelelang, alamat_pelelang, id_kota, tgl_daftar_pelelang');
 		$this->db->from($this->tbl_pelelang);
 		$this->db->where($this->indexKey, $id);
 		$query = $this->db->get();
@@ -112,7 +112,7 @@ class Pelelang_model extends CI_Model
 	 */
 	function get_data_info2($id)
 	{
-		$this->db->select('id_pelelang, nama_pelelang, akun_pelelang, email_pelelang, telepon_pelelang, status_pelelang, alamat_pelelang, tgl_daftar_pelelang');
+		$this->db->select('id_pelelang, nama_pelelang, akun_pelelang, email_pelelang, telepon_pelelang, status_pelelang, alamat_pelelang, id_kota, tgl_daftar_pelelang');
 		$this->db->from($this->tbl_pelelang);
 		$this->db->where($this->primKey, $id);
 		$query = $this->db->get();
