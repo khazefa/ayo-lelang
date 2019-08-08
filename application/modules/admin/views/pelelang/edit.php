@@ -25,10 +25,10 @@
 									<?php echo $error; ?>
 								</div>
 							<?php
-						}
-						$success = $this->session->flashdata('success');
-						if ($success) {
-							?>
+							}
+							$success = $this->session->flashdata('success');
+							if ($success) {
+								?>
 								<div class="alert alert-success alert-dismissable">
 									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 									<?php echo $success; ?>
@@ -73,16 +73,33 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-sm-3 control-label">Kota</label>
+							<div class="col-sm-4">
+								<select name="fkota" id="fkota" class="form-control">
+									<option value="" selected>Pilih</option>
+									<?php
+									foreach ($records_kota as $rs_kota) {
+										if( $rs_kota['id_kota'] === $records[0]['id_kota'] ) {
+											echo '<option value="' . $rs_kota['id_kota'] . '" selected>' . $rs_kota['nama_kota'] . '</option> ';
+										} else {
+											echo '<option value="' . $rs_kota['id_kota'] . '">' . $rs_kota['nama_kota'] . '</option> ';
+										}
+									}
+									?>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-sm-3 control-label">Status</label>
 							<div class="col-sm-4">
 								<select name="fstatus" id="fstatus" class="form-control">
 									<option value="" selected>Pilih</option>
 									<?php
-										$status_a = (int) $records[0]['status_pelelang'] === 1 ? 'selected' : '';
-										$status_n = (int) $records[0]['status_pelelang'] === 0 ? 'selected' : '';
+									$status_a = (int) $records[0]['status_pelelang'] === 1 ? 'selected' : '';
+									$status_n = (int) $records[0]['status_pelelang'] === 0 ? 'selected' : '';
 
-										echo '<option value="1" ' . $status_a . '>Active</option> ';
-										echo '<option value="0" ' . $status_n . '>Deactive</option> ';
+									echo '<option value="1" ' . $status_a . '>Active</option> ';
+									echo '<option value="0" ' . $status_n . '>Deactive</option> ';
 									?>
 								</select>
 							</div>
