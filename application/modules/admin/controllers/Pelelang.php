@@ -10,6 +10,7 @@ class Pelelang extends Back_Controller
 		parent::__construct();
 		$this->isLoggedIn();
 		$this->load->model('Pelelang_model', 'MPelelang');
+		$this->load->model('Kota_model', 'MKota');
 	}
 
 	public function index()
@@ -39,6 +40,8 @@ class Pelelang extends Back_Controller
 		$this->global['role'] = $this->accRole;
 
 		$data = array();
+		$rs_kota = $this->MKota->get_data(array(), array(), 0);
+		$data['records_kota'] = $rs_kota;
 		$this->digiAdminLayout($data, $this->view_dir . 'create', $this->global);
 	}
 
@@ -51,9 +54,10 @@ class Pelelang extends Back_Controller
 		$femail = $this->input->post('femail', TRUE);
 		$ftelepon = $this->input->post('ftelepon', TRUE);
 		$falamat = $this->input->post('falamat', TRUE);
+		$fkota = $this->input->post('fkota', TRUE);
 		$tgl_daftar = date('Y-m-d');
 
-		$dataInfo = array('akun_pelelang' => $fusername, 'sandi_pelelang' => $password, 'nama_pelelang' => $fnama, 'email_pelelang' => $femail, 'telepon_pelelang' => $ftelepon, 'alamat_pelelang' => $falamat, 'tgl_daftar_pelelang' => $tgl_daftar);
+		$dataInfo = array('akun_pelelang' => $fusername, 'sandi_pelelang' => $password, 'nama_pelelang' => $fnama, 'email_pelelang' => $femail, 'telepon_pelelang' => $ftelepon, 'alamat_pelelang' => $falamat, 'id_kota' => $fkota, 'tgl_daftar_pelelang' => $tgl_daftar);
 		$result = $this->MPelelang->insert_data($dataInfo);
 
 		if ($result > 0) {
@@ -78,7 +82,9 @@ class Pelelang extends Back_Controller
 		$this->global['role'] = $this->accRole;
 
 		$rs = $this->MPelelang->get_data_info($fkey);
+		$rs_kota = $this->MKota->get_data(array(), array(), 0);
 		$data['records'] = $rs;
+		$data['records_kota'] = $rs_kota;
 		$this->digiAdminLayout($data, $this->view_dir . 'edit', $this->global);
 	}
 
@@ -133,12 +139,13 @@ class Pelelang extends Back_Controller
 		$femail = $this->input->post('femail', TRUE);
 		$ftelepon = $this->input->post('ftelepon', TRUE);
 		$falamat = $this->input->post('falamat', TRUE);
+		$fkota = $this->input->post('fkota', TRUE);
 
 		if (!empty($fpassword)) {
 			$password = sha1($fpassword);
-			$dataInfo = array('sandi_pelelang' => $password, 'nama_pelelang' => $fnama, 'email_pelelang' => $femail, 'telepon_pelelang' => $ftelepon, 'alamat_pelelang' => $falamat);
+			$dataInfo = array('sandi_pelelang' => $password, 'nama_pelelang' => $fnama, 'email_pelelang' => $femail, 'telepon_pelelang' => $ftelepon, 'alamat_pelelang' => $falamat, 'id_kota' => $fkota);
 		} else {
-			$dataInfo = array('nama_pelelang' => $fnama, 'email_pelelang' => $femail, 'telepon_pelelang' => $ftelepon, 'alamat_pelelang' => $falamat);
+			$dataInfo = array('nama_pelelang' => $fnama, 'email_pelelang' => $femail, 'telepon_pelelang' => $ftelepon, 'alamat_pelelang' => $falamat, 'id_kota' => $fkota);
 		}
 
 		$result = $this->MPelelang->update_data($dataInfo, $fusername);
