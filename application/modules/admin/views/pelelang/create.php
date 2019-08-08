@@ -24,10 +24,10 @@
 									<?php echo $error; ?>
 								</div>
 							<?php
-						}
-						$success = $this->session->flashdata('success');
-						if ($success) {
-							?>
+							}
+							$success = $this->session->flashdata('success');
+							if ($success) {
+								?>
 								<div class="alert alert-success alert-dismissable">
 									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 									<?php echo $success; ?>
@@ -69,6 +69,19 @@
 							<label class="col-sm-3 control-label">Alamat</label>
 							<div class="col-sm-6">
 								<textarea id="falamat" name="falamat" class="form-control" placeholder="Alamat"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Kota</label>
+							<div class="col-sm-4">
+								<select name="fkota" id="fkota" class="form-control">
+									<option value="" selected>Pilih</option>
+									<?php
+									foreach ($records_kota as $rs_kota) {
+										echo '<option value="' . $rs_kota['id_kota'] . '">' . $rs_kota['nama_kota'] . '</option> ';
+									}
+									?>
+								</select>
 							</div>
 						</div>
 					</div>
