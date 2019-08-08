@@ -64,7 +64,7 @@
 						$price_idr = format_rupiah($price);
 						// $end_time = date('d/m/Y H:i:s', strtotime($rp['waktu_selesai']));
 
-						$start_time  = date_create($rp['waktu_mulai']);
+						$start_time  = date_create() >= date_create($rp['waktu_mulai']) ? date_create() : date_create($rp['waktu_mulai']);
 						$end_time = date_create($rp['waktu_selesai']); // waktu sekarang
 						$diff  = date_diff($start_time, $end_time);
 						?>
