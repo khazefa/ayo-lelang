@@ -229,6 +229,20 @@ class Tawaran_model extends CI_Model
 		}
 		return $this->db->count_all_results();
 	}
+
+	function get_current_bid_price($id)
+	{
+		//Flush Param
+		$this->db->flush_cache();
+
+		$this->db->select("(CASE WHEN t.jumlah_tawaran IS NULL THEN p.harga_awal ELSE t.jumlah_tawaran END) as bid_price");
+		$this->db->from($this->tbl_tawaran . ' as t');
+		$this->db->join('lelang as p', ' t.id_lelang = p.id_lelang', 'right');
+		$this->db->where("p.id_lelang",$id);
+		$query = $this->db->get();
+		$rs = $query->result_array();
+		return $rs;
+	}
 }
 
 ?>
