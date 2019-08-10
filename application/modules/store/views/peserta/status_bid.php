@@ -38,7 +38,7 @@
 									$id = (int) $r['id'];
 									$peserta_id = (int) $r['peserta_id'];
 									$item_id = (int) $r['item_id'];
-									$item_name = $r['item_name'];
+									$item_name = "<a href='" . base_url('produk/detail/' . $r['item_id']) ."'>". $r['item_name']."</a>";
 									$item_img = $r['item_img'];
 									$foto = '<img src="' . base_url() . '/uploads/products/' . $item_img . '" width="100px">';
 									$bid_type = strtoupper($r['bid_type']);
@@ -56,7 +56,7 @@
 										}
 									} elseif ($bid_type === "BID") {
 										if ($bid_status !== "REJECTED") {
-											$bid_button .= ' <a class="btn btn-warning btn-sm btn-up-bid" data-toggle="modal" data-target="#modal-up-bid" data-id="' . $id . '" data-price="' . $bid_price . '"><i class="fa fa-hand-o-up"></i> Up</a>';
+											$bid_button .= ' <a class="btn btn-warning btn-sm btn-up-bid" data-toggle="modal" data-target="#modal-up-bid" data-id="' . $id . '" data-item-id="' . $r['item_id'] . '" data-price="' . $bid_price . '"><i class="fa fa-hand-o-up"></i> Up</a>';
 										}
 
 										if ($bid_status === "ACCEPTED") {
