@@ -77,7 +77,20 @@ class Site extends Front_Controller
 		}
 
 		$rs_produk = $this->MProduk->get_data_lelang(TRUE, NULL, NULL, array('waktu_selesai' => 'ASC'), $per_page, $offset);
-		$data['rs_produk'] = $rs_produk;
+		$arr_produk = array();
+		foreach ($rs_produk as $rp) {
+			$bid_price = $this->MTawaran->get_current_bid_price($rp['id_lelang']);
+			$row['id'] = $rp['id_lelang'];
+			$row['nama'] = $rp['nama_lelang'];
+			$row['gambar'] = $rp['gambar_produk'];
+			$row['keterangan'] = $rp['keterangan'];
+			$row['harga_awal'] = $bid_price[0]['bid_price'];
+			$row['waktu_mulai'] = $rp['waktu_mulai'];
+			$row['waktu_selesai'] = $rp['waktu_selesai'];
+
+			array_push($arr_produk, $row);
+		}
+		$data['rs_produk'] = $arr_produk;
 		$data['pagination'] = $this->pagination->create_links();
 
 		$this->digiLayout($data, $this->view_dir, $this->global);
@@ -154,14 +167,15 @@ class Site extends Front_Controller
 		$this->digiLayout($data, 'store/pages/cara-lelang', $this->global);
 	}
 
-	public function get_max_bid_price($id)
+	public function get_current_bid_price($id)
 	{
+		$current_bid = $this->MTawaran->get_current_bid_price($id);
 		$arrWhere = array('id_lelang' => $id, 'tipe_tawaran' => 'bid');
 		$rs_bid = $this->MTawaran->get_data($arrWhere, array(), 0, 0);
 		$arrWhere1 = array('id_lelang' => $id);
 		$rs_produk = $this->MProduk->get_data($arrWhere1, array(), 0, 0);
 
-		$bid_price = empty($rs_bid[0]['jumlah_tawaran']) ? (int)$rs_produk[0]['harga_awal'] : (int) $rs_bid[0]['jumlah_tawaran'];
+		$bid_price = (int) $current_bid[0]['bid_price'];
 		$bid_price_rp = format_rupiah($bid_price);
 
 		$output = $this->output
@@ -169,7 +183,8 @@ class Site extends Front_Controller
 			->set_output(
 				json_encode(
 					array(
-						'current_bid_price' => $bid_price_rp,
+						'current_bid_price' => $bid_price,
+						'current_bid_price_rp' => $bid_price_rp,
 					)
 				)
 			);
