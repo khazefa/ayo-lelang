@@ -18,6 +18,7 @@ class Kategori extends Front_Controller
 		$this->load->library('pagination');
 		$this->load->model('store/Kategori_model', 'MKategori');
 		$this->load->model('store/Produk_model', 'MProduk');
+		$this->load->model('store/Tawaran_model', 'MTawaran');
 	}
 
 	/**
@@ -79,7 +80,20 @@ class Kategori extends Front_Controller
 		}
 
 		$rs_produk = $this->MProduk->get_data($arrWhere, array('waktu_selesai' => 'ASC'), $per_page, $offset);
-		$data['rs_produk'] = $rs_produk;
+		$arr_produk = array();
+		foreach ($rs_produk as $rp) {
+			$bid_price = $this->MTawaran->get_current_bid_price($rp['id_lelang']);
+			$row['id'] = $rp['id_lelang'];
+			$row['nama'] = $rp['nama_lelang'];
+			$row['gambar'] = $rp['gambar_produk'];
+			$row['keterangan'] = $rp['keterangan'];
+			$row['harga_awal'] = $bid_price[0]['bid_price'];
+			$row['waktu_mulai'] = $rp['waktu_mulai'];
+			$row['waktu_selesai'] = $rp['waktu_selesai'];
+
+			array_push($arr_produk, $row);
+		}
+		$data['rs_produk'] = $arr_produk;
 		$data['pagination'] = $this->pagination->create_links();
 
 		$this->digiLayout($data, $this->view_dir."/kategori", $this->global);
