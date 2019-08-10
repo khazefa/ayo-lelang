@@ -4,11 +4,12 @@ $(document).ready(function () {
 
 	let get_bid_price = function load_bid_price(id) {
 		$.ajax({
-			url: base_url + 'store/Site/get_max_bid_price/' + id,
+			url: base_url + 'store/Site/get_current_bid_price/' + id,
 			type: 'get',
 			dataType: 'json',
 			success: function (response) {
-				$('.product-price-' + id).html(response.current_bid_price);
+				// $('.product-price-' + id).html(response.current_bid_price);
+				$('#prd_price').html(response.current_bid_price);
 			}
 		});
 	};
@@ -29,7 +30,7 @@ $(document).ready(function () {
 
 	for (let elements of iterator) {
 		// console.log(elements);
-		get_bid_price(elements);
+		// get_bid_price(elements);
 		get_total_offer(elements);
 	}
 });
