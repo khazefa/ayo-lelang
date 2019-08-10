@@ -58,7 +58,7 @@
 				<?php
 				if (count($rs_produk) > 0) {
 					foreach ($rs_produk as $rp) {
-						$id = (int) $rp['id_lelang'];
+						$id = (int) $rp['id'];
 						?>
 						<script>
 							arr_id.push(<?= $id; ?>);
@@ -76,13 +76,13 @@
 						<div class="col-md-3">
 							<div class="box box-warning box-solid">
 								<div class="box-header with-border">
-									<h3 class="box-title wrapping-text"><?= $rp['nama_lelang']; ?></h3>
+									<h3 class="box-title wrapping-text"><?= $rp['nama']; ?></h3>
 									<!-- /.box-tools -->
 								</div>
 								<!-- /.box-header -->
 								<div class="box-body">
-									<a href="<?= base_url('produk/detail/' . $rp['id_lelang']); ?>">
-										<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar_produk']); ?>" alt="<?= $rp['nama_lelang']; ?>">
+									<a href="<?= base_url('produk/detail/' . $rp['id']); ?>">
+										<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar']); ?>" alt="<?= $rp['nama']; ?>">
 									</a>
 									<p class="text-center">
 										<?php
@@ -94,11 +94,10 @@
 										?>
 									</p>
 									<p class="text-center">
-										Lihat <a href="<?= base_url('produk/detail/' . $rp['id_lelang']); ?>"> detail</a> untuk selengkapnya
+										Lihat <a href="<?= base_url('produk/detail/' . $rp['id']); ?>"> detail</a> untuk selengkapnya
 									</p>
 									<div class="price">
-										<!-- <h5>Mulai dari <strong class="text-danger"><?= $price_idr; ?></strong></h5> -->
-										<h5>Mulai dari <strong class="text-danger product-price-<?= $id; ?>"></strong></h5>
+										<h5>Mulai dari <strong class="text-danger"><?= $price_idr; ?></strong></h5>
 									</div>
 
 								</div>
@@ -109,7 +108,7 @@
 									</div>
 									<div class="pull-right">
 										<button type="button" class="btn btn-danger btn-block btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $id; ?>" data-price="<?= $price; ?>">Bid Now!</button>
-										<center><span class="text-warning total-bid-<?= $id; ?>">10 bidder</span></center>
+										<center><span class="text-warning total-bid-<?= $id; ?>">0 bidder</span></center>
 									</div>
 								</div>
 								<!-- /.box-body -->
