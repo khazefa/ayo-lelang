@@ -37,6 +37,13 @@
 	<script src="<?= base_url('assets/jquery/dist/jquery.min.js'); ?>"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="<?= base_url('assets/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
+	<script>
+		var base_url = "<?= base_url(); ?>";
+		var request;
+		var arr_id = [];
+	</script>
+	<script src="<?= base_url('assets/js/custom-store.js'); ?>" type="text/javascript"></script>
+	<script src="<?= base_url('assets/js/custom.js'); ?>" ></script>
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 
