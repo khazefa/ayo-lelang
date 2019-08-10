@@ -1,6 +1,5 @@
 $(function () {
 	'use strict'
-	var request;
 
 	/**
 	 * Open modal input bid price
@@ -124,6 +123,10 @@ $(function () {
 			$inputs.prop("disabled", false);
 		});
 	});
+
+	function mutate_bidder(id) {
+		arr_id.push(id);
+	}
 
 	// CountDownTimer("<?php echo $timer->waktu;?>", 'hari', 'jam', 'menit', 'detik');
 	function CountDownTimer(dt, id1, id2, id3, id4) {
