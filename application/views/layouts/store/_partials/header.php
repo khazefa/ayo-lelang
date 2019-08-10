@@ -43,7 +43,7 @@
 		var arr_id = [];
 	</script>
 	<script src="<?= base_url('assets/js/custom-store.js'); ?>" type="text/javascript"></script>
-	<script src="<?= base_url('assets/js/custom.js'); ?>" ></script>
+	<script src="<?= base_url('assets/js/custom-store-el.js'); ?>" ></script>
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 
