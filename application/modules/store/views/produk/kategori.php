@@ -9,7 +9,12 @@
 				<?php
 				if (count($rs_produk) > 0) {
 					foreach ($rs_produk as $rp) {
-						$id = (int) $rp['id_lelang'];
+						$id = (int) $rp['id'];
+						?>
+						<script>
+							arr_id.push(<?= $id; ?>);
+						</script>
+						<?php
 						$short_desc = text_shorter($rp['keterangan'], 75);
 						$price = (int) $rp['harga_awal'];
 						$price_idr = format_rupiah($price);
@@ -21,55 +26,55 @@
 						$diff  = date_diff($start_time, $end_time);
 
 						$is_expired = false;
-						if ( ($rp['waktu_mulai'] > $current_date) || ($current_date > $rp['waktu_selesai']) ) 
-						{
+						if (($rp['waktu_mulai'] > $current_date) || ($current_date > $rp['waktu_selesai'])) {
 							$is_expired = true;
 						}
 
-						if ( !$is_expired ) 
-						{
-						?>
-						<div class="col-md-3">
-							<div class="box box-warning box-solid">
-								<div class="box-header with-border">
-									<h3 class="box-title wrapping-text"><?= $rp['nama_lelang']; ?></h3>
-									<!-- /.box-tools -->
-								</div>
-								<!-- /.box-header -->
-								<div class="box-body">
-									<a href="<?= base_url('produk/detail/' . $rp['id_lelang']); ?>">
-										<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar_produk']); ?>" alt="<?= $rp['nama_lelang']; ?>">
-									</a>
-									<p class="text-center">
-										<?php
-										if ((int) $diff->d >= 1) {
-											echo '<strong>Tinggal ' . $diff->d . ' hari ' . $diff->h . ' Jam lagi!</strong>';
-										} else {
-											echo '<strong>Tinggal ' . $diff->h . ' Jam ' . $diff->i . ' Menit lagi!</strong>';
-										}
-										?>
-									</p>
-									<p class="text-center">
-										Lihat <a href="<?= base_url('produk/detail/' . $rp['id_lelang']); ?>"> detail</a> untuk selengkapnya
-									</p>
-									<div class="price">
-										<h5>Mulai dari <strong class="text-danger"><?= $price_idr; ?></strong></h5>
+						if (!$is_expired) {
+							?>
+							<div class="col-md-3">
+								<div class="box box-warning box-solid">
+									<div class="box-header with-border">
+										<h3 class="box-title wrapping-text"><?= $rp['nama']; ?></h3>
+										<!-- /.box-tools -->
 									</div>
-								</div>
-								<div class="box-footer">
-									<div class="pull-left">
-										<button type="button" class="btn btn-success btn-block btn-bin" data-id="<?= $id; ?>">Buy It Now!</button>
+									<!-- /.box-header -->
+									<div class="box-body">
+										<a href="<?= base_url('produk/detail/' . $rp['id']); ?>">
+											<img class="img-responsive img-carbox" src="<?= base_url('uploads/products/' . $rp['gambar']); ?>" alt="<?= $rp['nama']; ?>">
+										</a>
+										<p class="text-center">
+											<?php
+											if ((int) $diff->d >= 1) {
+												echo '<strong>Tinggal ' . $diff->d . ' hari ' . $diff->h . ' Jam lagi!</strong>';
+											} else {
+												echo '<strong>Tinggal ' . $diff->h . ' Jam ' . $diff->i . ' Menit lagi!</strong>';
+											}
+											?>
+										</p>
+										<p class="text-center">
+											Lihat <a href="<?= base_url('produk/detail/' . $rp['id']); ?>"> detail</a> untuk selengkapnya
+										</p>
+										<div class="price">
+											<h5>Mulai dari <strong class="text-danger"><?= $price_idr; ?></strong></h5>
+										</div>
 									</div>
-									<div class="pull-right">
-										<button type="button" class="btn btn-danger btn-block btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $id; ?>" data-price="<?= $price; ?>">Bid Now!</button>
+									<div class="box-footer">
+										<div class="pull-left">
+											<button type="button" class="btn btn-success btn-block btn-bin" data-id="<?= $id; ?>">Buy It Now!</button>
+											<center><span class="text-info total-bin-<?= $id; ?>">0 buyer</span></center>
+										</div>
+										<div class="pull-right">
+											<button type="button" class="btn btn-danger btn-block btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $id; ?>" data-price="<?= $price; ?>">Bid Now!</button>
+											<center><span class="text-warning total-bid-<?= $id; ?>">0 bidder</span></center>
+										</div>
 									</div>
+									<!-- /.box-body -->
 								</div>
-								<!-- /.box-body -->
+								<!-- /.box -->
 							</div>
-							<!-- /.box -->
-						</div>
-						<!-- /.col -->
-					<?php
+							<!-- /.col -->
+						<?php
 						}
 					}
 				} else {
