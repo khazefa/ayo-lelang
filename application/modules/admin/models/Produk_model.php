@@ -98,7 +98,7 @@ class Produk_model extends CI_Model
         //Flush Param
         $this->db->flush_cache();
         
-		$this->db->select('p.id_lelang, p.id_kategori, k.nama_kategori, p.id_pelelang, pl.nama_pelelang, p.nama_lelang, p.gambar_produk, p.harga_awal, p.harga_maksimal, p.waktu_mulai, p.waktu_selesai, p.keterangan, p.status_lelang');
+		$this->db->select('p.id_lelang, p.id_kategori, k.nama_kategori, p.id_pelelang, pl.nama_pelelang, p.nama_lelang, p.gambar_produk, p.berat_produk, p.harga_awal, p.harga_maksimal, p.waktu_mulai, p.waktu_selesai, p.keterangan, p.status_lelang');
         $this->db->from($this->tbl_produk.' as p');
         $this->db->join($this->tbl_kategori.' as k','p.id_kategori = k.id_kategori', 'both');
         $this->db->join($this->tbl_pelelang.' as pl','p.id_pelelang = pl.id_pelelang', 'both');
