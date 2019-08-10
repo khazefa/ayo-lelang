@@ -100,6 +100,12 @@
 								<p class="help-block">tipe file gambar (jpg, jpeg, png)</p>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Berat Produk</label>
+							<div class="col-sm-3">
+								<input type="number" class="form-control" id="fberat" name="fberat" placeholder="0" min="0">
+							</div>
+						</div>
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
