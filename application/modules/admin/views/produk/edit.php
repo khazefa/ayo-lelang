@@ -118,6 +118,12 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-sm-3 control-label">Berat Produk</label>
+							<div class="col-sm-3">
+								<input type="number" class="form-control" id="fberat" name="fberat" value="<?= $records[0]['berat_produk']; ?>" min="0">
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-sm-3 control-label">Status</label>
 							<div class="col-sm-4">
 								<select name="fstatus" id="fstatus" class="form-control">
