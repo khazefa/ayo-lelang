@@ -27,7 +27,7 @@
 						</table>
 					</div>
 					<div class="col-md-8 product_content">
-						<h3 class="cost">Mulai dari - <span class="text-bold">IDR</span> <?= format_rupiah($rs_produk[0]['harga_awal']); ?></h3>
+						<h3 id="prd_price" class="cost">Mulai dari - <span class="text-bold">IDR</span> <?= format_rupiah($rs_produk[0]['harga_awal']); ?></h3>
 						<hr>
 						<h4><?= $rs_produk[0]['nama_lelang']; ?></h4>
 						<h4>Kategori: <span><?= $rs_kategori[0]['nama_kategori']; ?></span></h4>
