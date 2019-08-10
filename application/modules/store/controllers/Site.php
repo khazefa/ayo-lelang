@@ -18,6 +18,7 @@ class Site extends Front_Controller
 		$this->load->library('pagination');
 		$this->load->model('store/Kategori_model', 'MKategori');
 		$this->load->model('store/Produk_model', 'MProduk');
+		$this->load->model('store/Tawaran_model', 'MTawaran');
 	}
 
 	/**
@@ -151,5 +152,50 @@ class Site extends Front_Controller
 
 		$data = array();
 		$this->digiLayout($data, 'store/pages/cara-lelang', $this->global);
+	}
+
+	public function get_max_bid_price($id)
+	{
+		$arrWhere = array('id_lelang' => $id, 'tipe_tawaran' => 'bid');
+		$rs_bid = $this->MTawaran->get_data($arrWhere, array(), 0, 0);
+		$arrWhere1 = array('id_lelang' => $id);
+		$rs_produk = $this->MProduk->get_data($arrWhere1, array(), 0, 0);
+
+		$bid_price = empty($rs_bid[0]['jumlah_tawaran']) ? (int)$rs_produk[0]['harga_awal'] : (int) $rs_bid[0]['jumlah_tawaran'];
+		$bid_price_rp = format_rupiah($bid_price);
+
+		$output = $this->output
+			->set_content_type('application/json')
+			->set_output(
+				json_encode(
+					array(
+						'current_bid_price' => $bid_price_rp,
+					)
+				)
+			);
+
+		return $output;
+	}
+
+	public function get_current_bidder($id)
+	{
+		$arrWhere = array('id_lelang' => $id, 'tipe_tawaran' => 'bid');
+		$rs_total_bid = $this->MTawaran->count_all_by($arrWhere);
+
+		$arrWhere1 = array('id_lelang' => $id, 'tipe_tawaran' => 'bin');
+		$rs_total_bin = $this->MTawaran->count_all_by($arrWhere1);
+
+		$output = $this->output
+			->set_content_type('application/json')
+			->set_output(
+				json_encode(
+					array(
+						'total_bid' => (int) $rs_total_bid,
+						'total_bin' => (int) $rs_total_bin,
+					)
+				)
+			);
+
+		return $output;
 	}
 }
