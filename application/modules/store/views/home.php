@@ -59,6 +59,11 @@
 				if (count($rs_produk) > 0) {
 					foreach ($rs_produk as $rp) {
 						$id = (int) $rp['id_lelang'];
+						?>
+						<script>
+							arr_id.push(<?= $id; ?>);
+						</script>
+						<?php
 						$short_desc = text_shorter($rp['keterangan'], 75);
 						$price = (int) $rp['harga_awal'];
 						$price_idr = format_rupiah($price);
@@ -81,28 +86,30 @@
 									</a>
 									<p class="text-center">
 										<?php
-											if ((int)$diff->d >= 1 ) 
-											{
-												echo '<strong>Tinggal '. $diff->d . ' hari ' . $diff->h . ' Jam lagi!</strong>';
-											} else {
-												echo '<strong>Tinggal ' . $diff->h . ' Jam ' . $diff->i . ' Menit lagi!</strong>';
-											}
+										if ((int) $diff->d >= 1) {
+											echo '<strong>Tinggal ' . $diff->d . ' hari ' . $diff->h . ' Jam lagi!</strong>';
+										} else {
+											echo '<strong>Tinggal ' . $diff->h . ' Jam ' . $diff->i . ' Menit lagi!</strong>';
+										}
 										?>
 									</p>
 									<p class="text-center">
 										Lihat <a href="<?= base_url('produk/detail/' . $rp['id_lelang']); ?>"> detail</a> untuk selengkapnya
 									</p>
 									<div class="price">
-										<h5>Mulai dari <strong class="text-danger"><?= $price_idr; ?></strong></h5>
+										<!-- <h5>Mulai dari <strong class="text-danger"><?= $price_idr; ?></strong></h5> -->
+										<h5>Mulai dari <strong class="text-danger product-price-<?= $id; ?>"></strong></h5>
 									</div>
 
 								</div>
 								<div class="box-footer">
 									<div class="pull-left">
 										<button type="button" class="btn btn-success btn-block btn-bin" data-id="<?= $id; ?>">Buy It Now!</button>
+										<center><span class="text-info total-bin-<?= $id; ?>">0 buyer</span></center>
 									</div>
 									<div class="pull-right">
 										<button type="button" class="btn btn-danger btn-block btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $id; ?>" data-price="<?= $price; ?>">Bid Now!</button>
+										<center><span class="text-warning total-bid-<?= $id; ?>">10 bidder</span></center>
 									</div>
 								</div>
 								<!-- /.box-body -->
