@@ -10,11 +10,11 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-4 product_img">
-						<img src="<?= base_url('uploads/products/' . $rs_produk[0]['gambar_produk']); ?>" class="img-responsive">
+						<img src="<?= base_url('uploads/products/' . $rs_produk[0]['gambar']); ?>" class="img-responsive">
 						<br>
 						<div class="btn-ground text-center">
-							<button type="button" class="btn btn-block btn-success btn-bin" data-id="<?= $rs_produk[0]['id_lelang']; ?>" <?= $rs_produk[0]['status_lelang'] === 'end' ? "disabled" : ""; ?>><span class="glyphicon glyphicon-shopping-cart"></span> Buy It Now!</button>
-							<button type="button" class="btn btn-block btn-danger btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $rs_produk[0]['id_lelang']; ?>" data-price="<?= $rs_produk[0]['harga_maksimal']; ?>" <?= $rs_produk[0]['status_lelang'] === 'end' ? "disabled" : ""; ?>><span class="glyphicon glyphicon-hand-up"></span> Bid Now!</button>
+							<button type="button" class="btn btn-block btn-success btn-bin" data-id="<?= $rs_produk[0]['id']; ?>" <?= $rs_produk[0]['status'] === 'end' ? "disabled" : ""; ?>><span class="glyphicon glyphicon-shopping-cart"></span> Buy It Now!</button>
+							<button type="button" class="btn btn-block btn-danger btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $rs_produk[0]['id']; ?>" data-price="<?= $rs_produk[0]['harga_maksimal']; ?>" <?= $rs_produk[0]['status'] === 'end' ? "disabled" : ""; ?>><span class="glyphicon glyphicon-hand-up"></span> Bid Now!</button>
 						</div>
 						<br>
 						<table class="table table-striped">
@@ -29,7 +29,7 @@
 					<div class="col-md-8 product_content">
 						<h3 id="prd_price" class="cost">Mulai dari - <span class="text-bold">IDR</span> <?= format_rupiah($rs_produk[0]['harga_awal']); ?></h3>
 						<hr>
-						<h4><?= $rs_produk[0]['nama_lelang']; ?></h4>
+						<h4><?= $rs_produk[0]['nama']; ?></h4>
 						<h4>Kategori: <span><?= $rs_kategori[0]['nama_kategori']; ?></span></h4>
 						<!-- <h4>Product Id: <span>51526</span></h4> -->
 						<!--
