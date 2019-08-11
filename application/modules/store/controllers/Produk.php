@@ -18,6 +18,7 @@ class Produk extends Front_Controller
 		$this->load->model('store/Produk_model', 'MProduk');
 		$this->load->model('store/Pelelang_model', 'MPelelang');
 		$this->load->model('store/Kota_model', 'MKota');
+		$this->load->model('store/Tawaran_model', 'MTawaran');
 	}
 
 	/**
@@ -48,7 +49,22 @@ class Produk extends Front_Controller
 		$this->global['contentTitle'] = 'Lelang ' . $rs_produk[0]["nama_lelang"];
 		$this->global['name'] = $this->uName;
 
-		$data['rs_produk'] = $rs_produk;
+		$arr_produk = array();
+		foreach ($rs_produk as $rp) {
+			$bid_price = $this->MTawaran->get_current_bid_price($rp['id_lelang']);
+			$row['id'] = $rp['id_lelang'];
+			$row['nama'] = $rp['nama_lelang'];
+			$row['gambar'] = $rp['gambar_produk'];
+			$row['keterangan'] = $rp['keterangan'];
+			$row['harga_awal'] = $bid_price[0]['bid_price'];
+			$row['harga_maksimal'] = $rp['harga_maksimal'];
+			$row['waktu_mulai'] = $rp['waktu_mulai'];
+			$row['waktu_selesai'] = $rp['waktu_selesai'];
+			$row['status'] = $rp['status_lelang'];
+
+			array_push($arr_produk, $row);
+		}
+		$data['rs_produk'] = $arr_produk;
 		$data['rs_kategori'] = $rs_kategori;
 		$data['rs_pelelang'] = $rs_pelelang;
 		$data['rs_kota'] = $rs_kota;
