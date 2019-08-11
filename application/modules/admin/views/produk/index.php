@@ -40,7 +40,7 @@
 					</p>
 
 					<div class="table-responsive">
-						<table id="data_grid" class="table table-bordered table-hover">
+						<table id="data-produk" class="table table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>Foto Barang</th>
