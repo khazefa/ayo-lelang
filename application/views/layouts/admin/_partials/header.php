@@ -50,6 +50,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<script src="<?= base_url('assets/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
 	<!-- Bootstrap Datetime Picker -->
 	<script src="<?= base_url('assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'); ?>"></script>
+
+	<script src="<?= base_url('assets/js/custom-admin.js'); ?>" type="text/javascript"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -197,6 +199,20 @@ desired effect
 						</li>
 						<li><a href="<?= base_url('admin/pelelang'); ?>"><i class="fa fa-users"></i> <span>Daftar Pelelang</span></a></li>
 						<li><a href="<?= base_url('admin/peserta'); ?>"><i class="fa fa-users"></i> <span>Daftar Peserta</span></a></li>
+					<?php
+					} elseif ($role === "auctioner") {
+						?>
+						<li class="treeview">
+							<a href="#"><i class="fa fa-gavel"></i> <span>Bid</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('admin/bid'); ?>">Daftar Penawaran</a></li>
+								<li><a href="<?= base_url('admin/bid/orders'); ?>">Daftar Terjual</a></li>
+							</ul>
+						</li>
 					<?php
 					}
 					?>
