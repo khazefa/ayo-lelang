@@ -3,18 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 22, 2019 at 11:49 PM
+-- Generation Time: Aug 11, 2019 at 02:07 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `db_sa_lelang`
@@ -83,7 +77,9 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`id_kategori`, `alias_kategori`, `nama_kategori`, `deskripsi_kategori`) VALUES
 (1, 'hp', 'Handphone', 'Handphone'),
-(2, 'aksesoris', 'Aksesoris', 'Aksesoris');
+(2, 'aksesoris', 'Aksesoris', 'Aksesoris'),
+(3, 'komputer-dan-laptop', 'Komputer & Laptop', 'Komputer & Laptop'),
+(4, 'fotografi', 'Fotografi', 'Fotografi');
 
 -- --------------------------------------------------------
 
@@ -103,7 +99,12 @@ CREATE TABLE `kota` (
 INSERT INTO `kota` (`id_kota`, `nama_kota`) VALUES
 (1, 'Jakarta Pusat'),
 (2, 'Jakarta Timur'),
-(3, 'Jakarta Selatan');
+(3, 'Jakarta Selatan'),
+(4, 'Jakarta Barat'),
+(5, 'Jakarta Utara'),
+(6, 'Bogor'),
+(7, 'Bekasi'),
+(8, 'Depok');
 
 -- --------------------------------------------------------
 
@@ -117,6 +118,7 @@ CREATE TABLE `lelang` (
   `id_pelelang` int(11) NOT NULL,
   `nama_lelang` varchar(100) NOT NULL,
   `gambar_produk` varchar(100) NOT NULL,
+  `berat_produk` int(5) NOT NULL DEFAULT '0',
   `harga_awal` int(11) NOT NULL,
   `harga_maksimal` int(11) NOT NULL,
   `waktu_mulai` datetime NOT NULL,
@@ -129,14 +131,16 @@ CREATE TABLE `lelang` (
 -- Dumping data for table `lelang`
 --
 
-INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, `gambar_produk`, `harga_awal`, `harga_maksimal`, `waktu_mulai`, `waktu_selesai`, `keterangan`, `status_lelang`) VALUES
-(1, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(2, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(3, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(4, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(5, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(6, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(7, 1, 1, 'Xiaomi A3 China', 'xiaomi_a2.jpg', 2200000, 5000000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active');
+INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, `gambar_produk`, `berat_produk`, `harga_awal`, `harga_maksimal`, `waktu_mulai`, `waktu_selesai`, `keterangan`, `status_lelang`) VALUES
+(1, 1, 1, 'Xiaomi A2 Lite', 'xiaomi_mi_a2_lite.jpg', 200, 500000, 5000000, '2019-08-01 09:30:00', '2019-08-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(2, 1, 1, 'Meizu M3 Note', 'l-20190807114138.jpg', 170, 500000, 1250000, '2019-08-01 00:00:00', '2019-08-13 00:00:00', 'Meizu M3 Note\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(3, 1, 1, 'Iphone 6s 64 Gb', 'l-20190621230933.jpg', 250, 1000000, 3000000, '2019-08-01 00:00:00', '2019-08-15 00:00:00', 'Iphone 6s 64 gb rose gold\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(4, 1, 1, 'Xiaomi Redmi Note 7', 'l-20190624143409.jpg', 200, 500000, 2500000, '2019-08-01 00:00:00', '2019-08-22 00:00:00', 'Xiaomi Redmi Note 7 4/64\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(5, 1, 1, 'Samsung Galaxy Note 4', 'l-20180409235352.jpg', 500, 1000000, 2500000, '2019-08-01 00:00:00', '2019-08-21 00:00:00', 'Samsung Galaxy Note 4 SEIN Fullset\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(6, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 0, 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(8, 3, 2, 'Laptop ASUS X441U', 'l-20190810115.jpeg', 3000, 1000000, 4000000, '2019-08-01 00:00:00', '2019-09-01 00:00:00', 'Laptop ASUS X441U Intel Core i3/RAM 4GB/HDD 1TB/Windows 10\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'active'),
+(9, 3, 2, 'Lenovo IdeaPad G50', 'l-20190709130119.jpg', 3000, 1500000, 6750000, '2019-08-01 00:00:00', '2019-09-01 00:00:00', 'Lenovo IdeaPad G50 Core i5-5200U\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'active'),
+(10, 3, 2, 'Hp EliteBook 820 G1', 'l-20190703231403.jpg', 3000, 1500000, 6725000, '2019-08-01 00:00:00', '2019-09-01 00:00:00', 'Hp EliteBook 820 G1 Core i7-4510U\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'active');
 
 -- --------------------------------------------------------
 
@@ -168,6 +172,7 @@ CREATE TABLE `pelelang` (
   `telepon_pelelang` varchar(32) NOT NULL,
   `status_pelelang` tinyint(1) NOT NULL,
   `alamat_pelelang` text NOT NULL,
+  `id_kota` int(11) NOT NULL,
   `tgl_daftar_pelelang` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -175,10 +180,10 @@ CREATE TABLE `pelelang` (
 -- Dumping data for table `pelelang`
 --
 
-INSERT INTO `pelelang` (`id_pelelang`, `nama_pelelang`, `akun_pelelang`, `sandi_pelelang`, `email_pelelang`, `telepon_pelelang`, `status_pelelang`, `alamat_pelelang`, `tgl_daftar_pelelang`) VALUES
-(1, 'Fajar Hidayati', 'auctioner01', 'a62657dc10df0e8b98a651cb19e465f9a131087a', 'auctioner01@example.com', '08129999999', 1, 'Apartemen Ula Ilu Tower Melati Lantai 8 No.44\r\nJl. Kacang Kapri Muda Kav. 13\r\nUtan Kayu Selatan, Matraman, Jakarta Timur, Indonesia, 13120', '2019-06-20 00:00:00'),
-(2, 'Laisa Ahza', 'auctioner02', 'c493d328a59c1aa1a091af2b2db30e40281d8f4b', 'auctioner02@example.com', '08129999876', 1, 'Jl. Cinta Boulevard No.3 RT 07/02\r\nBintaro, Pesanggrahan, Jaksel, 12330', '2019-06-21 00:00:00'),
-(3, 'Udin Komarudin', 'auctioner03', '7ab3494a54d74915d4ca3baf5922bbb1085ec571', 'auctioner03@example.com', '081297373932', 0, 'Perumahan Griya Mandala, Jl. Kehormatan Blok A No.19 Rt.002 Rw.08\r\nDuri Kepa, Kebon Jeruk, Jakarta Barat, Indonesia, 11510', '2019-06-26 00:00:00');
+INSERT INTO `pelelang` (`id_pelelang`, `nama_pelelang`, `akun_pelelang`, `sandi_pelelang`, `email_pelelang`, `telepon_pelelang`, `status_pelelang`, `alamat_pelelang`, `id_kota`, `tgl_daftar_pelelang`) VALUES
+(1, 'Fajar Hidayati', 'auctioner01', 'a62657dc10df0e8b98a651cb19e465f9a131087a', 'auctioner01@example.com', '08129999999', 1, 'Apartemen Ula Ilu Tower Melati Lantai 8 No.44\r\nJl. Kacang Kapri Muda Kav. 13\r\nUtan Kayu Selatan, Matraman, Jakarta Timur, Indonesia, 13120', 1, '2019-06-20 00:00:00'),
+(2, 'Laisa Ahza', 'auctioner02', 'c493d328a59c1aa1a091af2b2db30e40281d8f4b', 'auctioner02@example.com', '08129999876', 1, 'Jl. Cinta Boulevard No.3 RT 07/02\r\nBintaro, Pesanggrahan, Jaksel, 12330', 2, '2019-06-21 00:00:00'),
+(3, 'Udin Komarudin', 'auctioner03', '7ab3494a54d74915d4ca3baf5922bbb1085ec571', 'auctioner03@example.com', '081297373932', 1, 'Perumahan Griya Mandala, Jl. Kehormatan Blok A No.19 Rt.002 Rw.08\r\nDuri Kepa, Kebon Jeruk, Jakarta Barat, Indonesia, 11510', 3, '2019-06-26 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -204,7 +209,8 @@ CREATE TABLE `peserta` (
 
 INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_peserta`, `email_peserta`, `telepon_peserta`, `alamat_peserta`, `tgl_daftar_peserta`, `status_peserta`) VALUES
 (1, 'Hyde Lawlesss', 'hydelaw', '6cf50439ff6959475621f3a762fcc9b2cf62b503', 'hydelaw@email.com', '081299998878', 'Jl Shinjuku Kosakabe No 07', '2019-07-14 10:28:38', 1),
-(2, 'Jay Weinberg', 'jaywein', 'd70fa9ddea6eb70c28bf0f75ec5107614786129b', 'jaywein@example.com', '081276765454', 'Jl Core Sana No 08', '2019-07-14 10:32:14', 1);
+(2, 'Jay Weinberg', 'jaywein', 'd70fa9ddea6eb70c28bf0f75ec5107614786129b', 'jaywein@email.com', '081276765454', 'Jl Core Sana No 08', '2019-07-14 10:32:14', 1),
+(3, 'Zainal Abidin', 'zainalay', '7b72713003291020cc46b79d7486dba899f0b604', 'zainalay@email.com', '081298987676', 'Jl. KH Agus Salim 16, Sabang, Menteng Jakarta Pusat', '2019-08-10 14:08:21', 1);
 
 -- --------------------------------------------------------
 
@@ -216,6 +222,7 @@ CREATE TABLE `tawaran` (
   `id_tawaran` int(11) NOT NULL,
   `id_peserta` int(11) NOT NULL,
   `id_lelang` int(11) NOT NULL,
+  `id_pelelang` int(11) NOT NULL,
   `jumlah_tawaran` int(11) NOT NULL,
   `waktu_tawaran` datetime NOT NULL,
   `tipe_tawaran` enum('bid','bin') NOT NULL,
@@ -226,10 +233,8 @@ CREATE TABLE `tawaran` (
 -- Dumping data for table `tawaran`
 --
 
-INSERT INTO `tawaran` (`id_tawaran`, `id_peserta`, `id_lelang`, `jumlah_tawaran`, `waktu_tawaran`, `tipe_tawaran`, `status_tawaran`) VALUES
-(1, 1, 3, 2500000, '2019-07-21 08:14:14', 'bid', 'accepted'),
-(3, 1, 1, 4500000, '2019-07-21 19:07:51', 'bin', 'postponed'),
-(4, 1, 4, 4500000, '2019-07-21 19:08:14', 'bin', 'postponed');
+INSERT INTO `tawaran` (`id_tawaran`, `id_peserta`, `id_lelang`, `id_pelelang`, `jumlah_tawaran`, `waktu_tawaran`, `tipe_tawaran`, `status_tawaran`) VALUES
+(1, 2, 3, 1, 1500000, '2019-08-11 11:41:51', 'bid', 'accepted');
 
 --
 -- Indexes for dumped tables
@@ -315,19 +320,19 @@ ALTER TABLE `biaya_kirim`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kategori` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kota`
 --
 ALTER TABLE `kota`
-  MODIFY `id_kota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `lelang`
 --
 ALTER TABLE `lelang`
-  MODIFY `id_lelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_lelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `order_lelang`
@@ -345,14 +350,10 @@ ALTER TABLE `pelelang`
 -- AUTO_INCREMENT for table `peserta`
 --
 ALTER TABLE `peserta`
-  MODIFY `id_peserta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_peserta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tawaran`
 --
 ALTER TABLE `tawaran`
-  MODIFY `id_tawaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  MODIFY `id_tawaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
