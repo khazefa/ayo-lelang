@@ -105,6 +105,16 @@ class Peserta_model extends CI_Model
 		return $query->result_array();
 	}
 
+	function get_data_info2($id)
+	{
+		$this->db->select('id_peserta, nama_peserta, akun_peserta, email_peserta, telepon_peserta, status_peserta, alamat_peserta, tgl_daftar_peserta');
+		$this->db->from($this->tbl_peserta);
+		$this->db->where($this->primKey, $id);
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
 	/**
 	 * This function is used to add new data to system
 	 * @return number $insert_id : This is last inserted id
