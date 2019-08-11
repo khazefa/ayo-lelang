@@ -133,12 +133,13 @@ class Peserta extends Back_Controller
 		$femail = $this->input->post('femail', TRUE);
 		$ftelepon = $this->input->post('ftelepon', TRUE);
 		$falamat = $this->input->post('falamat', TRUE);
+		$fstatus = $this->input->post('fstatus', TRUE);
 
 		if (!empty($fpassword)) {
 			$password = sha1($fpassword);
-			$dataInfo = array('sandi_peserta' => $password, 'nama_peserta' => $fnama, 'email_peserta' => $femail, 'telepon_peserta' => $ftelepon, 'alamat_peserta' => $falamat);
+			$dataInfo = array('sandi_peserta' => $password, 'nama_peserta' => $fnama, 'email_peserta' => $femail, 'telepon_peserta' => $ftelepon, 'alamat_peserta' => $falamat, 'status_peserta' => (int)$fstatus);
 		} else {
-			$dataInfo = array('nama_peserta' => $fnama, 'email_peserta' => $femail, 'telepon_peserta' => $ftelepon, 'alamat_peserta' => $falamat);
+			$dataInfo = array('nama_peserta' => $fnama, 'email_peserta' => $femail, 'telepon_peserta' => $ftelepon, 'alamat_peserta' => $falamat, 'status_peserta' => (int) $fstatus);
 		}
 
 		$result = $this->MPeserta->update_data($dataInfo, $fusername);
