@@ -14,7 +14,7 @@
 						<br>
 						<div class="btn-ground text-center">
 							<button type="button" class="btn btn-block btn-success btn-bin" data-id="<?= $rs_produk[0]['id']; ?>" <?= $rs_produk[0]['status'] === 'end' ? "disabled" : ""; ?>><span class="glyphicon glyphicon-shopping-cart"></span> Buy It Now!</button>
-							<button type="button" class="btn btn-block btn-danger btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $rs_produk[0]['id']; ?>" data-price="<?= $rs_produk[0]['harga_maksimal']; ?>" <?= $rs_produk[0]['status'] === 'end' ? "disabled" : ""; ?>><span class="glyphicon glyphicon-hand-up"></span> Bid Now!</button>
+							<button type="button" class="btn btn-block btn-danger btn-bid" data-toggle="modal" data-target="#modal-bid" data-id="<?= $rs_produk[0]['id']; ?>" data-price="0" <?= $rs_produk[0]['status'] === 'end' ? "disabled" : ""; ?>><span class="glyphicon glyphicon-hand-up"></span> Bid Now!</button>
 						</div>
 						<br>
 						<table class="table table-striped">
@@ -45,15 +45,13 @@
 						<p><?= $rs_produk[0]['keterangan']; ?></p>
 						<table class="table table-bordered">
 							<tbody>
-								<tr>
-									<td><i class="fa fa-hand-o-right"> A telah BIN item CLOSED!</td>
-								</tr>
-								<tr>
-									<td><i class="fa fa-hand-o-right"> B telah BID 2.100.000 12:00</td>
-								</tr>
-								<tr>
-									<td><i class="fa fa-hand-o-right"> C telah BID 2.300.000 13:00</td>
-								</tr>
+								<?php
+									foreach ($rs_bid as $rb) {
+										echo '<tr>';
+										echo '<td><i class="fa fa-hand-o-right"> '.$rb['user'].' '.$rb['bid_type'].' item <strong>'.$rb['bid_price'].'</strong> at '.$rb['bid_time'].' <label class="label label-info"> '.$rb['bid_status'].'</label></td>';
+										echo '</tr>';
+									}
+								?>
 							</tbody>
 						</table>
 					</div>
