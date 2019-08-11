@@ -11,9 +11,17 @@ $(function () {
 		$("#modal-bid .modal-body #mdl_bid_id").attr({
 			"value" : id
 		});
-		$("#modal-bid .modal-body #mdl_bid_price").attr({
-			"min" : price	//set minimal price by data
-		 });
+
+		$.ajax({
+			url: base_url + 'store/Site/get_current_bid_price/' + id,
+			type: 'get',
+			dataType: 'json',
+			success: function (response) {
+				$("#modal-bid .modal-body #mdl_bid_price").attr({
+					"min": response.current_bid_price	//set minimal price by data
+				});
+			}
+		});
 	});
 
 	/**
