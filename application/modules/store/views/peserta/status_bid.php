@@ -55,12 +55,15 @@
 											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('bid/pay/') . $id . '"><i class="fa fa-money"></i> Pay</a>';
 										}
 									} elseif ($bid_type === "BID") {
-										if ($bid_status !== "REJECTED") {
-											$bid_button .= ' <a class="btn btn-warning btn-sm btn-up-bid" data-toggle="modal" data-target="#modal-up-bid" data-id="' . $id . '" data-item-id="' . $r['item_id'] . '" data-price="' . $bid_price . '"><i class="fa fa-hand-o-up"></i> Up</a>';
-										}
+										if ($bid_status === "REJECTED") {
 
-										if ($bid_status === "ACCEPTED") {
+										}
+										elseif ($bid_status === "ACCEPTED") {
 											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('bid/pay/') . $id . '"><i class="fa fa-money"></i> Pay</a>';
+										}
+										else
+										{
+											$bid_button .= ' <a class="btn btn-warning btn-sm btn-up-bid" data-toggle="modal" data-target="#modal-up-bid" data-id="' . $id . '" data-item-id="' . $r['item_id'] . '" data-price="' . $bid_price . '"><i class="fa fa-hand-o-up"></i> Up</a>';
 										}
 									}
 
