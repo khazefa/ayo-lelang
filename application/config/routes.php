@@ -85,6 +85,7 @@ $route['peserta'] = 'store/Peserta';
 $route['peserta/registrasi'] = 'store/Peserta/registrasi';
 $route['peserta/profil'] = 'store/Peserta/profil';
 $route['peserta/status-bid'] = 'store/Peserta/status_bid';
+$route['peserta/checkout/(:num)'] = 'store/Peserta/checkout/$1';
 $route['peserta/submit'] = 'store/Peserta/insert_data';
 $route['peserta/update'] = 'store/Peserta/modify_data';
 
