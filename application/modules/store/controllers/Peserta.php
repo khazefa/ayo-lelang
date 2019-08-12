@@ -175,4 +175,24 @@ class Peserta extends Front_Controller
 			$this->registrasi();
 		}
 	}
+
+	/**
+	 * Show Checkout Bid Page
+	 */
+	public function checkout($id)
+	{
+		if ($this->session->userdata('signed_in')) {
+			$this->global['pageTitle'] = 'Checkout Order';
+			$this->global['contentTitle'] = 'Checkout Order';
+			$this->global['name'] = $this->uName;
+
+			$peserta_id = $this->uBid;
+			$username = $this->uKey;
+
+			$data = array();
+			$this->digiLayout($data, $this->view_dir . "/checkout", $this->global);
+		} else {
+			$this->registrasi();
+		}
+	}
 }
