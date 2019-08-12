@@ -160,6 +160,7 @@ class Peserta extends Front_Controller
 				$rs_items = $this->MProduk->get_data_info($row['item_id']);
 				$row['item_name'] = $rs_items[0]['nama_lelang'];
 				$row['item_img'] = $rs_items[0]['gambar_produk'];
+				$row['item_status'] = $rs_items[0]['status_lelang'];
 				$row['bid_price'] = (int) $rb['jumlah_tawaran'];
 				$row['bid_type'] = $rb['tipe_tawaran'];
 				$row['bid_time'] = $rb['waktu_tawaran'];
