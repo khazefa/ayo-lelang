@@ -35,6 +35,7 @@ class Bid extends Back_Controller
 			$rs_produk = $this->MProduk->get_data_info((int)$rb['id_lelang']);
 			$rs_peserta = $this->MPeserta->get_data_info2((int)$rb['id_peserta']);
 			$row['id'] = $rb['id_tawaran'];
+			$row['item_id'] = $rs_produk[0]['id_lelang'];
 			$row['item_img'] = $rs_produk[0]['gambar_produk'];
 			$row['item_name'] = $rs_produk[0]['nama_lelang'];
 			$row['bidder_name'] = $rs_peserta[0]['nama_peserta'];
@@ -49,13 +50,17 @@ class Bid extends Back_Controller
 		$this->digiAdminLayout($data, $this->view_dir . 'index', $this->global);
 	}
 
-	public function accept($id = NULL)
+	public function accept($id = NULL, $item_id = NULL)
 	{
 		$dataInfo = array('status_tawaran' => 'accepted');
 
 		$result = $this->MBid->update_data($dataInfo, $id);
 		if ($result == true) {
-			setFlashData('success', 'Bid is successfully Accepted');
+			$dataInfo2 = array('status_lelang' => 'end');
+			$result2 = $this->MProduk->update_data($dataInfo2, $item_id);
+			if($result2) {
+				setFlashData('success', 'Bid is successfully Accepted');
+			}
 		} else {
 			setFlashData('error', 'Bid is failed to Accept');
 		}
