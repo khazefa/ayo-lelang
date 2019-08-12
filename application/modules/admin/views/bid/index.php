@@ -55,6 +55,7 @@
 								foreach ($records as $r) {
 									$id = $r['id'];
 									$item_img = '<img src="' . base_url() . '/uploads/products/' . $r['item_img'] . '" width="100px">';
+									$item_id = $r['item_id'];
 									$item_name = $r['item_name'];
 									$bidder_name = $r['bidder_name'];
 									$bid_price = $r['bid_price'];
@@ -77,7 +78,7 @@
 										$button .= '<li><a href="' . base_url('admin/bid/reject/') . $id . '"><i class="fa fa-ban"></i> Reject</a></li>';
 									} else
 									{
-										$button .= '<li><a href="' . base_url('admin/bid/accept/') . $id . '"><i class="fa fa-check-circle-o"></i> Accept</a></li>';
+										$button .= '<li><a href="' . base_url('admin/bid/accept/'. $id .'/'. $item_id). '"><i class="fa fa-check-circle-o"></i> Accept</a></li>';
 										$button .= '<li><a href="' . base_url('admin/bid/reject/') . $id . '"><i class="fa fa-ban"></i> Reject</a></li>';
 									}
 									$button .= '</ul>';
