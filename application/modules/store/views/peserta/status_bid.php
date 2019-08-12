@@ -41,6 +41,7 @@
 									$item_name = "<a href='" . base_url('produk/detail/' . $r['item_id']) ."'>". $r['item_name']."</a>";
 									$item_img = $r['item_img'];
 									$foto = '<img src="' . base_url() . '/uploads/products/' . $item_img . '" width="100px">';
+									$item_status = $r['item_status'];
 									$bid_type = strtoupper($r['bid_type']);
 									$bid_price = (int) $r['bid_price'];
 									$bid_price_rp = "Rp. " . format_rupiah($bid_price);
@@ -51,10 +52,24 @@
 									$bid_button .= '<a class="btn btn-danger btn-sm" href="' . base_url('bid/delete/') . $id . '"><i class="fa fa-trash"></i> Del</a>';
 
 									if ($bid_type === "BIN") {
+										/**
+										 * if bid type is BIN then
+										 * if bid status accepted then
+										 * show Pay button else
+										 * only show Del button
+										 */
 										if ($bid_status === "ACCEPTED") {
 											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('bid/pay/') . $id . '"><i class="fa fa-money"></i> Pay</a>';
 										}
 									} elseif ($bid_type === "BID") {
+										/**
+										 * if bid type is BID then
+										 * if bid status rejected then
+										 * only show Del button
+										 * if bid status accepted then
+										 * also show Pay button
+										 * if bid status postponed and item status is Active then also show Bid Up button 
+										 */
 										if ($bid_status === "REJECTED") {
 
 										}
@@ -63,7 +78,10 @@
 										}
 										else
 										{
-											$bid_button .= ' <a class="btn btn-warning btn-sm btn-up-bid" data-toggle="modal" data-target="#modal-up-bid" data-id="' . $id . '" data-item-id="' . $r['item_id'] . '" data-price="' . $bid_price . '"><i class="fa fa-hand-o-up"></i> Up</a>';
+											if($item_status !== 'end')
+											{
+												$bid_button .= ' <a class="btn btn-warning btn-sm btn-up-bid" data-toggle="modal" data-target="#modal-up-bid" data-id="' . $id . '" data-item-id="' . $r['item_id'] . '" data-price="' . $bid_price . '"><i class="fa fa-hand-o-up"></i> Up</a>';
+											}
 										}
 									}
 
