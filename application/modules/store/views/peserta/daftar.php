@@ -46,6 +46,19 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-3 control-label">Kota</label>
+								<div class="col-sm-4">
+									<select name="reg_kota" id="reg_kota" class="form-control">
+										<option value="" selected>Pilih</option>
+										<?php
+										foreach ($records_kota as $rs_kota) {
+											echo '<option value="' . $rs_kota['id_kota'] . '">' . $rs_kota['nama_kota'] . '</option> ';
+										}
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="reg_phone" class="col-sm-3 control-label">No. Telepon</label>
 
 								<div class="col-sm-9">
