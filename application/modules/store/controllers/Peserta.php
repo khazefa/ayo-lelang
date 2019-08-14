@@ -17,6 +17,7 @@ class Peserta extends Front_Controller
 		$this->load->model('store/Peserta_model', 'MPeserta');
 		$this->load->model('store/Tawaran_model', 'MBid');
 		$this->load->model('store/Produk_model', 'MProduk');
+		$this->load->model('store/Kota_model', 'MKota');
 	}
 
 	/**
@@ -43,6 +44,8 @@ class Peserta extends Front_Controller
 		$this->global['name'] = $this->uName;
 
 		$data = array();
+		$rs_kota = $this->MKota->get_data(array(), array(), 0);
+		$data['records_kota'] = $rs_kota;
 		$this->digiLayout($data, $this->view_dir . "/daftar", $this->global);
 	}
 
@@ -57,12 +60,13 @@ class Peserta extends Front_Controller
 		$reg_password = $this->input->post('reg_password', TRUE);
 		$password = sha1($reg_password);
 		$reg_address = $this->input->post('reg_address', TRUE);
+		$reg_kota = $this->input->post('reg_kota', TRUE);
 		$reg_phone = $this->input->post('reg_phone', TRUE);
 		$current_date = date('Y-m-d H:i:s');
 
 		$dataInfo = array(
 			'nama_peserta' => $reg_nama, 'akun_peserta' => $reg_username, 'sandi_peserta' => $password,
-			'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address, 'tgl_daftar_peserta' => $current_date, 'status_peserta' => 1
+			'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address, 'id_kota' => $reg_kota, 'tgl_daftar_peserta' => $current_date, 'status_peserta' => 1
 		);
 		$count = $this->MPeserta->check_data_exists(array('email_peserta' => $reg_email));
 		if ($count > 0) {
@@ -91,18 +95,19 @@ class Peserta extends Front_Controller
 		$reg_username = $this->input->post('reg_username', TRUE);
 		$reg_password = $this->input->post('reg_password', TRUE);
 		$reg_address = $this->input->post('reg_address', TRUE);
+		$reg_kota = $this->input->post('reg_kota', TRUE);
 		$reg_phone = $this->input->post('reg_phone', TRUE);
 
 		if (!empty($reg_password)) {
 			$password = sha1($reg_password);
 			$dataInfo = array(
 				'nama_peserta' => $reg_nama, 'sandi_peserta' => $password,
-				'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address
+				'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address, 'id_kota' => $reg_kota
 			);
 		} else {
 			$dataInfo = array(
 				'nama_peserta' => $reg_nama,
-				'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address
+				'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address, 'id_kota' => $reg_kota
 			);
 		}
 
@@ -131,6 +136,8 @@ class Peserta extends Front_Controller
 			$rs_peserta = $this->MPeserta->get_data_info($username);
 
 			$data['records_peserta'] = $rs_peserta;
+			$rs_kota = $this->MKota->get_data(array(), array(), 0);
+			$data['records_kota'] = $rs_kota;
 			$this->digiLayout($data, $this->view_dir . "/profil", $this->global);
 		} else {
 			$this->registrasi();
