@@ -97,7 +97,7 @@ class Peserta_model extends CI_Model
 	 */
 	function get_data_info($id)
 	{
-		$this->db->select('id_peserta, nama_peserta, akun_peserta, email_peserta, telepon_peserta, status_peserta, alamat_peserta, tgl_daftar_peserta');
+		$this->db->select('id_peserta, nama_peserta, akun_peserta, email_peserta, telepon_peserta, status_peserta, alamat_peserta, id_kota, tgl_daftar_peserta');
 		$this->db->from($this->tbl_peserta);
 		$this->db->where($this->indexKey, $id);
 		$query = $this->db->get();
@@ -107,7 +107,7 @@ class Peserta_model extends CI_Model
 
 	function get_data_info2($id)
 	{
-		$this->db->select('id_peserta, nama_peserta, akun_peserta, email_peserta, telepon_peserta, status_peserta, alamat_peserta, tgl_daftar_peserta');
+		$this->db->select('id_peserta, nama_peserta, akun_peserta, email_peserta, telepon_peserta, status_peserta, alamat_peserta, id_kota, tgl_daftar_peserta');
 		$this->db->from($this->tbl_peserta);
 		$this->db->where($this->primKey, $id);
 		$query = $this->db->get();
