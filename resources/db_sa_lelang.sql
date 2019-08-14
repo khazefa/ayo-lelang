@@ -3,12 +3,18 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 11, 2019 at 02:07 PM
+-- Generation Time: Aug 14, 2019 at 07:41 AM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `db_sa_lelang`
@@ -134,7 +140,7 @@ CREATE TABLE `lelang` (
 INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, `gambar_produk`, `berat_produk`, `harga_awal`, `harga_maksimal`, `waktu_mulai`, `waktu_selesai`, `keterangan`, `status_lelang`) VALUES
 (1, 1, 1, 'Xiaomi A2 Lite', 'xiaomi_mi_a2_lite.jpg', 200, 500000, 5000000, '2019-08-01 09:30:00', '2019-08-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (2, 1, 1, 'Meizu M3 Note', 'l-20190807114138.jpg', 170, 500000, 1250000, '2019-08-01 00:00:00', '2019-08-13 00:00:00', 'Meizu M3 Note\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(3, 1, 1, 'Iphone 6s 64 Gb', 'l-20190621230933.jpg', 250, 1000000, 3000000, '2019-08-01 00:00:00', '2019-08-15 00:00:00', 'Iphone 6s 64 gb rose gold\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(3, 1, 1, 'Iphone 6s 64 Gb', 'l-20190621230933.jpg', 250, 1000000, 3000000, '2019-08-01 00:00:00', '2019-08-15 00:00:00', 'Iphone 6s 64 gb rose gold\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'end'),
 (4, 1, 1, 'Xiaomi Redmi Note 7', 'l-20190624143409.jpg', 200, 500000, 2500000, '2019-08-01 00:00:00', '2019-08-22 00:00:00', 'Xiaomi Redmi Note 7 4/64\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (5, 1, 1, 'Samsung Galaxy Note 4', 'l-20180409235352.jpg', 500, 1000000, 2500000, '2019-08-01 00:00:00', '2019-08-21 00:00:00', 'Samsung Galaxy Note 4 SEIN Fullset\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (6, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 0, 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
@@ -199,6 +205,7 @@ CREATE TABLE `peserta` (
   `email_peserta` varchar(100) NOT NULL,
   `telepon_peserta` varchar(32) DEFAULT NULL,
   `alamat_peserta` text NOT NULL,
+  `id_kota` int(11) NOT NULL,
   `tgl_daftar_peserta` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status_peserta` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -207,10 +214,10 @@ CREATE TABLE `peserta` (
 -- Dumping data for table `peserta`
 --
 
-INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_peserta`, `email_peserta`, `telepon_peserta`, `alamat_peserta`, `tgl_daftar_peserta`, `status_peserta`) VALUES
-(1, 'Hyde Lawlesss', 'hydelaw', '6cf50439ff6959475621f3a762fcc9b2cf62b503', 'hydelaw@email.com', '081299998878', 'Jl Shinjuku Kosakabe No 07', '2019-07-14 10:28:38', 1),
-(2, 'Jay Weinberg', 'jaywein', 'd70fa9ddea6eb70c28bf0f75ec5107614786129b', 'jaywein@email.com', '081276765454', 'Jl Core Sana No 08', '2019-07-14 10:32:14', 1),
-(3, 'Zainal Abidin', 'zainalay', '7b72713003291020cc46b79d7486dba899f0b604', 'zainalay@email.com', '081298987676', 'Jl. KH Agus Salim 16, Sabang, Menteng Jakarta Pusat', '2019-08-10 14:08:21', 1);
+INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_peserta`, `email_peserta`, `telepon_peserta`, `alamat_peserta`, `id_kota`, `tgl_daftar_peserta`, `status_peserta`) VALUES
+(1, 'Hyde Lawlesss', 'hydelaw', '6cf50439ff6959475621f3a762fcc9b2cf62b503', 'hydelaw@email.com', '081299998878', 'Jl Shinjuku Kosakabe No 07', 3, '2019-07-14 10:28:38', 1),
+(2, 'Jay Weinberg', 'jaywein', 'd70fa9ddea6eb70c28bf0f75ec5107614786129b', 'jaywein@email.com', '081276765454', 'Jl Core Sana No 08', 0, '2019-07-14 10:32:14', 1),
+(3, 'Zainal Abidin', 'zainalay', '7b72713003291020cc46b79d7486dba899f0b604', 'zainalay@email.com', '081298987676', 'Jl. KH Agus Salim 16, Sabang, Menteng Jakarta Pusat', 0, '2019-08-10 14:08:21', 1);
 
 -- --------------------------------------------------------
 
@@ -234,7 +241,8 @@ CREATE TABLE `tawaran` (
 --
 
 INSERT INTO `tawaran` (`id_tawaran`, `id_peserta`, `id_lelang`, `id_pelelang`, `jumlah_tawaran`, `waktu_tawaran`, `tipe_tawaran`, `status_tawaran`) VALUES
-(1, 2, 3, 1, 1500000, '2019-08-11 11:41:51', 'bid', 'accepted');
+(1, 2, 3, 1, 1500000, '2019-08-11 11:41:51', 'bid', 'postponed'),
+(2, 1, 3, 1, 1750000, '2019-08-11 22:04:54', 'bid', 'accepted');
 
 --
 -- Indexes for dumped tables
@@ -356,4 +364,8 @@ ALTER TABLE `peserta`
 -- AUTO_INCREMENT for table `tawaran`
 --
 ALTER TABLE `tawaran`
-  MODIFY `id_tawaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tawaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
