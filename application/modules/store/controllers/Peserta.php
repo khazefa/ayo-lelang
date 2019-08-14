@@ -18,6 +18,7 @@ class Peserta extends Front_Controller
 		$this->load->model('store/Tawaran_model', 'MBid');
 		$this->load->model('store/Produk_model', 'MProduk');
 		$this->load->model('store/Kota_model', 'MKota');
+		$this->load->model('store/BiayaKirim_model', 'MOngkir');
 	}
 
 	/**
@@ -193,10 +194,20 @@ class Peserta extends Front_Controller
 			$this->global['contentTitle'] = 'Checkout Order';
 			$this->global['name'] = $this->uName;
 
-			$peserta_id = $this->uBid;
 			$username = $this->uKey;
 
-			$data = array();
+			$rs_bid = $this->MBid->get_data_info((int)$id);
+			$rs_items = $this->MProduk->get_data_info((int)$rs_bid[0]['id_lelang']);
+			
+			$rs_peserta = $this->MPeserta->get_data_info($username);
+			$rs_kota = $this->MKota->get_data_info((int)$rs_peserta[0]['id_kota']);
+			$rs_ongkir = $this->MOngkir->get_data_info((int)$rs_kota[0]['id_kota']);
+
+			$data['records_peserta'] = $rs_peserta;
+			$data['records_kota'] = $rs_kota;
+			$data['records_ongkir'] = $rs_ongkir;
+			$data['records_produk'] = $rs_items;
+			$data['records_bid'] = $rs_bid;
 			$this->digiLayout($data, $this->view_dir . "/checkout", $this->global);
 		} else {
 			$this->registrasi();
