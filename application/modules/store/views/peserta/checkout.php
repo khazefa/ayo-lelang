@@ -37,32 +37,50 @@
                                                         <tr>
                                                             <td colspan="2">
                                                                 <a class="btn btn-warning btn-sm pull-right"
-                                                                   href="http://www.startajobboard.com/"
-                                                                   title="Remove Item">X</a>
-                                                                <b>
-                                                                    Premium Posting</b></td>
+                                                                   href="#"
+                                                                   title="Cancel Item">X</a>
+                                                                <strong>
+																	Detail Order</strong>
+															</td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <ul>
-                                                                    <li>One Job Posting Credit</li>
-                                                                    <li>Job Distribution*</li>
-                                                                    <li>Social Media Distribution</li>
-                                                                </ul>
+																<?=
+																	$records_produk[0]['nama_lelang'];
+																?>
                                                             </td>
                                                             <td>
+																<strong>
+																	
+																</strong>
                                                                 <b>$147.00</b>
                                                             </td>
                                                         </tr>
 													</table>
+													<table class="table table-striped">
+                                                        <tr>
+                                                            <td colspan="2">
+																<strong>Shipping Detail</strong>
+															</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+															<?php
+																echo nl2br($records_peserta[0]['alamat_peserta']);
+																echo "<br>";
+																echo $records_kota[0]['nama_kota'];
+																echo "<br>";
 
-													Info alamat dan Kota Tujuan sesuai Alamat<br>
-													Jl Bintang Laut No 3
-													
-													<select name="" id="input" class="form-control" required="required">
-														<option value="Jakarta">Jakarta Pusat</option>
-														<option value="Jakarta">Jakarta Selatan</option>
-													</select>
+																$ongkir = $records_ongkir[0]['jumlah_biaya_kirim'];
+																$ongkir_rp = format_rupiah($ongkir);
+															?>
+                                                            </td>
+                                                            <td>
+																Shipping Fee<br>
+                                                                <strong>Rp. <?= $ongkir_rp; ?></strong>
+                                                            </td>
+                                                        </tr>
+													</table>
 													
                                                 </div>
                                                 <div class="col-md-3">
