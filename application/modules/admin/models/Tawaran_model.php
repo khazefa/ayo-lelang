@@ -239,6 +239,7 @@ class Tawaran_model extends CI_Model
 		$this->db->from($this->tbl_tawaran . ' as t');
 		$this->db->join('lelang as p', ' t.id_lelang = p.id_lelang', 'right');
 		$this->db->where("p.id_lelang",$id);
+		$this->db->order_by("t.jumlah_tawaran", "DESC");
 		$query = $this->db->get();
 		$rs = $query->result_array();
 		return $rs;
