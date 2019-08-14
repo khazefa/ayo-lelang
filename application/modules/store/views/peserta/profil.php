@@ -3,6 +3,7 @@ $name = "";
 $email = "";
 $username = "";
 $address = "";
+$city = "";
 $phone = "";
 
 foreach ($records_peserta as $rp) {
@@ -10,6 +11,7 @@ foreach ($records_peserta as $rp) {
 	$email = $rp['email_peserta'];
 	$username = $rp['akun_peserta'];
 	$address = $rp['alamat_peserta'];
+	$city = $rp['id_kota'];
 	$phone = $rp['telepon_peserta'];
 }
 ?>
@@ -72,6 +74,23 @@ foreach ($records_peserta as $rp) {
 
 								<div class="col-sm-9">
 									<textarea id="reg_address" name="reg_address" class="form-control" rows="3"><?= $address; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">Kota</label>
+								<div class="col-sm-4">
+									<select name="reg_kota" id="reg_kota" class="form-control">
+										<option value="" selected>Pilih</option>
+										<?php
+										foreach ($records_kota as $rs_kota) {
+											if ($rs_kota['id_kota'] === $city) {
+												echo '<option value="' . $rs_kota['id_kota'] . '" selected>' . $rs_kota['nama_kota'] . '</option> ';
+											} else {
+												echo '<option value="' . $rs_kota['id_kota'] . '">' . $rs_kota['nama_kota'] . '</option> ';
+											}
+										}
+										?>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
