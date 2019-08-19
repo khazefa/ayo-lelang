@@ -97,12 +97,15 @@
 													</div>
 												</div>
 											</div>
+										<button type="submit" class="btn btn-success btn-lg" style="width:100%;">Checkout
+										</button>
 										</div>
 									</div>
 
 								</div>
 							</div>
 
+							<!--
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
@@ -121,9 +124,9 @@
 											</p>
 
 											<div class="row">
-												<!-- 
+												<!- - 
 													Panel Bank Transfer Info
-												-->
+												- ->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -138,9 +141,9 @@
 													</div>
 												</div>
 
-												<!-- 
+												<!- - 
 													Panel Bank Transfer Info
-												-->
+												- ->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -157,9 +160,9 @@
 											</div>
 
 											<div class="row">
-												<!-- 
+												<!- - 
 												Panel Bank Transfer Info
-											-->
+												- ->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -174,9 +177,9 @@
 													</div>
 												</div>
 
-												<!-- 
+												<!- - 
 												Panel Bank Transfer Info
-											-->
+												- ->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -193,10 +196,8 @@
 											</div>
 
 										</fieldset>
-										<!--
-										<button type="submit" class="btn btn-success btn-lg" style="width:100%;">Konfirmasi Pembayaran
+										<button type="submit" class="btn btn-success btn-lg" style="width:100%;">Checkout
 										</button>
-										-->
 										<br />
 										<div style="text-align: left;"><br />
 											Setelah melakukan pembayaran, silahkan konfirmasi pembayaran melalui Invoice Area > List Order > Pilih Tombol Konfirmasi pada Order Anda. Kami akan memproses order Anda setelah konfirmasi dilakukan.
@@ -204,7 +205,7 @@
 									</div>
 								</div>
 							</div>
-
+							-->
 						</form>
 					</div>
 
