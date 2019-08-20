@@ -18,7 +18,7 @@ class Peserta extends Front_Controller
 		$this->load->model('store/Tawaran_model', 'MBid');
 		$this->load->model('store/Produk_model', 'MProduk');
 		$this->load->model('store/Kota_model', 'MKota');
-		$this->load->model('store/BiayaKirim_model', 'MOngkir');
+		$this->load->model('store/Ongkir_model', 'MOngkir');
 	}
 
 	/**
