@@ -18,7 +18,7 @@ class BiayaKirim extends Back_Controller
 		parent::__construct();
 		$this->isLoggedIn();
 		if ($this->accRole === 'admin') {
-			$this->load->model('admin/BiayaKirim_model', 'MBiayaKirim');
+			$this->load->model('admin/Ongkir_model', 'MOngkir');
 			$this->load->model('admin/Kota_model', 'MKota');
 		} else {
 			redirect('admin');
@@ -41,7 +41,7 @@ class BiayaKirim extends Back_Controller
 		$this->global['name'] = $this->accName;
 		$this->global['role'] = $this->accRole;
 
-		$rs = $this->MBiayaKirim->get_data_join_kota($arrWhere, $arrOrder, $limit);
+		$rs = $this->MOngkir->get_data_join_kota($arrWhere, $arrOrder, $limit);
 		$data['records'] = $rs;
 		$this->digiAdminLayout($data, $this->view_dir . 'index', $this->global);
 	}
@@ -75,7 +75,7 @@ class BiayaKirim extends Back_Controller
 		$fharga = $this->input->post('fharga', TRUE);
 
 		$dataInfo = array('id_kota' => $fkota, 'jumlah_biaya_kirim' => $fharga);
-		$result = $this->MBiayaKirim->insert_data($dataInfo);
+		$result = $this->MOngkir->insert_data($dataInfo);
 
 		if ($result > 0) {
 			setFlashData('success', 'Data telah sukses ditambahkan');
@@ -102,7 +102,7 @@ class BiayaKirim extends Back_Controller
 		$this->global['name'] = $this->accName;
 		$this->global['role'] = $this->accRole;
 
-		$rs = $this->MBiayaKirim->get_data_info($fkey);
+		$rs = $this->MOngkir->get_data_info($fkey);
 		$data['records'] = $rs;
 
 		$arrWhere = array();
@@ -124,7 +124,7 @@ class BiayaKirim extends Back_Controller
 		$fharga = $this->input->post('fharga', TRUE);
 
 		$dataInfo = array('id_kota' => $fkota, 'jumlah_biaya_kirim' => $fharga);
-		$result = $this->MBiayaKirim->update_data($dataInfo, $fid);
+		$result = $this->MOngkir->update_data($dataInfo, $fid);
 		if ($result == true) {
 			setFlashData('success', 'Data is successfully updated');
 			redirect('admin/biaya-kirim');
@@ -140,7 +140,7 @@ class BiayaKirim extends Back_Controller
 	 */
 	function delete($fkey = NULL)
 	{
-		$result = $this->MBiayaKirim->delete_data($fkey);
+		$result = $this->MOngkir->delete_data($fkey);
 
 		if ($result > 0) {
 			setFlashData('success', 'Data is successfully deleted');
