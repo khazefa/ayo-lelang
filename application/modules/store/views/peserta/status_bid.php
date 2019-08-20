@@ -74,7 +74,7 @@
 
 										}
 										elseif ($bid_status === "ACCEPTED") {
-											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('peserta/checkout/') . $id . '"><i class="fa fa-money"></i> Pay</a>';
+											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('peserta/checkout/') . $id . '"><i class="fa fa-shopping-cart"></i> Checkout</a>';
 										}
 										else
 										{

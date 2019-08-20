@@ -97,15 +97,12 @@
 													</div>
 												</div>
 											</div>
-										<button type="submit" class="btn btn-success btn-lg" style="width:100%;">Checkout
-										</button>
 										</div>
 									</div>
 
 								</div>
 							</div>
 
-							<!--
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
@@ -124,9 +121,9 @@
 											</p>
 
 											<div class="row">
-												<!- - 
+												<!-- 
 													Panel Bank Transfer Info
-												- ->
+												-->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -141,9 +138,9 @@
 													</div>
 												</div>
 
-												<!- - 
+												<!-- 
 													Panel Bank Transfer Info
-												- ->
+												-->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -160,9 +157,9 @@
 											</div>
 
 											<div class="row">
-												<!- - 
+												<!-- 
 												Panel Bank Transfer Info
-												- ->
+											-->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -177,9 +174,9 @@
 													</div>
 												</div>
 
-												<!- - 
+												<!-- 
 												Panel Bank Transfer Info
-												- ->
+											-->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -205,7 +202,7 @@
 									</div>
 								</div>
 							</div>
-							-->
+
 						</form>
 					</div>
 
