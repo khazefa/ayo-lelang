@@ -16,6 +16,7 @@ class Peserta extends Front_Controller
 		$this->isLoggedIn();
 		$this->load->model('store/Peserta_model', 'MPeserta');
 		$this->load->model('store/Tawaran_model', 'MBid');
+		$this->load->model('store/Order_model', 'MOrder');
 		$this->load->model('store/Produk_model', 'MProduk');
 		$this->load->model('store/Kota_model', 'MKota');
 		$this->load->model('store/Ongkir_model', 'MOngkir');
@@ -212,5 +213,72 @@ class Peserta extends Front_Controller
 		} else {
 			$this->registrasi();
 		}
+	}
+
+	/**
+	 * Show Invoice Page
+	 */
+	public function list_invoice()
+	{
+		if ($this->session->userdata('signed_in')) {
+			$this->global['pageTitle'] = 'List Invoice';
+			$this->global['contentTitle'] = 'List Invoice';
+			$this->global['name'] = $this->uName;
+
+			$peserta_id = $this->uBid;
+			$username = $this->uKey;
+
+			$arrWhere = array('id_peserta' => $peserta_id);
+			$rs_bid = $this->MBid->get_data($arrWhere, array('waktu_tawaran' => 'ASC'), 100, 0);
+			$arr_data = array();
+			foreach ($rs_bid as $rb) {
+				$row['id'] = $rb['id_tawaran'];
+				$row['peserta_id'] = $peserta_id;
+				$row['item_id'] = (int) $rb['id_lelang'];
+				$rs_items = $this->MProduk->get_data_info($row['item_id']);
+				$row['item_name'] = $rs_items[0]['nama_lelang'];
+				$row['item_img'] = $rs_items[0]['gambar_produk'];
+				$row['item_status'] = $rs_items[0]['status_lelang'];
+				$row['bid_price'] = (int) $rb['jumlah_tawaran'];
+				$row['bid_type'] = $rb['tipe_tawaran'];
+				$row['bid_time'] = $rb['waktu_tawaran'];
+				$row['bid_status'] = $rb['status_tawaran'];
+
+				array_push($arr_data, $row);
+			}
+
+			$data['records_bid'] = $arr_data;
+			$this->digiLayout($data, $this->view_dir . "/status_bid", $this->global);
+		} else {
+			$this->registrasi();
+		}
+	}
+
+	public function add_order()
+	{
+		$no_trans = $this->MOrder->get_key_data("TR");
+		$tgl_order = date('Y-m-d H:i:s');
+		$bid_id = $this->input->post('id', TRUE);
+
+		$dataInfo = array(
+			'notrans_order' => $no_trans, 'tgl_order' => $tgl_order, 'id_tawaran' => (int) $bid_id
+		);
+		$count = $this->MOrder->check_data_exists(array('notrans_order' => $no_trans));
+		if ($count > 0) {
+			redirect('peserta/checkout/' . $bid_id);
+		} else {
+			$result = $this->MOrder->insert_data($dataInfo);
+
+			if ($result > 0) {
+				setFlashData('success', 'Nomor Order ', $no_trans . ', telah sukses dibuat.');
+				redirect('peserta/list-invoice');
+			} else {
+				setFlashData('error', 'Nomor Order ', $no_trans . ', telah gagal dibuat.');
+				redirect('peserta/list-invoice');
+			}
+		}
+
+		$data['no_trans'] = $no_trans;
+		$this->digiLayout($data, $this->view_dir . "/order", $this->global);
 	}
 }

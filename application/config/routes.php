@@ -88,6 +88,8 @@ $route['peserta/status-bid'] = 'store/Peserta/status_bid';
 $route['peserta/checkout/(:num)'] = 'store/Peserta/checkout/$1';
 $route['peserta/submit'] = 'store/Peserta/insert_data';
 $route['peserta/update'] = 'store/Peserta/modify_data';
+$route['peserta/list-invoice'] = 'store/Peserta/list_invoice';
+$route['peserta/add-order'] = 'store/Peserta/add_order';
 
 /* Routing Bid */
 $route['bid'] = 'store/Bid';

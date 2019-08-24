@@ -128,7 +128,7 @@
 													</a>
 												</li>
 												<li>
-													<a href="<?= base_url('peserta/invoice'); ?>">
+													<a href="<?= base_url('peserta/list-invoice'); ?>">
 														<i class="fa fa-file-text-o text-aqua"></i> Invoice
 													</a>
 												</li>

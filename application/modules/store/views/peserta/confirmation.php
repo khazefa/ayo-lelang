@@ -6,7 +6,7 @@
 			<a href="<?= base_url('peserta/status-bid'); ?>" class="list-group-item active">
 				<i class="fa fa-gavel"></i> Status Bid
 			</a>
-			<a href="<?= base_url('peserta/invoice'); ?>" class="list-group-item"><i class="fa fa-file-text-o"></i> Invoice</a>
+			<a href="<?= base_url('peserta/list-invoice'); ?>" class="list-group-item"><i class="fa fa-file-text-o"></i> Invoice</a>
 			<a href="<?= base_url('signout'); ?>" class="list-group-item"><i class="fa fa-sign-out"></i> Logout</a>
 		</div>
 	</div>

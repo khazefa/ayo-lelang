@@ -6,7 +6,7 @@
 			<a href="<?= base_url('peserta/status-bid'); ?>" class="list-group-item active">
 				<i class="fa fa-gavel"></i> Status Bid
 			</a>
-			<a href="<?= base_url('peserta/invoice'); ?>" class="list-group-item"><i class="fa fa-file-text-o"></i> Invoice</a>
+			<a href="<?= base_url('peserta/list-invoice'); ?>" class="list-group-item"><i class="fa fa-file-text-o"></i> Invoice</a>
 			<a href="<?= base_url('signout'); ?>" class="list-group-item"><i class="fa fa-sign-out"></i> Logout</a>
 		</div>
 	</div>
@@ -20,7 +20,8 @@
 				<div class="col-md-12">
 
 					<div class="shopping_cart">
-						<form class="form-horizontal" role="form" action="" method="post" id="payment-form">
+						<form class="form-horizontal" role="form" action="<?= base_url('peserta/add-order'); ?>" method="post" id="payment-form">
+						<input type="hidden" name="id" value="<?= $records_bid[0]['id_tawaran']; ?>" readonly="readonly">
 							<div class="panel-group" id="accordion">
 								<div class="panel panel-default">
 									<div class="panel-heading">
