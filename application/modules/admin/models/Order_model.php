@@ -10,6 +10,8 @@ class Order_model extends CI_Model
 {
     protected $tbl_order = 'order_lelang';
 	protected $tbl_bid = 'tawaran';
+	protected $tbl_ongkir = 'biaya_kirim';
+	protected $tbl_confirm = 'konfirmasi_bayar';
     protected $tbl_lelang = 'lelang';
     protected $tbl_peserta = 'peserta';
     protected $primKey = 'id_order';
@@ -244,33 +246,69 @@ class Order_model extends CI_Model
 		return $this->db->count_all_results();
 	}
 
-	function get_key_data($param)
+	function get_data_orders($arrWhere = array(), $arrOrder = array(), $limit = 0, $start = 0)
 	{
+		$rs = array();
+		//Flush Param
 		$this->db->flush_cache();
-		$q = $this->db->query("SELECT MAX(RIGHT(notrans_order,4)) AS idmax FROM " . $this->tbl_order);
-		$kd = ""; //first code
-		if ($q->num_rows() > 0) {
-			foreach ($q->result() as $k) {
-				$tmp = ((int) $k->idmax); //konversi julah nilai digit yang didapat ke integer
-				$tmp = $tmp + 1; //lalu ditambahkan nilai 1 dari digit tersebut
-				$kd = str_pad($tmp, 4, '0', STR_PAD_LEFT); //Pad some digits to the left side of the string
-			}
-		} else { //jika data kosong, maka set digit awal yaitu 1
-			$kd = 1;
-			$kd = str_pad($kd, 4, '0', STR_PAD_LEFT);
-		}
-		$firstdate = date('Y-m-d', strtotime('first day of this month'));
-		$curdate = date('Y-m-d');
-		$maskdate = date('ym');
 
-		if ($curdate == $firstdate) {
-			$kd = 1;
-			$kd = str_pad($kd, 4, '0', STR_PAD_LEFT);
+		$this->db->select('o.*, b.id_pelelang');
+		$this->db->from($this->tbl_order . ' as o');
+		$this->db->join($this->tbl_bid . ' as b', 'o.id_tawaran = b.id_tawaran', 'both');
+
+		if (empty($arrWhere)) {
+			// $rs = array();
+			//Limit
+			if ($limit > 0) {
+				$this->db->limit($limit);
+			}
+
+			//Order By
+			if (count($arrOrder) > 0) {
+				foreach ($arrOrder as $strField => $strValue) {
+					$this->db->order_by($strField, $strValue);
+				}
+			}
+			$query = $this->db->get();
+			$rs = $query->result_array();
+		} else {
+			foreach ($arrWhere as $strField => $strValue) {
+				if (is_array($strValue)) {
+					$this->db->where_in($strField, $strValue);
+				} else {
+					if (strpos(strtolower($strField), '_date1') !== false) {
+						$strField = substr($strField, 0, -6);
+						if (!empty($strValue)) {
+							$this->db->where("$strField >= '" . $strValue . "' ");
+						}
+					} elseif (strpos(strtolower($strField), '_date2') !== false) {
+						$strField = substr($strField, 0, -6);
+						if (!empty($strValue)) {
+							$this->db->where("$strField <= '" . $strValue . "' ");
+						}
+					} else {
+						$this->db->where($strField, $strValue);
+					}
+				}
+			}
+
+			//Limit
+			if ($limit > 0) {
+				$this->db->limit($limit);
+			}
+
+			//Order By
+			if (count($arrOrder) > 0) {
+				foreach ($arrOrder as $strField => $strValue) {
+					$this->db->order_by($strField, $strValue);
+				}
+			}
+
+			$query = $this->db->get();
+			$rs = $query->result_array();
 		}
-		//gabungkan string dengan kode yang telah dibuat tadi
-		// return $param.$fslcode.$maskdate.$kd;
-		return $param . $maskdate . $kd;
-		//        return $param.$kd;
+
+		return $rs;
 	}
 
 }

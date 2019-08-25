@@ -10,6 +10,9 @@ class Bid extends Back_Controller
 		parent::__construct();
 		$this->isLoggedIn();
 		$this->load->model('Tawaran_model', 'MBid');
+		$this->load->model('Order_model', 'MOrder');
+		$this->load->model('Konfirmasi_model', 'MConfirm');
+		$this->load->model('Ongkir_model', 'MOngkir');
 		$this->load->model('Produk_model', 'MProduk');
 		$this->load->model('Peserta_model', 'MPeserta');
 	}
@@ -78,5 +81,49 @@ class Bid extends Back_Controller
 			setFlashData('error', 'Bid is failed to Rejected');
 		}
 		redirect('admin/bid');
+	}
+
+	public function orders()
+	{
+		$rs = array();
+		$arrWhere = array();
+		$arrOrder = array('o.tgl_order' => 'DESC');
+		$limit = 0;
+
+		$this->global['pageTitle'] = 'List Order';
+		$this->global['contentHeader'] = 'List Order';
+		$this->global['contentTitle'] = 'List Order';
+		$this->global['name'] = $this->accName;
+		$this->global['role'] = $this->accRole;
+
+		$arrWhere = array('b.id_pelelang' => $this->accBid);
+		$rs_order = $this->MOrder->get_data_orders($arrWhere, $arrOrder, $limit);
+
+		$arr_order = array();
+		foreach ($rs_order as $rb) {
+			$row['id'] = $rb['id_order'];
+			$row['order_num'] = $rb['notrans_order'];
+			$row['order_date'] = $rb['tgl_order'];
+			$row['peserta_id'] = $rb['id_peserta'];
+			$row['bid_id'] = $rb['id_tawaran'];
+			$rs_bid = $this->MBid->get_data_info($row['bid_id']);
+			$row['item_id'] = (int) $rs_bid[0]['id_lelang'];
+			$rs_items = $this->MProduk->get_data_info($row['item_id']);
+			$rs_peserta = $this->MPeserta->get_data_info2((int) $rb['id_peserta']);
+			$rs_ongkir = $this->MOngkir->get_data_info($rb['id_biaya_kirim']);
+			$row['item_name'] = $rs_items[0]['nama_lelang'];
+			$row['item_img'] = $rs_items[0]['gambar_produk'];
+			$row['item_status'] = $rs_items[0]['status_lelang'];
+			$row['bidder_name'] = $rs_peserta[0]['nama_peserta'];
+			$row['bid_price'] = (int) $rs_bid[0]['jumlah_tawaran'];
+			$row['bid_type'] = $rs_bid[0]['tipe_tawaran'];
+			$row['order_total'] = (int) ($rs_bid[0]['jumlah_tawaran'] + $rs_ongkir[0]['jumlah_biaya_kirim']);
+			$row['order_status'] = $rb['status_order'];
+
+			array_push($arr_order, $row);
+		}
+		$data['records'] = $arr_order;
+		$this->digiAdminLayout($data, $this->view_dir . 'order', $this->global);
+
 	}
 }
