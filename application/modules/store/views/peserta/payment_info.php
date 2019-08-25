@@ -3,10 +3,10 @@
 	<div class="col-md-2">
 		<div class="list-group">
 			<a href="<?= base_url('peserta/profil'); ?>" class="list-group-item"><i class="fa fa-user"></i> Profil</a>
-			<a href="<?= base_url('peserta/status-bid'); ?>" class="list-group-item active">
+			<a href="<?= base_url('peserta/status-bid'); ?>" class="list-group-item">
 				<i class="fa fa-gavel"></i> Status Bid
 			</a>
-			<a href="<?= base_url('peserta/list-invoice'); ?>" class="list-group-item"><i class="fa fa-file-text-o"></i> Invoice</a>
+			<a href="<?= base_url('peserta/list-invoice'); ?>" class="list-group-item active"><i class="fa fa-file-text-o"></i> Invoice</a>
 			<a href="<?= base_url('signout'); ?>" class="list-group-item"><i class="fa fa-sign-out"></i> Logout</a>
 		</div>
 	</div>
@@ -15,99 +15,18 @@
 		<div class="box box-solid">
 			<div class="box-header with-border text-center">
 				<h3 class="box-title"><?= $contentTitle; ?></h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Back" onclick="window.history.go(-1); return false;">
+						<i class="fa fa-reply"></i> Back
+					</button>
+				</div>
 			</div>
 			<div class="box-body">
 				<div class="col-md-12">
 
-					<div class="shopping_cart">
-						<form class="form-horizontal" role="form" action="<?= base_url('peserta/add-order'); ?>" method="post" id="checkout-form">
-						<input type="hidden" name="id" value="<?= $records_bid[0]['id_tawaran']; ?>" readonly="readonly">
-						<input type="hidden" name="id_ongkir" value="<?= $records_ongkir[0]['id_biaya_kirim']; ?>" readonly="readonly">
-							<div class="panel-group" id="accordion">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Review
-												Your Order</a>
-										</h4>
-									</div>
-									<div id="collapseOne" class="panel-collapse collapse in">
-										<div class="panel-body">
-											<div class="items">
-												<div class="col-md-9">
-													<table class="table table-striped">
-														<?php
-														$item_name =
-															$records_produk[0]['nama_lelang'];
-														$item_price = $records_bid[0]['jumlah_tawaran'];
-														$item_price_rp = "Rp. " . format_rupiah($item_price);
-														?>
-														<tr>
-															<td colspan="2">
-																<!--
-																<a class="btn btn-warning btn-sm pull-right" href="#" title="Cancel Item">X</a>
-																-->
-																<strong>
-																	Detail Order</strong>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<?= $item_name; ?>
-															</td>
-															<td>
-																<strong>
-																	<?= $item_price_rp; ?>
-																</strong>
-															</td>
-														</tr>
-													</table>
-													<table class="table table-striped">
-														<tr>
-															<td colspan="2">
-																<strong>Shipping Detail</strong>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<?php
-																echo nl2br($records_peserta[0]['alamat_peserta']);
-																echo "<br>";
-																echo $records_kota[0]['nama_kota'];
-																echo "<br>";
-
-																$ongkir = $records_ongkir[0]['jumlah_biaya_kirim'];
-																$ongkir_rp = format_rupiah($ongkir);
-																?>
-															</td>
-															<td>
-																Shipping Fee<br>
-																<strong>Rp. <?= $ongkir_rp; ?></strong>
-															</td>
-														</tr>
-													</table>
-
-												</div>
-												<div class="col-md-3">
-													<div style="text-align: center;">
-														<?php
-														$total = $item_price + $ongkir;
-														$total_rp = "Rp. " . format_rupiah($total);
-														?>
-														<h3>Order Total</h3>
-														<h3><span style="color:green;"><?= $total_rp; ?></span></h3>
-													</div>
-												</div>
-											</div>
-										<button type="submit" class="btn btn-success btn-lg" style="width:100%;">Checkout
-										</button>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
-							<!--
+					<div class="payment_info">
+						<form class="form-horizontal" role="form" action="<?= base_url('peserta/confirm-pay'); ?>" method="post" id="payment-info">
+						<input type="hidden" name="id" value="<?= $no_order; ?>" readonly="readonly">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
@@ -116,7 +35,7 @@
 										</a>
 									</h4>
 								</div>
-								<div id="collapseThree" class="panel-collapse collapse">
+								<div id="collapseThree" class="panel-collapse collapse in">
 									<div class="panel-body">
 										<span class='payment-errors'></span>
 										<fieldset>
@@ -126,9 +45,9 @@
 											</p>
 
 											<div class="row">
-												<!- - 
+												<!-- 
 													Panel Bank Transfer Info
-												- ->
+												-->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -143,9 +62,9 @@
 													</div>
 												</div>
 
-												<!- - 
+												<!-- 
 													Panel Bank Transfer Info
-												- ->
+												-->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -162,9 +81,9 @@
 											</div>
 
 											<div class="row">
-												<!- - 
+												<!-- 
 												Panel Bank Transfer Info
-												- ->
+											-->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -179,9 +98,9 @@
 													</div>
 												</div>
 
-												<!- - 
+												<!-- 
 												Panel Bank Transfer Info
-												- ->
+											-->
 												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 													<div class="panel panel-primary">
 														<div class="panel-heading text-center">
@@ -198,16 +117,16 @@
 											</div>
 
 										</fieldset>
-										<button type="submit" class="btn btn-success btn-lg" style="width:100%;">Checkout
+										<button type="submit" class="btn btn-success btn-lg" style="width:100%;">Confirm Payment
 										</button>
 										<br />
 										<div style="text-align: left;"><br />
-											Setelah melakukan pembayaran, silahkan konfirmasi pembayaran melalui Invoice Area > List Order > Pilih Tombol Konfirmasi pada Order Anda. Kami akan memproses order Anda setelah konfirmasi dilakukan.
+											Setelah melakukan pembayaran, silahkan konfirmasi pembayaran. Kami akan memproses order Anda setelah konfirmasi dilakukan.
 										</div>
 									</div>
 								</div>
 							</div>
-							-->
+
 						</form>
 					</div>
 

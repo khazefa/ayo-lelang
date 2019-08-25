@@ -15,6 +15,8 @@
 	<link rel="stylesheet" href="<?= base_url('assets/Ionicons/css/ionicons.min.css'); ?>">
 	<!-- DataTables -->
 	<link rel="stylesheet" href="<?= base_url('assets/datatables.net-bs/css/dataTables.bootstrap.css'); ?>">
+	<!-- Bootstrap Datetime Picker -->
+	<link rel="stylesheet" href="<?= base_url('assets/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'); ?>">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="<?= base_url('assets/css/AdminLTE.min.css'); ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/custom.css'); ?>">
@@ -37,13 +39,23 @@
 	<script src="<?= base_url('assets/jquery/dist/jquery.min.js'); ?>"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="<?= base_url('assets/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
+
+	<!-- Moment JS -->
+	<script src="<?= base_url('assets/moment-js/moment.js'); ?>"></script>
+	<!-- Bootstrap Transition JS -->
+	<script src="<?= base_url('assets/bootstrap/js/transition.js'); ?>"></script>
+	<!-- Bootstrap Collapse JS -->
+	<script src="<?= base_url('assets/bootstrap/js/collapse.js'); ?>"></script>
+	<!-- Bootstrap Datetime Picker -->
+	<script src="<?= base_url('assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'); ?>"></script>
+
 	<script>
 		var base_url = "<?= base_url(); ?>";
 		var request;
 		var arr_id = [];
 	</script>
 	<script src="<?= base_url('assets/js/custom-store.js'); ?>" type="text/javascript"></script>
-	<script src="<?= base_url('assets/js/custom-store-el.js'); ?>" ></script>
+	<script src="<?= base_url('assets/js/custom-store-el.js'); ?>"></script>
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 
@@ -111,71 +123,71 @@
 							<?php
 							if ($this->session->userdata('signed_in')) {
 								?>
-								<li class="dropdown notifications-menu">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= $name; ?></b> <span class="caret"></span></a>
-									<ul id="login-dp" class="dropdown-menu">
-										<li class="header">Your access link</li>
-										<li>
-											<ul class="menu">
-												<li>
-													<a href="<?= base_url('peserta/profil'); ?>">
-														<i class="fa fa-user text-aqua"></i> Profil
-													</a>
-												</li>
-												<li>
-													<a href="<?= base_url('peserta/status-bid'); ?>">
-														<i class="fa fa-gavel text-aqua"></i> Status Bid
-													</a>
-												</li>
-												<li>
-													<a href="<?= base_url('peserta/list-invoice'); ?>">
-														<i class="fa fa-file-text-o text-aqua"></i> Invoice
-													</a>
-												</li>
-												<li>
-													<a href="<?= base_url('signout'); ?>">
-														<i class="fa fa-sign-out text-aqua"></i> Logout
-													</a>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= $name; ?></b> <span class="caret"></span></a>
+								<ul id="login-dp" class="dropdown-menu">
+									<li class="header">Your access link</li>
+									<li>
+										<ul class="menu">
+											<li>
+												<a href="<?= base_url('peserta/profil'); ?>">
+													<i class="fa fa-user text-aqua"></i> Profil
+												</a>
+											</li>
+											<li>
+												<a href="<?= base_url('peserta/status-bid'); ?>">
+													<i class="fa fa-gavel text-aqua"></i> Status Bid
+												</a>
+											</li>
+											<li>
+												<a href="<?= base_url('peserta/list-invoice'); ?>">
+													<i class="fa fa-file-text-o text-aqua"></i> Invoice
+												</a>
+											</li>
+											<li>
+												<a href="<?= base_url('signout'); ?>">
+													<i class="fa fa-sign-out text-aqua"></i> Logout
+												</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
 							<?php
 							} else {
 								?>
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-									<ul id="login-dp" class="dropdown-menu">
-										<li>
-											<div class="row">
-												<div class="col-md-12">
-													<form class="form" role="form" method="post" action="<?= base_url('signin'); ?>" accept-charset="UTF-8" id="login-nav">
-														<div class="form-group">
-															<label class="sr-only" for="login_email">Email</label>
-															<input type="email" class="form-control" id="login_email" name="login_email" placeholder="Email" required="required">
-														</div>
-														<div class="form-group">
-															<label class="sr-only" for="login_password">Password</label>
-															<input type="password" class="form-control" id="login_password" name="login_password" placeholder="Password" required="required">
-														</div>
-														<div class="form-group">
-															<button type="submit" class="btn btn-primary btn-block">Sign in</button>
-														</div>
-														<div class="checkbox">
-															<label>
-																<input type="checkbox" name="login_remember"> tetap login
-															</label>
-														</div>
-													</form>
-												</div>
-												<div class="bottom text-center">
-													Belum bergabung ? <a href="<?= base_url('peserta/registrasi'); ?>"><b>Registrasi</b></a>
-												</div>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+								<ul id="login-dp" class="dropdown-menu">
+									<li>
+										<div class="row">
+											<div class="col-md-12">
+												<form class="form" role="form" method="post" action="<?= base_url('signin'); ?>" accept-charset="UTF-8" id="login-nav">
+													<div class="form-group">
+														<label class="sr-only" for="login_email">Email</label>
+														<input type="email" class="form-control" id="login_email" name="login_email" placeholder="Email" required="required">
+													</div>
+													<div class="form-group">
+														<label class="sr-only" for="login_password">Password</label>
+														<input type="password" class="form-control" id="login_password" name="login_password" placeholder="Password" required="required">
+													</div>
+													<div class="form-group">
+														<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+													</div>
+													<div class="checkbox">
+														<label>
+															<input type="checkbox" name="login_remember"> tetap login
+														</label>
+													</div>
+												</form>
 											</div>
-										</li>
-									</ul>
-								</li>
+											<div class="bottom text-center">
+												Belum bergabung ? <a href="<?= base_url('peserta/registrasi'); ?>"><b>Registrasi</b></a>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</li>
 							<?php
 							}
 							?>

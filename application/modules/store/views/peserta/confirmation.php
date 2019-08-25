@@ -3,10 +3,10 @@
 	<div class="col-md-2">
 		<div class="list-group">
 			<a href="<?= base_url('peserta/profil'); ?>" class="list-group-item"><i class="fa fa-user"></i> Profil</a>
-			<a href="<?= base_url('peserta/status-bid'); ?>" class="list-group-item active">
+			<a href="<?= base_url('peserta/status-bid'); ?>" class="list-group-item">
 				<i class="fa fa-gavel"></i> Status Bid
 			</a>
-			<a href="<?= base_url('peserta/list-invoice'); ?>" class="list-group-item"><i class="fa fa-file-text-o"></i> Invoice</a>
+			<a href="<?= base_url('peserta/list-invoice'); ?>" class="list-group-item active"><i class="fa fa-file-text-o"></i> Invoice</a>
 			<a href="<?= base_url('signout'); ?>" class="list-group-item"><i class="fa fa-sign-out"></i> Logout</a>
 		</div>
 	</div>
@@ -15,190 +15,107 @@
 		<div class="box box-solid">
 			<div class="box-header with-border text-center">
 				<h3 class="box-title"><?= $contentTitle; ?></h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Back" onclick="window.history.go(-1); return false;">
+						<i class="fa fa-reply"></i> Back
+					</button>
+				</div>
 			</div>
 			<div class="box-body">
 				<div class="col-md-12">
 
-					<div class="shopping_cart">
-						<form class="form-horizontal" role="form" action="" method="post" id="payment-form">
-							<div class="panel-group" id="accordion">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Review
-												Your Order</a>
-										</h4>
-									</div>
-									<div id="collapseOne" class="panel-collapse collapse in">
-										<div class="panel-body">
-											<div class="items">
-												<div class="col-md-9">
-													<table class="table table-striped">
-														<?php
-														$item_name =
-															$records_produk[0]['nama_lelang'];
-														$item_price = $records_bid[0]['jumlah_tawaran'];
-														$item_price_rp = "Rp. " . format_rupiah($item_price);
-														?>
-														<tr>
-															<td colspan="2">
-																<!--
-																<a class="btn btn-warning btn-sm pull-right" href="#" title="Cancel Item">X</a>
-																-->
-																<strong>
-																	Detail Order</strong>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<?= $item_name; ?>
-															</td>
-															<td>
-																<strong>
-																	<?= $item_price_rp; ?>
-																</strong>
-															</td>
-														</tr>
-													</table>
-													<table class="table table-striped">
-														<tr>
-															<td colspan="2">
-																<strong>Shipping Detail</strong>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<?php
-																echo nl2br($records_peserta[0]['alamat_peserta']);
-																echo "<br>";
-																echo $records_kota[0]['nama_kota'];
-																echo "<br>";
-
-																$ongkir = $records_ongkir[0]['jumlah_biaya_kirim'];
-																$ongkir_rp = format_rupiah($ongkir);
-																?>
-															</td>
-															<td>
-																Shipping Fee<br>
-																<strong>Rp. <?= $ongkir_rp; ?></strong>
-															</td>
-														</tr>
-													</table>
-
-												</div>
-												<div class="col-md-3">
-													<div style="text-align: center;">
-														<?php
-														$total = $item_price + $ongkir;
-														$total_rp = "Rp. " . format_rupiah($total);
-														?>
-														<h3>Order Total</h3>
-														<h3><span style="color:green;"><?= $total_rp; ?></span></h3>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
+					<div class="payment_info">
+						<form class="form-horizontal" role="form" action="<?= base_url('peserta/add-pay'); ?>" method="post" enctype="multipart/form-data" id="payment-form">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-											<b>Payment Information</b>
+											<b>Payment Confirmation</b>
 										</a>
 									</h4>
 								</div>
-								<div id="collapseThree" class="panel-collapse collapse">
+								<div id="collapseThree" class="panel-collapse collapse in">
 									<div class="panel-body">
 										<span class='payment-errors'></span>
 										<fieldset>
-											<legend>Bank Transfer</legend>
+											<legend>Confirmation Form</legend>
 											<p>
-												Kami menerima pembayaran dari berbagai Bank di Indonesia dengan melalui berbagai cara, diantaranya adalah melalui Internet Banking, Transfer ATM, m-Banking, SMS Banking, Setoran Tunai maupun Phone Banking. Semua pembayaran produk lelang dapat dilakukan melalui rekening bank berikut:
+												Harap menginput data konfirmasi pembayaran Anda dengan benar dan lengkap agar dapat mempermudah proses konfirmasi pembayaran Order Anda.
 											</p>
+											<div class="form-group">
+												<label for="no_trans" class="col-sm-3 control-label">No. Order</label>
 
-											<div class="row">
-												<!-- 
-													Panel Bank Transfer Info
-												-->
-												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-													<div class="panel panel-primary">
-														<div class="panel-heading text-center">
-															<img src="<?= base_url('assets/img/bank/bca.png'); ?>">
-														</div>
-														<div class="panel-body">
-															<ul>
-																<li>No. Rekening: 0283116411</li>
-																<li>a.n: AYO LELANG</li>
-															</ul>
-														</div>
-													</div>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="no_trans" name="no_trans" value="<?= $no_order; ?>" readonly="readonly">
 												</div>
+											</div>
+											<div class="form-group">
+												<label for="no_rek" class="col-sm-3 control-label">No. Rekening <span class="text-danger">*</span></label>
 
-												<!-- 
-													Panel Bank Transfer Info
-												-->
-												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-													<div class="panel panel-primary">
-														<div class="panel-heading text-center">
-															<img src="<?= base_url('assets/img/bank/bri.png'); ?>">
-														</div>
-														<div class="panel-body">
-															<ul>
-																<li>No. Rekening: 040901000391111</li>
-																<li>a.n: AYO LELANG</li>
-															</ul>
-														</div>
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="no_rek" name="no_rek" placeholder="No. Rekening" required="required">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="rek_bank" class="col-sm-3 control-label">Nama Bank <span class="text-danger">*</span></label>
+
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="rek_bank" name="rek_bank" placeholder="Nama Bank" required="required">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="rek_nama" class="col-sm-3 control-label">Nama Lengkap <span class="text-danger">*</span></label>
+
+												<div class="col-sm-6">
+													<input type="text" class="form-control" id="rek_nama" name="rek_nama" placeholder="<?= $name; ?>" required="required">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="tgl_transfer" class="col-sm-3 control-label">Tgl. Transfer <span class="text-danger">*</span></label>
+
+												<div class="col-sm-4">
+													<div class='input-group date datetimepicker1'>
+														<input type='text' class="form-control" id="tgl_transfer" name="tgl_transfer" placeholder="2019-01-01 00:00:00" required="required" />
+														<span class=" input-group-addon">
+															<span class="glyphicon glyphicon-calendar"></span>
+														</span>
 													</div>
 												</div>
 											</div>
+											<div class="form-group">
+												<label for="jml_transfer" class="col-sm-3 control-label">Nominal Transfer <span class="text-danger">*</span></label>
 
-											<div class="row">
-												<!-- 
-												Panel Bank Transfer Info
-											-->
-												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-													<div class="panel panel-primary">
-														<div class="panel-heading text-center">
-															<img src="<?= base_url('assets/img/bank/bni.png'); ?>">
-														</div>
-														<div class="panel-body">
-															<ul>
-																<li>No. Rekening: 3300031111</li>
-																<li>a.n: AYO LELANG</li>
-															</ul>
-														</div>
-													</div>
+												<div class="col-sm-3">
+													<input type="number" class="form-control" id="jml_transfer" name="jml_transfer" min="100" placeholder="100" required="required">
 												</div>
+											</div>
+											<div class="form-group">
+												<label for="bank_transfer" class="col-sm-3 control-label">Bank Tujuan Pembayaran <span class="text-danger">*</span></label>
 
-												<!-- 
-												Panel Bank Transfer Info
-											-->
-												<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-													<div class="panel panel-primary">
-														<div class="panel-heading text-center">
-															<img src="<?= base_url('assets/img/bank/mandiri.png'); ?>">
-														</div>
-														<div class="panel-body">
-															<ul>
-																<li>No. Rekening: 1030006052222</li>
-																<li>a.n: AYO LELANG</li>
-															</ul>
-														</div>
-													</div>
+												<div class="col-sm-6">
+													<select class="form-control" id="bank_transfer" name="bank_transfer" required="required">
+														<option selected>-Bank Tujuan-</option>
+														<option value="BCA - 0283116411">BCA - 0283116411</option>
+														<option value="BRI - 040901000391111">BRI - 040901000391111</option>
+														<option value="BNI - 3300031111">BNI - 3300031111</option>
+														<option value="MANDIRI - 1030006052222">MANDIRI - 1030006052222</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="bukti_transfer" class="col-sm-3 control-label">Upload Bukti Transfer <span class="text-danger">*</span></label>
+
+												<div class="col-sm-3">
+													<input type="file" class="form-control" id="bukti_transfer" name="bukti_transfer" required="required">
 												</div>
 											</div>
 
 										</fieldset>
-										<button type="submit" class="btn btn-success btn-lg" style="width:100%;">Checkout
-										</button>
-										<br />
-										<div style="text-align: left;"><br />
-											Setelah melakukan pembayaran, silahkan konfirmasi pembayaran melalui Invoice Area > List Order > Pilih Tombol Konfirmasi pada Order Anda. Kami akan memproses order Anda setelah konfirmasi dilakukan.
-										</div>
+									</div>
+									<!-- /.panel-body -->
+									<div class="panel-footer">
+										<button type="submit" class="btn btn-block btn-primary">Submit</button>
+										<!-- /.panel-footer -->
 									</div>
 								</div>
 							</div>

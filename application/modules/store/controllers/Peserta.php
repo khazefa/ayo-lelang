@@ -17,6 +17,7 @@ class Peserta extends Front_Controller
 		$this->load->model('store/Peserta_model', 'MPeserta');
 		$this->load->model('store/Tawaran_model', 'MBid');
 		$this->load->model('store/Order_model', 'MOrder');
+		$this->load->model('store/Konfirmasi_model', 'MConfirm');
 		$this->load->model('store/Produk_model', 'MProduk');
 		$this->load->model('store/Kota_model', 'MKota');
 		$this->load->model('store/Ongkir_model', 'MOngkir');
@@ -229,42 +230,53 @@ class Peserta extends Front_Controller
 			$username = $this->uKey;
 
 			$arrWhere = array('id_peserta' => $peserta_id);
-			$rs_bid = $this->MBid->get_data($arrWhere, array('waktu_tawaran' => 'ASC'), 100, 0);
+			$rs_order = $this->MOrder->get_data($arrWhere, array('tgl_order' => 'ASC'), 100, 0);
 			$arr_data = array();
-			foreach ($rs_bid as $rb) {
-				$row['id'] = $rb['id_tawaran'];
+			foreach ($rs_order as $rb) {
+				$row['id'] = $rb['id_order'];
+				$row['order_num'] = $rb['notrans_order'];
+				$row['order_date'] = $rb['tgl_order'];
 				$row['peserta_id'] = $peserta_id;
-				$row['item_id'] = (int) $rb['id_lelang'];
+				$row['bid_id'] = $rb['id_tawaran'];
+				$rs_bid = $this->MBid->get_data_info($row['bid_id']);
+				$row['item_id'] = (int) $rs_bid[0]['id_lelang'];
 				$rs_items = $this->MProduk->get_data_info($row['item_id']);
+				$rs_ongkir = $this->MOngkir->get_data_info($rb['id_biaya_kirim']);
 				$row['item_name'] = $rs_items[0]['nama_lelang'];
 				$row['item_img'] = $rs_items[0]['gambar_produk'];
 				$row['item_status'] = $rs_items[0]['status_lelang'];
-				$row['bid_price'] = (int) $rb['jumlah_tawaran'];
-				$row['bid_type'] = $rb['tipe_tawaran'];
-				$row['bid_time'] = $rb['waktu_tawaran'];
-				$row['bid_status'] = $rb['status_tawaran'];
+				$row['bid_price'] = (int) $rs_bid[0]['jumlah_tawaran'];
+				$row['bid_type'] = $rs_bid[0]['tipe_tawaran'];
+				$row['order_total'] = (int) ( $rs_bid[0]['jumlah_tawaran'] + $rs_ongkir[0]['jumlah_biaya_kirim'] );
+				$row['order_status'] = $rb['status_order'];
 
 				array_push($arr_data, $row);
 			}
 
-			$data['records_bid'] = $arr_data;
-			$this->digiLayout($data, $this->view_dir . "/status_bid", $this->global);
+			$data['records_order'] = $arr_data;
+			$this->digiLayout($data, $this->view_dir . "/invoice", $this->global);
 		} else {
 			$this->registrasi();
 		}
 	}
 
+	/**
+	 * Process Order
+	 */
 	public function add_order()
 	{
 		$no_trans = $this->MOrder->get_key_data("TR");
 		$tgl_order = date('Y-m-d H:i:s');
 		$bid_id = $this->input->post('id', TRUE);
+		$shipping_id = $this->input->post('id_ongkir', TRUE);
+		$peserta_id = $this->uBid;
 
 		$dataInfo = array(
-			'notrans_order' => $no_trans, 'tgl_order' => $tgl_order, 'id_tawaran' => (int) $bid_id
+			'notrans_order' => $no_trans, 'tgl_order' => $tgl_order, 'id_tawaran' => (int) $bid_id, 'id_biaya_kirim' => (int) $shipping_id, 'id_peserta' => (int) $peserta_id
 		);
 		$count = $this->MOrder->check_data_exists(array('notrans_order' => $no_trans));
 		if ($count > 0) {
+			setFlashData('error', 'Telah terjadi kesalahan sistem, harap mengulangi proses Checkout Anda.');
 			redirect('peserta/checkout/' . $bid_id);
 		} else {
 			$result = $this->MOrder->insert_data($dataInfo);
@@ -277,8 +289,158 @@ class Peserta extends Front_Controller
 				redirect('peserta/list-invoice');
 			}
 		}
+	}
 
-		$data['no_trans'] = $no_trans;
-		$this->digiLayout($data, $this->view_dir . "/order", $this->global);
+	/**
+	 * Show Payment Information Page
+	 */
+	function pay_order($id)
+	{
+		$this->global['pageTitle'] = 'Pay Order';
+		$this->global['contentTitle'] = 'Pay Order';
+		$this->global['name'] = $this->uName;
+
+		$data['no_order'] = $id;
+		$this->digiLayout($data, $this->view_dir . "/payment_info", $this->global);
+	}
+
+	/**
+	 * Show Payment Confirmation Page
+	 */
+	function pay_confirm()
+	{
+		$this->global['pageTitle'] = 'Confirm Payment';
+		$this->global['contentTitle'] = 'Confirm Payment';
+		$this->global['name'] = $this->uName;
+
+		$id = $this->input->post('id', TRUE);
+
+		$data['no_order'] = $id;
+		$this->digiLayout($data, $this->view_dir . "/confirmation", $this->global);
+	}
+
+	/**
+	 * Process Confirm Payment
+	 */
+	public function add_pay()
+	{
+		$no_trans = $this->input->post('no_trans', TRUE);
+		$date_add = date('Y-m-d H:i:s');
+		$no_rek = $this->input->post('no_rek', TRUE);
+		$rek_bank = $this->input->post('rek_bank', TRUE);
+		$rek_nama = $this->input->post('rek_nama', TRUE);
+		$tgl_transfer = $this->input->post('tgl_transfer', TRUE);
+		$jml_transfer = $this->input->post('jml_transfer', TRUE);
+		$bank_transfer = $this->input->post('bank_transfer', TRUE);
+		$bukti_transfer = "bukti_transfer";
+		$peserta_id = $this->uBid;
+
+		$config['upload_path']          = './uploads/bukti_transfer/';
+		$config['allowed_types']        = 'jpg|jpeg|png';
+		$config['max_size']             = 2048;
+		// $config['max_width']            = 1024;
+		// $config['max_height']           = 1024;
+
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload($bukti_transfer)) {
+			setFlashData('error', 'Gagal upload gambar ' . $this->upload->display_errors());
+			$dataInfo = array(
+				'tgl_konfirmasi' => $date_add, 'notrans_order' => $no_trans, 'no_rek' => $no_rek, 'nama_bank' => $rek_bank, 'atas_nama' => $rek_nama, 'nominal' => $jml_transfer, 'tgl_transfer' => $tgl_transfer, 'id_peserta' => $peserta_id, 'bank_tujuan' => $bank_transfer
+			);
+		} else {
+			setFlashData('success', 'Sukses upload gambar ' . $this->upload->data('file_name'));
+			$filename = $this->upload->data('file_name');       // Returns: mypic.jpg
+			$dataInfo = array(
+				'tgl_konfirmasi' => $date_add, 'notrans_order' => $no_trans, 'no_rek' => $no_rek, 'nama_bank' => $rek_bank, 'atas_nama' => $rek_nama, 'nominal' => $jml_transfer, 'tgl_transfer' => $tgl_transfer, 'id_peserta' => $peserta_id, 'bank_tujuan' => $bank_transfer, 'file_konfirmasi' => $this->upload->data('file_name')
+			);
+		}
+
+		$count = $this->MConfirm->check_data_exists(array('notrans_order' => $no_trans));
+		if ($count > 0) {
+			setFlashData('error', 'Anda sudah pernah mengkonfirmasi order '.$no_trans.' sebelumnya.');
+			redirect('peserta/list-invoice');
+		} else {
+			$result = $this->MConfirm->insert_data($dataInfo);
+
+			if ($result > 0) {
+				setFlashData('success', 'Nomor Order '. $no_trans . ', telah sukses dikonfirmasi.');
+				$this->MOrder->update_data(array('status_order'=>'verify_pay'), $no_trans);
+				redirect('peserta/list-invoice');
+			} else {
+				setFlashData('error', 'Nomor Order '. $no_trans . ', telah gagal dikonfirmasi.');
+				redirect('peserta/list-invoice');
+			}
+		}
+	}
+
+	/**
+	 * This function is used to upload file
+	 */
+	function upload_files($field_name)
+	{
+		$filename = "";
+		$config['upload_path']          = './uploads/bukti_transfer/';
+		$config['allowed_types']        = 'jpg|png';
+		$config['max_size']             = 2048;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload($field_name)) {
+			setFlashData('error', 'Gagal upload gambar ' . $this->upload->display_errors());
+		} else {
+			setFlashData('success', 'Data telah sukses ditambahkan ' . $this->upload->data('file_name'));
+			$filename = $this->upload->data('file_name');       // Returns: mypic.jpg
+		}
+		return $filename;
+	}
+
+	/**
+	 * This function is used to add new data to the system
+	 */
+	function create()
+	{
+		$fnama = $this->input->post('fnama', TRUE);
+		$fkategori = $this->input->post('fkategori', TRUE);
+		$fberat = $this->input->post('fberat', TRUE);
+		$fharga1 = $this->input->post('fharga1', TRUE);
+		$fharga2 = $this->input->post('fharga2', TRUE);
+		$fwaktu1 = $this->input->post('fwaktu1', TRUE);
+		$fwaktu2 = $this->input->post('fwaktu2', TRUE);
+		$fketerangan = $this->input->post('fketerangan', TRUE);
+		$id_pelelang = (int) $this->session->userdata('accBid');
+		$fgambar = 'fgambar';
+
+		$config['upload_path']          = './uploads/products/';
+		$config['allowed_types']        = 'jpg|jpeg|png';
+		$config['max_size']             = 2048;
+		// $config['max_width']            = 1024;
+		// $config['max_height']           = 1024;
+
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload($fgambar)) {
+			setFlashData('error', 'Gagal upload gambar ' . $this->upload->display_errors());
+			$dataInfo = array(
+				'id_kategori' => $fkategori, 'id_pelelang' => $id_pelelang, 'nama_lelang' => $fnama, 'harga_awal' => $fharga1, 'harga_maksimal' => $fharga2, 'waktu_mulai' => $fwaktu1, 'waktu_selesai' => $fwaktu2, 'keterangan' => $fketerangan,
+				'berat_produk' => (int) $fberat
+			);
+		} else {
+			setFlashData('success', 'Sukses upload gambar ' . $this->upload->data('file_name'));
+			$filename = $this->upload->data('file_name');       // Returns: mypic.jpg
+			$dataInfo = array(
+				'id_kategori' => $fkategori, 'id_pelelang' => $id_pelelang, 'nama_lelang' => $fnama, 'harga_awal' => $fharga1, 'harga_maksimal' => $fharga2, 'waktu_mulai' => $fwaktu1, 'waktu_selesai' => $fwaktu2, 'keterangan' => $fketerangan, 'gambar_produk' => $this->upload->data('file_name'),
+				'berat_produk' => (int) $fberat
+			);
+		}
+
+		$result = $this->MProduk->insert_data($dataInfo);
+		if ($result > 0) {
+			setFlashData('success', 'Data telah sukses ditambahkan');
+			redirect('admin/produk');
+		} else {
+			setFlashData('error', 'Data telah gagal ditambahkan');
+			redirect('admin/produk/add');
+		}
 	}
 }

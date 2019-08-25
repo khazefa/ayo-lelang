@@ -181,10 +181,23 @@ $(function () {
 	}
 
 	$(document).ready(function () {
+		$('.datetimepicker1').datetimepicker({
+			format: 'YYYY-MM-DD HH:mm:ss'
+		});
+		
 		$('#grid_status_bid').DataTable({
 			'paging': true,
 			'lengthChange': false,
-			'searching': false,
+			'searching': true,
+			'ordering': true,
+			'info': true,
+			'autoWidth': false
+		});
+
+		$('#grid_invoice').DataTable({
+			'paging': true,
+			'lengthChange': false,
+			'searching': true,
 			'ordering': true,
 			'info': true,
 			'autoWidth': false

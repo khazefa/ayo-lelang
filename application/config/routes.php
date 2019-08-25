@@ -90,6 +90,9 @@ $route['peserta/submit'] = 'store/Peserta/insert_data';
 $route['peserta/update'] = 'store/Peserta/modify_data';
 $route['peserta/list-invoice'] = 'store/Peserta/list_invoice';
 $route['peserta/add-order'] = 'store/Peserta/add_order';
+$route['peserta/pay-order/(:any)'] = 'store/Peserta/pay_order/$1';
+$route['peserta/confirm-pay'] = 'store/Peserta/pay_confirm';
+$route['peserta/add-pay'] = 'store/Peserta/add_pay';
 
 /* Routing Bid */
 $route['bid'] = 'store/Bid';
