@@ -13,7 +13,7 @@ class Konfirmasi_model extends CI_Model
     protected $tbl_lelang = 'lelang';
     protected $tbl_peserta = 'peserta';
     protected $primKey = 'id_konfirmasi';
-    protected $indexKey = 'id_konfirmasi';
+    protected $indexKey = 'notrans_order';
     protected $order = array('tgl_konfirmasi' => 'desc'); // default order
 
     function __construct()
@@ -161,6 +161,21 @@ class Konfirmasi_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from($this->tbl_confirm);
 		$this->db->where($this->primKey, $id);
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
+	/**
+	 * This function used to get data information by id
+	 * @param number $id : This is id
+	 * @return array $result : This is data information
+	 */
+	function get_data_info2($id)
+	{
+		$this->db->select('*');
+		$this->db->from($this->tbl_confirm);
+		$this->db->where($this->indexKey, $id);
 		$query = $this->db->get();
 
 		return $query->result_array();

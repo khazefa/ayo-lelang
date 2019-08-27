@@ -185,6 +185,12 @@ $route['admin/peserta/update'] = 'admin/Peserta/update';
 $route['admin/peserta/delete/(:any)'] = 'admin/Peserta/delete/$1';
 $route['admin/peserta/block/(:any)'] = 'admin/Peserta/banned/$1';
 
+
+/* Routing Orders */
+$route['admin/orders'] = 'admin/Orders';
+$route['admin/orders/verify/(:num)'] = 'admin/Orders/verify/$1';
+$route['admin/orders/verify-paid/(:any)'] = 'admin/Orders/verify_paid/$1';
+
 /** ----------------------------------------------------------------------- */
 /** End Admin Controller */
 /** ----------------------------------------------------------------------- */

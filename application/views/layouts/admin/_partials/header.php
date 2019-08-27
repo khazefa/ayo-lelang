@@ -197,6 +197,7 @@ desired effect
 								<li><a href="<?= base_url('admin/biaya-kirim'); ?>">Biaya Kirim</a></li>
 							</ul>
 						</li>
+						<li><a href="<?= base_url('admin/orders'); ?>"><i class="fa fa-money"></i> <span>Daftar Transaksi</span></a></li>
 						<li><a href="<?= base_url('admin/pelelang'); ?>"><i class="fa fa-users"></i> <span>Daftar Pelelang</span></a></li>
 						<li><a href="<?= base_url('admin/peserta'); ?>"><i class="fa fa-users"></i> <span>Daftar Peserta</span></a></li>
 					<?php

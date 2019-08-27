@@ -106,6 +106,21 @@ class Pelelang_model extends CI_Model
 	}
 
 	/**
+	 * This function used to get data information by id
+	 * @param number $id : This is id
+	 * @return array $result : This is data information
+	 */
+	function get_data_info2($id)
+	{
+		$this->db->select('id_pelelang, nama_pelelang, akun_pelelang, email_pelelang, telepon_pelelang, status_pelelang, alamat_pelelang, id_kota, tgl_daftar_pelelang');
+		$this->db->from($this->tbl_pelelang);
+		$this->db->where($this->primKey, $id);
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
+	/**
 	 * This function is used to add new data to system
 	 * @return number $insert_id : This is last inserted id
 	 */

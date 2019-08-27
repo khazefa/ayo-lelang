@@ -124,6 +124,5 @@ class Bid extends Back_Controller
 		}
 		$data['records'] = $arr_order;
 		$this->digiAdminLayout($data, $this->view_dir . 'order', $this->global);
-
 	}
 }

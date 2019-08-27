@@ -46,10 +46,14 @@
 									$bid_type = strtoupper($r['bid_type']);
 									$order_total = (int) $r['order_total'];
 									$order_total_rp = "Rp. " . format_rupiah($order_total);
-									$order_status = strtoupper($r['order_status']);
+									$order_status = strpos($r['order_status'], '_') !== false ? strtoupper( str_replace('_', ' ', $r['order_status']) ) : strtoupper($r['order_status']);
 
 									$order_button = "";
-									$order_button .= '<a class="btn btn-warning btn-sm" href="' . base_url('peserta/pay-order/'. $order_num) . '"><i class="fa fa-money"></i> Pay</a>';
+									if ( $r['order_status'] === 'paid' || $r['order_status'] === 'sent' || $r['order_status'] === 'received') {
+										$order_button = "-";
+									} else {
+										$order_button .= '<a class="btn btn-warning btn-sm" href="' . base_url('peserta/pay-order/' . $order_num) . '"><i class="fa fa-money"></i> Pay</a>';
+									}
 
 									echo '<tr>';
 									echo '<td>' . $order_num . '</td>';
