@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 14, 2019 at 07:41 AM
+-- Generation Time: Aug 27, 2019 at 10:18 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `akun`
 --
 
+DROP TABLE IF EXISTS `akun`;
 CREATE TABLE `akun` (
   `id_akun` int(11) NOT NULL,
   `nama_akun` varchar(25) NOT NULL,
@@ -49,6 +50,7 @@ INSERT INTO `akun` (`id_akun`, `nama_akun`, `sandi_akun`, `nama_lengkap_akun`, `
 -- Table structure for table `biaya_kirim`
 --
 
+DROP TABLE IF EXISTS `biaya_kirim`;
 CREATE TABLE `biaya_kirim` (
   `id_biaya_kirim` int(11) NOT NULL,
   `id_kota` int(11) NOT NULL,
@@ -70,6 +72,7 @@ INSERT INTO `biaya_kirim` (`id_biaya_kirim`, `id_kota`, `jumlah_biaya_kirim`) VA
 -- Table structure for table `kategori`
 --
 
+DROP TABLE IF EXISTS `kategori`;
 CREATE TABLE `kategori` (
   `id_kategori` int(5) NOT NULL,
   `alias_kategori` varchar(100) NOT NULL,
@@ -90,9 +93,39 @@ INSERT INTO `kategori` (`id_kategori`, `alias_kategori`, `nama_kategori`, `deskr
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `konfirmasi_bayar`
+--
+
+DROP TABLE IF EXISTS `konfirmasi_bayar`;
+CREATE TABLE `konfirmasi_bayar` (
+  `id_konfirmasi` int(11) NOT NULL,
+  `tgl_konfirmasi` datetime NOT NULL,
+  `notrans_order` varchar(11) NOT NULL,
+  `no_rek` varchar(50) NOT NULL,
+  `nama_bank` varchar(100) NOT NULL,
+  `atas_nama` varchar(100) NOT NULL,
+  `nominal` int(11) NOT NULL,
+  `tgl_transfer` datetime NOT NULL,
+  `file_konfirmasi` varchar(150) NOT NULL,
+  `id_peserta` int(11) NOT NULL,
+  `bank_tujuan` varchar(100) NOT NULL,
+  `status_konfirmasi` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0: Pending, 1: Accepted, 2: Unverified'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `konfirmasi_bayar`
+--
+
+INSERT INTO `konfirmasi_bayar` (`id_konfirmasi`, `tgl_konfirmasi`, `notrans_order`, `no_rek`, `nama_bank`, `atas_nama`, `nominal`, `tgl_transfer`, `file_konfirmasi`, `id_peserta`, `bank_tujuan`, `status_konfirmasi`) VALUES
+(1, '2019-08-25 16:00:49', 'TR19080001', '0283116322', 'BCA', 'Hyde Lawless', 2609000, '2019-08-25 16:00:00', 'bukti_transfer_1.jpg', 1, 'BCA - 0283116411', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kota`
 --
 
+DROP TABLE IF EXISTS `kota`;
 CREATE TABLE `kota` (
   `id_kota` int(11) NOT NULL,
   `nama_kota` varchar(150) NOT NULL
@@ -118,6 +151,7 @@ INSERT INTO `kota` (`id_kota`, `nama_kota`) VALUES
 -- Table structure for table `lelang`
 --
 
+DROP TABLE IF EXISTS `lelang`;
 CREATE TABLE `lelang` (
   `id_lelang` int(11) NOT NULL,
   `id_kategori` int(11) NOT NULL,
@@ -141,7 +175,7 @@ INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, 
 (1, 1, 1, 'Xiaomi A2 Lite', 'xiaomi_mi_a2_lite.jpg', 200, 500000, 5000000, '2019-08-01 09:30:00', '2019-08-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (2, 1, 1, 'Meizu M3 Note', 'l-20190807114138.jpg', 170, 500000, 1250000, '2019-08-01 00:00:00', '2019-08-13 00:00:00', 'Meizu M3 Note\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (3, 1, 1, 'Iphone 6s 64 Gb', 'l-20190621230933.jpg', 250, 1000000, 3000000, '2019-08-01 00:00:00', '2019-08-15 00:00:00', 'Iphone 6s 64 gb rose gold\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'end'),
-(4, 1, 1, 'Xiaomi Redmi Note 7', 'l-20190624143409.jpg', 200, 500000, 2500000, '2019-08-01 00:00:00', '2019-08-22 00:00:00', 'Xiaomi Redmi Note 7 4/64\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(4, 1, 1, 'Xiaomi Redmi Note 7', 'l-20190624143409.jpg', 200, 500000, 2500000, '2019-08-01 00:00:00', '2019-08-22 00:00:00', 'Xiaomi Redmi Note 7 4/64\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'end'),
 (5, 1, 1, 'Samsung Galaxy Note 4', 'l-20180409235352.jpg', 500, 1000000, 2500000, '2019-08-01 00:00:00', '2019-08-21 00:00:00', 'Samsung Galaxy Note 4 SEIN Fullset\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (6, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 0, 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (8, 3, 2, 'Laptop ASUS X441U', 'l-20190810115.jpeg', 3000, 1000000, 4000000, '2019-08-01 00:00:00', '2019-09-01 00:00:00', 'Laptop ASUS X441U Intel Core i3/RAM 4GB/HDD 1TB/Windows 10\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'active'),
@@ -154,14 +188,24 @@ INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, 
 -- Table structure for table `order_lelang`
 --
 
+DROP TABLE IF EXISTS `order_lelang`;
 CREATE TABLE `order_lelang` (
   `id_order` int(11) NOT NULL,
   `notrans_order` varchar(11) NOT NULL,
   `tgl_order` datetime NOT NULL,
   `id_tawaran` int(11) NOT NULL,
   `id_biaya_kirim` int(11) NOT NULL,
-  `status_order` enum('order','paid','sent','received') NOT NULL
+  `id_peserta` int(11) NOT NULL,
+  `order_no_resi` varchar(32) DEFAULT NULL,
+  `status_order` enum('order','verify_pay','paid','sent','received') NOT NULL DEFAULT 'order'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_lelang`
+--
+
+INSERT INTO `order_lelang` (`id_order`, `notrans_order`, `tgl_order`, `id_tawaran`, `id_biaya_kirim`, `id_peserta`, `order_no_resi`, `status_order`) VALUES
+(1, 'TR19080001', '2019-08-25 13:22:46', 1, 3, 1, '2342553456345676', 'sent');
 
 -- --------------------------------------------------------
 
@@ -169,6 +213,7 @@ CREATE TABLE `order_lelang` (
 -- Table structure for table `pelelang`
 --
 
+DROP TABLE IF EXISTS `pelelang`;
 CREATE TABLE `pelelang` (
   `id_pelelang` int(11) NOT NULL,
   `nama_pelelang` varchar(100) NOT NULL,
@@ -197,6 +242,7 @@ INSERT INTO `pelelang` (`id_pelelang`, `nama_pelelang`, `akun_pelelang`, `sandi_
 -- Table structure for table `peserta`
 --
 
+DROP TABLE IF EXISTS `peserta`;
 CREATE TABLE `peserta` (
   `id_peserta` int(11) NOT NULL,
   `nama_peserta` varchar(100) NOT NULL,
@@ -216,8 +262,8 @@ CREATE TABLE `peserta` (
 
 INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_peserta`, `email_peserta`, `telepon_peserta`, `alamat_peserta`, `id_kota`, `tgl_daftar_peserta`, `status_peserta`) VALUES
 (1, 'Hyde Lawlesss', 'hydelaw', '6cf50439ff6959475621f3a762fcc9b2cf62b503', 'hydelaw@email.com', '081299998878', 'Jl Shinjuku Kosakabe No 07', 3, '2019-07-14 10:28:38', 1),
-(2, 'Jay Weinberg', 'jaywein', 'd70fa9ddea6eb70c28bf0f75ec5107614786129b', 'jaywein@email.com', '081276765454', 'Jl Core Sana No 08', 0, '2019-07-14 10:32:14', 1),
-(3, 'Zainal Abidin', 'zainalay', '7b72713003291020cc46b79d7486dba899f0b604', 'zainalay@email.com', '081298987676', 'Jl. KH Agus Salim 16, Sabang, Menteng Jakarta Pusat', 0, '2019-08-10 14:08:21', 1);
+(2, 'Jay Weinberg', 'jaywein', 'd70fa9ddea6eb70c28bf0f75ec5107614786129b', 'jaywein@email.com', '081276765454', 'Jl Core Sana No 08', 1, '2019-07-14 10:32:14', 1),
+(3, 'Zainal Abidin', 'zainalay', '7b72713003291020cc46b79d7486dba899f0b604', 'zainalay@email.com', '081298987676', 'Jl. KH Agus Salim 16, Sabang, Menteng Jakarta Pusat', 5, '2019-08-10 14:08:21', 1);
 
 -- --------------------------------------------------------
 
@@ -225,6 +271,7 @@ INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_pese
 -- Table structure for table `tawaran`
 --
 
+DROP TABLE IF EXISTS `tawaran`;
 CREATE TABLE `tawaran` (
   `id_tawaran` int(11) NOT NULL,
   `id_peserta` int(11) NOT NULL,
@@ -241,8 +288,9 @@ CREATE TABLE `tawaran` (
 --
 
 INSERT INTO `tawaran` (`id_tawaran`, `id_peserta`, `id_lelang`, `id_pelelang`, `jumlah_tawaran`, `waktu_tawaran`, `tipe_tawaran`, `status_tawaran`) VALUES
-(1, 2, 3, 1, 1500000, '2019-08-11 11:41:51', 'bid', 'postponed'),
-(2, 1, 3, 1, 1750000, '2019-08-11 22:04:54', 'bid', 'accepted');
+(1, 1, 4, 1, 2600000, '2019-08-14 20:48:51', 'bid', 'accepted'),
+(2, 2, 4, 1, 1200000, '2019-08-14 20:40:16', 'bid', 'rejected'),
+(3, 3, 4, 1, 1500000, '2019-08-14 20:48:14', 'bid', 'rejected');
 
 --
 -- Indexes for dumped tables
@@ -267,6 +315,12 @@ ALTER TABLE `biaya_kirim`
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`),
   ADD UNIQUE KEY `alias_kategori` (`alias_kategori`);
+
+--
+-- Indexes for table `konfirmasi_bayar`
+--
+ALTER TABLE `konfirmasi_bayar`
+  ADD PRIMARY KEY (`id_konfirmasi`);
 
 --
 -- Indexes for table `kota`
@@ -331,6 +385,12 @@ ALTER TABLE `kategori`
   MODIFY `id_kategori` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `konfirmasi_bayar`
+--
+ALTER TABLE `konfirmasi_bayar`
+  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `kota`
 --
 ALTER TABLE `kota`
@@ -346,7 +406,7 @@ ALTER TABLE `lelang`
 -- AUTO_INCREMENT for table `order_lelang`
 --
 ALTER TABLE `order_lelang`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pelelang`
@@ -364,7 +424,7 @@ ALTER TABLE `peserta`
 -- AUTO_INCREMENT for table `tawaran`
 --
 ALTER TABLE `tawaran`
-  MODIFY `id_tawaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_tawaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
