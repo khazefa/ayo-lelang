@@ -18,7 +18,7 @@ class Orders extends Back_Controller
 			$this->load->model('admin/Peserta_model', 'MPeserta');
 			$this->load->model('admin/Pelelang_model', 'MPelelang');
 		} else {
-			redirect('admin');
+			$this->load->model('admin/Order_model', 'MOrder');
 		}
 	}
 
@@ -123,6 +123,34 @@ class Orders extends Back_Controller
 		} else {
 			setFlashData('error', 'Payment Confirmation Unverified');
 			redirect('admin/orders/verify' . $order_num);
+		}
+	}
+
+	public function input_resi($order_num)
+	{
+		$this->global['pageTitle'] = 'Input Resi ' . $order_num;
+		$this->global['contentHeader'] = 'Input Resi ' . $order_num;
+		$this->global['contentTitle'] = 'Input Resi ' . $order_num;
+		$this->global['name'] = $this->accName;
+		$this->global['role'] = $this->accRole;
+
+		$data['order_num'] = $order_num;
+		$this->digiAdminLayout($data, $this->view_dir . 'form_resi', $this->global);
+	}
+
+	public function submit_resi()
+	{
+		$fid = $this->input->post('fid', TRUE);
+		$fresi = $this->input->post('fresi', TRUE);
+
+		$dataInfo = array('order_no_resi' => $fresi, 'status_order' => 'sent');
+		$result = $this->MOrder->update_data($dataInfo, $fid);
+		if ($result == true) {
+			setFlashData('success', 'Success Update No. Resi');
+			redirect('admin/bid/orders');
+		} else {
+			setFlashData('error', 'Failed Update No. Resi');
+			redirect('admin/orders/input-resi/' . $fid);
 		}
 	}
 }

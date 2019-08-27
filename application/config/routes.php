@@ -190,6 +190,8 @@ $route['admin/peserta/block/(:any)'] = 'admin/Peserta/banned/$1';
 $route['admin/orders'] = 'admin/Orders';
 $route['admin/orders/verify/(:num)'] = 'admin/Orders/verify/$1';
 $route['admin/orders/verify-paid/(:any)'] = 'admin/Orders/verify_paid/$1';
+$route['admin/orders/input-resi/(:any)'] = 'admin/Orders/input_resi/$1';
+$route['admin/orders/submit-resi'] = 'admin/Orders/submit_resi';
 
 /** ----------------------------------------------------------------------- */
 /** End Admin Controller */

@@ -12,7 +12,7 @@
 					</div>
 				</div>
 				<!-- /.box-header -->
-				<form class="form-horizontal" action="<?php echo base_url('admin/kota/create'); ?>" method="POST" role="form">
+				<form class="form-horizontal" action="#" method="POST" role="form">
 					<div class="box-body">
 						<p class="text-success text-center">
 							<?php

@@ -46,10 +46,9 @@
 									$bid_price = (int) $r['bid_price'];
 									$bid_price_rp = "Rp. " . format_rupiah($bid_price);
 									$bid_time = date('d/m/Y H:i:s', strtotime($r['bid_time']));
-									$bid_status = strtoupper($r['bid_status']);
+									$bid_status = empty($r['order_status']) ? strtoupper($r['bid_status']) : strtoupper($r['order_status']);
 
 									$bid_button = "";
-									$bid_button .= '<a class="btn btn-danger btn-sm" href="' . base_url('bid/delete/') . $id . '"><i class="fa fa-trash"></i> Del</a>';
 
 									if ($bid_type === "BIN") {
 										/**
@@ -59,6 +58,7 @@
 										 * only show Del button
 										 */
 										if ($bid_status === "ACCEPTED") {
+											$bid_button .= '<a class="btn btn-danger btn-sm" href="' . base_url('bid/delete/') . $id . '"><i class="fa fa-trash"></i> Del</a>';
 											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('peserta/checkout/') . $id . '"><i class="fa fa-money"></i> Pay</a>';
 										}
 									} elseif ($bid_type === "BID") {
@@ -71,9 +71,10 @@
 										 * if bid status postponed and item status is Active then also show Bid Up button 
 										 */
 										if ($bid_status === "REJECTED") {
-
+											$bid_button .= '<a class="btn btn-danger btn-sm" href="' . base_url('bid/delete/') . $id . '"><i class="fa fa-trash"></i> Del</a>';
 										}
 										elseif ($bid_status === "ACCEPTED") {
+											$bid_button .= '<a class="btn btn-danger btn-sm" href="' . base_url('bid/delete/') . $id . '"><i class="fa fa-trash"></i> Del</a>';
 											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('peserta/checkout/') . $id . '"><i class="fa fa-shopping-cart"></i> Checkout</a>';
 										}
 										else
@@ -83,6 +84,8 @@
 												$bid_button .= ' <a class="btn btn-warning btn-sm btn-up-bid" data-toggle="modal" data-target="#modal-up-bid" data-id="' . $id . '" data-item-id="' . $r['item_id'] . '" data-price="' . $bid_price . '"><i class="fa fa-hand-o-up"></i> Up</a>';
 											}
 										}
+									} else {
+										$bid_button = "-";
 									}
 
 									echo '<tr>';

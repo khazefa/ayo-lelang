@@ -175,6 +175,8 @@ class Peserta extends Front_Controller
 				$row['bid_type'] = $rb['tipe_tawaran'];
 				$row['bid_time'] = $rb['waktu_tawaran'];
 				$row['bid_status'] = $rb['status_tawaran'];
+				$rs_order = $this->MOrder->get_data(array('id_tawaran' => $rb['id_tawaran']), array(), 1, 0);
+				$row['order_status'] = !empty($rs_order) ? $rs_order[0]['status_order'] : '';
 
 				array_push($arr_data, $row);
 			}
