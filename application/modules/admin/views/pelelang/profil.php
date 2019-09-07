@@ -99,7 +99,9 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
+					<!--
 					<a type="button" href="#" class="btn btn-success">Tarik Dana</a>
+					-->
 				</div>
 				<!-- /.box-footer -->
 			</div>
