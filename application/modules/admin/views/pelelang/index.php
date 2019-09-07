@@ -67,8 +67,8 @@
 																																											<span class="caret"></span>
 																																											</button>';
 									$button .= '<ul class="dropdown-menu">';
-									$button .= '<li><a href="' . base_url('admin/pelelang/edit/') . $akun . '"><i class="fa fa-edit"></i> Edit</a></li>';
-									$button .= '<li><a href="' . base_url('admin/pelelang/delete/') . $akun . '"><i class="fa fa-trash"></i> Remove</a></li>';
+									// $button .= '<li><a href="' . base_url('admin/pelelang/edit/') . $akun . '"><i class="fa fa-edit"></i> Edit</a></li>';
+									// $button .= '<li><a href="' . base_url('admin/pelelang/delete/') . $akun . '"><i class="fa fa-trash"></i> Remove</a></li>';
 									$button .= '<li><a href="' . base_url('admin/pelelang/block/') . $akun . '"><i class="fa fa-ban"></i> Block</a></li>';
 									$button .= '</ul>';
 									$button .= '</div>';

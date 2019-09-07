@@ -161,4 +161,27 @@ class Pelelang_model extends CI_Model
 
 		return $this->db->affected_rows();
 	}
+
+	/**
+	 * This function is used to check whether field is already exist or not
+	 * @param {string} $param : This is param
+	 * @return {mixed} $result : This is searched result
+	 */
+	function check_data_exists($arrWhere = array())
+	{
+		//Flush Param
+		$this->db->flush_cache();
+		$this->db->from($this->tbl_pelelang);
+		//Criteria
+		if (count($arrWhere) > 0) {
+			foreach ($arrWhere as $strField => $strValue) {
+				if (is_array($strValue)) {
+					$this->db->where_in($strField, $strValue);
+				} else {
+					$this->db->where($strField, $strValue);
+				}
+			}
+		}
+		return $this->db->count_all_results();
+	}
 }

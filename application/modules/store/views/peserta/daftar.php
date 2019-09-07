@@ -11,6 +11,18 @@
 					<form method="POST" action="<?= base_url('peserta/submit'); ?>" class="form-horizontal">
 						<div class="box-body">
 							<div class="form-group">
+								<label for="reg_as" class="col-sm-3 control-label">Registrasi Sebagai <span class="text-danger">*</span></label>
+
+								<div class="col-sm-9">
+									<select name="reg_as" id="reg_as" class="form-control" required="required" placeholder="Pilih">
+										<option value="" selected>Pilih</option>
+										<option value="bidder">Peserta</option>
+										<option value="auctioner">Pelelang</option>
+									</select>
+
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="reg_nama" class="col-sm-3 control-label">Nama Lengkap <span class="text-danger">*</span></label>
 
 								<div class="col-sm-9">

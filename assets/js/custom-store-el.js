@@ -202,5 +202,22 @@ $(function () {
 			'info': true,
 			'autoWidth': false
 		});
+
+		$('#order_accept').on('click', function (e) { 
+			e.preventDefault();
+			let is_accepted = $('#order_accept').is(':checked');
+			// alert($('input[name="order_accept"]:checked').val());
+			let result = confirm("Finish Order Now?");
+
+			if (is_accepted) {
+				if (result) {
+					$('#order_accept').prop('value', 'received');
+					$('#order_accept').prop('checked', false);
+					$('#btn_finish_order').prop('disabled', false);
+				} else {
+					alert('Please check your shipping status once more.');
+				}
+			}
+		});
 	});
 });

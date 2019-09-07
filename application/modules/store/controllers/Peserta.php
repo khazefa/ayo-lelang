@@ -10,11 +10,12 @@ class Peserta extends Front_Controller
 {
 	private $view_dir = 'store/peserta';
 
-	public function __construct()
+	function __construct()
 	{
 		parent::__construct();
 		$this->isLoggedIn();
 		$this->load->model('store/Peserta_model', 'MPeserta');
+		$this->load->model('store/Pelelang_model', 'MPelelang');
 		$this->load->model('store/Tawaran_model', 'MBid');
 		$this->load->model('store/Order_model', 'MOrder');
 		$this->load->model('store/Konfirmasi_model', 'MConfirm');
@@ -26,7 +27,7 @@ class Peserta extends Front_Controller
 	/**
 	 * Show Front interface
 	 */
-	public function index()
+	function index()
 	{
 		if ( $this->session->userdata('signed_in') ) {
 			$this->profile();
@@ -40,10 +41,10 @@ class Peserta extends Front_Controller
 	/**
 	 * Show Registration Form
 	 */
-	public function registrasi()
+	function registrasi()
 	{
-		$this->global['pageTitle'] = 'Registrasi Peserta';
-		$this->global['contentTitle'] = 'Registrasi Peserta';
+		$this->global['pageTitle'] = 'Registrasi';
+		$this->global['contentTitle'] = 'Registrasi';
 		$this->global['name'] = $this->uName;
 
 		$data = array();
@@ -55,8 +56,9 @@ class Peserta extends Front_Controller
 	/**
 	 * Submit Registration Form
 	 */
-	public function insert_data()
+	function insert_data()
 	{
+		$reg_as = $this->input->post('reg_as', TRUE);
 		$reg_nama = $this->input->post('reg_nama', TRUE);
 		$reg_email = $this->input->post('reg_email', TRUE);
 		$reg_username = $this->input->post('reg_username', TRUE);
@@ -67,31 +69,56 @@ class Peserta extends Front_Controller
 		$reg_phone = $this->input->post('reg_phone', TRUE);
 		$current_date = date('Y-m-d H:i:s');
 
-		$dataInfo = array(
-			'nama_peserta' => $reg_nama, 'akun_peserta' => $reg_username, 'sandi_peserta' => $password,
-			'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address, 'id_kota' => $reg_kota, 'tgl_daftar_peserta' => $current_date, 'status_peserta' => 1
-		);
-		$count = $this->MPeserta->check_data_exists(array('email_peserta' => $reg_email));
-		if ($count > 0) {
-			setFlashData('error', 'Alamat Email '. $reg_email .' yang Anda input sudah ada, harap input alamat email yang lain.');
-			redirect('peserta/registrasi');
-		} else {
-			$result = $this->MPeserta->insert_data($dataInfo);
-
-			if ($result > 0) {
-				setFlashData('success', $reg_nama. ', Anda telah terdaftar di sistem kami.');
+		if ( $reg_as === "bidder" ) {
+			$dataInfo = array(
+				'nama_peserta' => $reg_nama, 'akun_peserta' => $reg_username, 'sandi_peserta' => $password,
+				'email_peserta' => $reg_email, 'telepon_peserta' => $reg_phone, 'alamat_peserta' => $reg_address, 'id_kota' => $reg_kota, 'tgl_daftar_peserta' => $current_date, 'status_peserta' => 1
+			);
+			$count = $this->MPeserta->check_data_exists(array('email_peserta' => $reg_email));
+			if ($count > 0) {
+				setFlashData('error', 'Alamat Email ' . $reg_email . ' yang Anda input sudah ada, harap input alamat email yang lain.');
 				redirect('peserta/registrasi');
 			} else {
-				setFlashData('error', $reg_nama. ', Anda gagal terdaftar di sistem kami.');
-				redirect('peserta/registrasi');
+				$result = $this->MPeserta->insert_data($dataInfo);
+
+				if ($result > 0) {
+					setFlashData('success', $reg_nama . ', Anda telah terdaftar di sistem kami.');
+					redirect('peserta/registrasi');
+				} else {
+					setFlashData('error', $reg_nama . ', Anda gagal terdaftar di sistem kami.');
+					redirect('peserta/registrasi');
+				}
 			}
+		} elseif ($reg_as === "auctioner") {
+			$dataInfo = array(
+				'nama_pelelang' => $reg_nama, 'akun_pelelang' => $reg_username, 'sandi_pelelang' => $password,
+				'email_pelelang' => $reg_email, 'telepon_pelelang' => $reg_phone, 'alamat_pelelang' => $reg_address, 'id_kota' => $reg_kota, 'tgl_daftar_pelelang' => $current_date, 'status_pelelang' => 1
+			);
+			$count = $this->MPelelang->check_data_exists(array('email_pelelang' => $reg_email));
+			if ($count > 0) {
+				setFlashData('error', 'Alamat Email ' . $reg_email . ' yang Anda input sudah ada, harap input alamat email yang lain.');
+				redirect('peserta/registrasi');
+			} else {
+				$result = $this->MPelelang->insert_data($dataInfo);
+
+				if ($result > 0) {
+					setFlashData('success', $reg_nama . ', Anda telah terdaftar di sistem kami.');
+					redirect('peserta/registrasi');
+				} else {
+					setFlashData('error', $reg_nama . ', Anda gagal terdaftar di sistem kami.');
+					redirect('peserta/registrasi');
+				}
+			}
+		} else {
+			setFlashData('error', 'Harap mengisi form registrasi.');
+			redirect('peserta/registrasi');
 		}
 	}
 
 	/**
 	 * Modify Users
 	 */
-	public function modify_data()
+	function modify_data()
 	{
 		$reg_nama = $this->input->post('reg_nama', TRUE);
 		$reg_email = $this->input->post('reg_email', TRUE);
@@ -128,7 +155,7 @@ class Peserta extends Front_Controller
 	/**
 	 * Show Profile Page
 	 */
-	public function profil()
+	function profil()
 	{
 		if ($this->session->userdata('signed_in')) {
 			$this->global['pageTitle'] = 'Profil Peserta';
@@ -150,7 +177,7 @@ class Peserta extends Front_Controller
 	/**
 	 * Show Status Bid Page
 	 */
-	public function status_bid()
+	function status_bid()
 	{
 		if ($this->session->userdata('signed_in')) {
 			$this->global['pageTitle'] = 'Status Bid';
@@ -191,7 +218,7 @@ class Peserta extends Front_Controller
 	/**
 	 * Show Checkout Bid Page
 	 */
-	public function checkout($id)
+	function checkout($id)
 	{
 		if ($this->session->userdata('signed_in')) {
 			$this->global['pageTitle'] = 'Checkout Order';
@@ -221,7 +248,7 @@ class Peserta extends Front_Controller
 	/**
 	 * Show Invoice Page
 	 */
-	public function list_invoice()
+	function list_invoice()
 	{
 		if ($this->session->userdata('signed_in')) {
 			$this->global['pageTitle'] = 'List Invoice';
@@ -265,7 +292,7 @@ class Peserta extends Front_Controller
 	/**
 	 * Process Order
 	 */
-	public function add_order()
+	function add_order()
 	{
 		$no_trans = $this->MOrder->get_key_data("TR");
 		$tgl_order = date('Y-m-d H:i:s');
@@ -324,7 +351,7 @@ class Peserta extends Front_Controller
 	/**
 	 * Process Confirm Payment
 	 */
-	public function add_pay()
+	function add_pay()
 	{
 		$no_trans = $this->input->post('no_trans', TRUE);
 		$date_add = date('Y-m-d H:i:s');
@@ -371,6 +398,46 @@ class Peserta extends Front_Controller
 			} else {
 				setFlashData('error', 'Nomor Order '. $no_trans . ', telah gagal dikonfirmasi.');
 				redirect('peserta/list-invoice');
+			}
+		}
+	}
+
+	/**
+	 * Show Shipping Detail Page
+	 */
+	function shipping_detail($id)
+	{
+		$this->global['pageTitle'] = 'Lihat Resi Pengiriman ' . $id;
+		$this->global['contentTitle'] = 'Lihat Resi Pengiriman ' . $id;
+		$this->global['name'] = $this->uName;
+
+		$arrWhere = array('notrans_order' => $id);
+		$rs_order = $this->MOrder->get_data($arrWhere, array(), 1, 0);
+
+		$data['order'] = $rs_order;
+		$data['no_order'] = $id;
+		$this->digiLayout($data, $this->view_dir . "/shipping-detail", $this->global);
+	}
+
+	/**
+	 * Action Finish Order (Change Status Order)
+	 */
+	function finish_order()
+	{
+		$fid = $this->input->post('id', TRUE);
+		$status = $this->input->post('order_accept');
+
+		if ( empty($status) ) {
+			redirect('peserta/shipping-detail/' . $fid);
+		} else {
+			$dataInfo = array('status_order' => $status);
+			$result = $this->MOrder->update_data($dataInfo, $fid);
+			if ($result == true) {
+				setFlashData('success', 'Your Order is Done');
+				redirect('peserta/list-invoice');
+			} else {
+				setFlashData('error', 'Failed Update Order');
+				redirect('peserta/shipping-detail/' . $fid);
 			}
 		}
 	}

@@ -93,6 +93,8 @@ $route['peserta/add-order'] = 'store/Peserta/add_order';
 $route['peserta/pay-order/(:any)'] = 'store/Peserta/pay_order/$1';
 $route['peserta/confirm-pay'] = 'store/Peserta/pay_confirm';
 $route['peserta/add-pay'] = 'store/Peserta/add_pay';
+$route['peserta/shipping-detail/(:any)'] = 'store/Peserta/shipping_detail/$1';
+$route['peserta/finish-order'] = 'store/Peserta/finish_order';
 
 /* Routing Bid */
 $route['bid'] = 'store/Bid';

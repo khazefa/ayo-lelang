@@ -52,7 +52,7 @@
 									if ( $r['order_status'] === 'paid' || $r['order_status'] === 'received') {
 										$order_button = "-";
 									} elseif ( $r['order_status'] === 'sent' ) {
-										$order_button .= '<a class="btn btn-warning btn-sm" href="' . base_url('peserta/view-airwaybill/' . $order_num) . '"><i class="fa fa-truck"></i> Lihat Resi</a>';
+										$order_button .= '<a class="btn btn-warning btn-sm" href="' . base_url('peserta/shipping-detail/' . $order_num) . '"><i class="fa fa-truck"></i> Lihat Resi</a>';
 									} else {
 										$order_button .= '<a class="btn btn-warning btn-sm" href="' . base_url('peserta/pay-order/' . $order_num) . '"><i class="fa fa-money"></i> Pay</a>';
 									}

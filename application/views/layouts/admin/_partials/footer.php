@@ -45,8 +45,8 @@
 
   <!-- Sorting DD/MM/YYYY datatables-->
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-	<script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
-	
+  <script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+
   <script src="<?= base_url('assets/datatables.net-bs/js/dataTables.bootstrap.min.js'); ?>"></script>
   <!-- DataTables Buttons -->
   <script src="<?= base_url('assets/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>"></script>
@@ -69,7 +69,8 @@
   <script type="text/javascript">
   	$(function() {
   		$('.datetimepicker1').datetimepicker({
-  			format: 'YYYY-MM-DD HH:mm:ss'
+				format: 'YYYY-MM-DD HH:mm:ss',
+				minDate: new Date(),
   		});
   	});
   </script>
