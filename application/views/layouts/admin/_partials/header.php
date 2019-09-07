@@ -51,6 +51,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- Bootstrap Datetime Picker -->
 	<script src="<?= base_url('assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'); ?>"></script>
 
+	<script>
+		var base_url = "<?= base_url(); ?>";
+	</script>
+
 	<script src="<?= base_url('assets/js/custom-admin.js'); ?>" type="text/javascript"></script>
 </head>
 <!--

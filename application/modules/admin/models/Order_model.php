@@ -311,4 +311,45 @@ class Order_model extends CI_Model
 		return $rs;
 	}
 
+	function get_total_orders($arrWhere = array())
+	{
+		$rs = array();
+		//Flush Param
+		$this->db->flush_cache();
+
+		$this->db->select('SUM(b.jumlah_tawaran) AS total, b.id_pelelang');
+		$this->db->from($this->tbl_order . ' as o');
+		$this->db->join($this->tbl_bid . ' as b', 'o.id_tawaran = b.id_tawaran', 'both');
+
+		if (empty($arrWhere)) {
+			$query = $this->db->get();
+			$rs = $query->result_array();
+		} else {
+			foreach ($arrWhere as $strField => $strValue) {
+				if (is_array($strValue)) {
+					$this->db->where_in($strField, $strValue);
+				} else {
+					if (strpos(strtolower($strField), '_date1') !== false) {
+						$strField = substr($strField, 0, -6);
+						if (!empty($strValue)) {
+							$this->db->where("$strField >= '" . $strValue . "' ");
+						}
+					} elseif (strpos(strtolower($strField), '_date2') !== false) {
+						$strField = substr($strField, 0, -6);
+						if (!empty($strValue)) {
+							$this->db->where("$strField <= '" . $strValue . "' ");
+						}
+					} else {
+						$this->db->where($strField, $strValue);
+					}
+				}
+			}
+
+			$query = $this->db->get();
+			$rs = $query->result_array();
+		}
+
+		return $rs;
+	}
+
 }

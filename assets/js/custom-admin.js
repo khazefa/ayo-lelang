@@ -26,4 +26,16 @@ $(document).ready(function () {
 		"buttons": ['copy', 'excel', 'pdf', 'print'],
 		"order": [[1, "asc"]]
 	});
+
+	function load_total_saldo() {
+		$.ajax({
+			url: base_url + 'admin/orders/total-saldo',
+			type: 'get',
+			dataType: 'json',
+			success: function (response) {
+				// $('.product-price-' + id).html(response.current_bid_price);
+				$('#total-saldo').html(response.total);
+			}
+		});
+	};
 });

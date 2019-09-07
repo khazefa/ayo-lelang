@@ -1,7 +1,7 @@
 <!-- Main content -->
 <section class="content">
 	<div class="row">
-		<div class="col-md-8 offset-md-4">
+		<div class="col-md-8">
 			<div class="box box-default">
 				<div class="box-header with-border">
 					<a href="javascript: history.go(-1)"><i class="fa fa-reply"></i></a>
@@ -25,10 +25,10 @@
 									<?php echo $error; ?>
 								</div>
 							<?php
-						}
-						$success = $this->session->flashdata('success');
-						if ($success) {
-							?>
+							}
+							$success = $this->session->flashdata('success');
+							if ($success) {
+								?>
 								<div class="alert alert-success alert-dismissable">
 									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 									<?php echo $success; ?>
@@ -69,7 +69,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Alamat</label>
 							<div class="col-sm-6">
-								<textarea id="falamat" name="falamat" class="form-control"><?= $records[0]['alamat_pelelang']; ?></textarea>
+								<textarea id="falamat" name="falamat" class="form-control" rows="5"><?= $records[0]['alamat_pelelang']; ?></textarea>
 							</div>
 						</div>
 					</div>
@@ -82,12 +82,45 @@
 				<!-- /.form -->
 			</div>
 		</div>
+		<div class="col-md-4">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<i class="fa fa-money"></i>
+					<h3 class="box-title">Total Saldo Penjualan</h3>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<label for="total-saldo" class="col-sm-12">
+						<h2 id="total-saldo">0</h2>
+					</label>
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<a type="button" href="#" class="btn btn-success">Tarik Dana</a>
+				</div>
+				<!-- /.box-footer -->
+			</div>
+		</div>
 	</div>
 
 </section>
 
-<script type="text/javascript">
+<script>
 	$(document).ready(function() {
+		let total_saldo = function load_total_saldo() {
+			$.ajax({
+				url: base_url + 'admin/orders/total-saldo',
+				type: 'get',
+				dataType: 'json',
+				success: function(response) {
+					$('#total-saldo').html(response.total_rp);
+				}
+			});
+		};
 
+		total_saldo();
 	});
 </script>

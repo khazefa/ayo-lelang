@@ -194,6 +194,7 @@ $route['admin/orders/verify/(:num)'] = 'admin/Orders/verify/$1';
 $route['admin/orders/verify-paid/(:any)'] = 'admin/Orders/verify_paid/$1';
 $route['admin/orders/input-resi/(:any)'] = 'admin/Orders/input_resi/$1';
 $route['admin/orders/submit-resi'] = 'admin/Orders/submit_resi';
+$route['admin/orders/total-saldo'] = 'admin/Orders/get_total_saldo';
 
 /** ----------------------------------------------------------------------- */
 /** End Admin Controller */

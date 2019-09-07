@@ -5,7 +5,7 @@ class Orders extends Back_Controller
 {
 	private $view_dir = 'admin/orders/';
 
-	public function __construct()
+	function __construct()
 	{
 		parent::__construct();
 		$this->isLoggedIn();
@@ -22,7 +22,7 @@ class Orders extends Back_Controller
 		}
 	}
 
-	public function index()
+	function index()
 	{
 		$this->global['pageTitle'] = 'List Order';
 		$this->global['contentHeader'] = 'List Order';
@@ -64,7 +64,7 @@ class Orders extends Back_Controller
 		$this->digiAdminLayout($data, $this->view_dir . 'index', $this->global);
 	}
 
-	public function verify($order_num)
+	function verify($order_num)
 	{
 		$this->global['pageTitle'] = 'Verify Payment ' . $order_num;
 		$this->global['contentHeader'] = 'Verify Payment ' . $order_num;
@@ -106,7 +106,7 @@ class Orders extends Back_Controller
 		$this->digiAdminLayout($data, $this->view_dir . 'verify', $this->global);
 	}
 
-	public function verify_paid($order_num)
+	function verify_paid($order_num)
 	{
 		$dataInfo = array('status_konfirmasi' => 1);
 		$result = $this->MConfirm->update_data($dataInfo, $order_num);
@@ -126,7 +126,7 @@ class Orders extends Back_Controller
 		}
 	}
 
-	public function input_resi($order_num)
+	function input_resi($order_num)
 	{
 		$this->global['pageTitle'] = 'Input Resi ' . $order_num;
 		$this->global['contentHeader'] = 'Input Resi ' . $order_num;
@@ -138,7 +138,7 @@ class Orders extends Back_Controller
 		$this->digiAdminLayout($data, $this->view_dir . 'form_resi', $this->global);
 	}
 
-	public function submit_resi()
+	function submit_resi()
 	{
 		$fid = $this->input->post('fid', TRUE);
 		$fresi = $this->input->post('fresi', TRUE);
@@ -152,5 +152,29 @@ class Orders extends Back_Controller
 			setFlashData('error', 'Failed Update No. Resi');
 			redirect('admin/orders/input-resi/' . $fid);
 		}
+	}
+
+	function get_total_saldo()
+	{
+		$id = (int) $this->accBid;
+
+		$arrWhere = array('b.id_pelelang' => $id, 'o.status_order' => 'received');
+
+		$orders = $this->MOrder->get_total_orders($arrWhere);
+
+		$total_order = (int) $orders[0]['total'];
+		$total_order_rp = format_rupiah($total_order);
+		$data = array(
+			'total' => $total_order,
+			'total_rp' => 'Rp. ' . $total_order_rp
+		);
+
+		$output = $this->output
+			->set_content_type('application/json')
+			->set_output(
+				json_encode($data)
+			);
+
+		return $output;
 	}
 }
