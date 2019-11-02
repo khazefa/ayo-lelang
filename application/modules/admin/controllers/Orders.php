@@ -19,6 +19,7 @@ class Orders extends Back_Controller
 			$this->load->model('admin/Pelelang_model', 'MPelelang');
 		} else {
 			$this->load->model('admin/Order_model', 'MOrder');
+			$this->load->model('admin/Saldo_model', 'MSaldo');
 		}
 	}
 
@@ -160,13 +161,22 @@ class Orders extends Back_Controller
 
 		$arrWhere = array('b.id_pelelang' => $id, 'o.status_order' => 'received');
 
-		$orders = $this->MOrder->get_total_orders($arrWhere);
+		$arrWhere2 = array('p.id_pelelang' => $id, 's.status' => 1);
 
+		$orders = $this->MOrder->get_total_orders($arrWhere);
+		$saldo_p = $this->MSaldo->get_total_saldo($arrWhere2);
+
+		$saldo = (int) $saldo_p[0]['total'];
 		$total_order = (int) $orders[0]['total'];
+		$jml_saldo = $total_order - $saldo;
+
+		$saldo_rp = format_rupiah($saldo);
 		$total_order_rp = format_rupiah($total_order);
 		$data = array(
 			'total' => $total_order,
-			'total_rp' => 'Rp. ' . $total_order_rp
+			'saldo' => $saldo,
+			'total_rp' => 'Rp. ' . $total_order_rp,
+			'saldo_rp' => 'Rp. ' . $saldo_rp,
 		);
 
 		$output = $this->output
