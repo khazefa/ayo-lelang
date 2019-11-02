@@ -12,6 +12,7 @@ class Saldo extends Back_Controller
 		if ($this->accRole === 'auctioner') {
 			$this->load->model('admin/Bank_model', 'MBank');
 			$this->load->model('admin/Saldo_model', 'MSaldo');
+			$this->load->model('admin/Order_model', 'MOrder');
 		} else {
 			redirect('admin');
 		}
@@ -33,19 +34,35 @@ class Saldo extends Back_Controller
 
 	public function request_withdrawal()
 	{
-		$pelelang = $this->accBid;
-		$id_akun_bank = $this->input->post('fid', TRUE);
-		$saldo = (int) $this->input->post('fsaldo', TRUE);
+		$fpelelang = $this->accBid;
+		$fid_akun_bank = $this->input->post('fid', TRUE);
+		$fsaldo = (int) $this->input->post('fsaldo', TRUE);
 
-		$dataInfo = array('id_pelelang' => $pelelang, 'id_akun_bank' => $id_akun_bank, 'jumlah_saldo' => $saldo);
-		$result = $this->MSaldo->insert_data($dataInfo);
+		$arrWhere = array('b.id_pelelang' => $fpelelang, 'o.status_order' => 'received');
 
-		if ($result > 0) {
-			setFlashData('success', 'Saldo telah sukses direquest');
-			redirect('admin/pelelang/profil/' . $this->accKey);
-		} else {
-			setFlashData('error', 'Saldo gagal direquest');
+		$arrWhere2 = array('p.id_pelelang' => $fpelelang, 's.status' => 1);
+
+		$orders = $this->MOrder->get_total_orders($arrWhere);
+		$saldo_p = $this->MSaldo->get_total_saldo($arrWhere2);
+
+		$saldo = (int) $saldo_p[0]['total'];
+		$total_order = (int) $orders[0]['total'];
+		$jml_saldo = $total_order - $saldo;
+
+		if ($fsaldo > (int) $jml_saldo) {
+			setFlashData('error', 'Jumlah dana yang Anda minta melebihi sisa Total Order yang Anda miliki');
 			redirect('admin/saldo/withdraw');
+		} else {
+			$dataInfo = array('id_pelelang' => $fpelelang, 'id_akun_bank' => $fid_akun_bank, 'jumlah_saldo' => $fsaldo);
+			$result = $this->MSaldo->insert_data($dataInfo);
+
+			if ($result > 0) {
+				setFlashData('success', 'Pencairan dana akan diproses oleh admin dalam waktu 1x24jam');
+				redirect('admin/pelelang/profil/' . $this->accKey);
+			} else {
+				setFlashData('error', 'Saldo gagal direquest');
+				redirect('admin/saldo/withdraw');
+			}
 		}
 	}
 }
