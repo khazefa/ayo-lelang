@@ -93,15 +93,19 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
+					<label for="total-order" class="col-sm-12">
+						<span class="text-success">Total Order</span>
+						<h2 id="total-order">0</h2>
+					</label>
+					<hr>
 					<label for="total-saldo" class="col-sm-12">
+						<span class="text-danger">Total Penarikan</span>
 						<h2 id="total-saldo">0</h2>
 					</label>
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<!--
-					<a type="button" href="#" class="btn btn-success">Tarik Dana</a>
-					-->
+					<a type="button" href="<?= base_url('admin/saldo/withdraw'); ?>" class="btn btn-success">Tarik Dana</a>
 				</div>
 				<!-- /.box-footer -->
 			</div>
@@ -118,7 +122,8 @@
 				type: 'get',
 				dataType: 'json',
 				success: function(response) {
-					$('#total-saldo').html(response.total_rp);
+					$('#total-order').html(response.total_rp);
+					$('#total-saldo').html(response.saldo_rp);
 				}
 			});
 		};
