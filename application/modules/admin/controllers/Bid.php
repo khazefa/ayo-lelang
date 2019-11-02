@@ -9,13 +9,17 @@ class Bid extends Back_Controller
 	{
 		parent::__construct();
 		$this->isLoggedIn();
-		$this->load->model('Tawaran_model', 'MBid');
-		$this->load->model('Order_model', 'MOrder');
-		$this->load->model('Konfirmasi_model', 'MConfirm');
-		$this->load->model('Ongkir_model', 'MOngkir');
-		$this->load->model('Produk_model', 'MProduk');
-		$this->load->model('Peserta_model', 'MPeserta');
-		$this->load->model('Pelelang_model', 'MPelelang');
+		if ($this->accRole === 'auctioner') {
+			$this->load->model('Tawaran_model', 'MBid');
+			$this->load->model('Order_model', 'MOrder');
+			$this->load->model('Konfirmasi_model', 'MConfirm');
+			$this->load->model('Ongkir_model', 'MOngkir');
+			$this->load->model('Produk_model', 'MProduk');
+			$this->load->model('Peserta_model', 'MPeserta');
+			$this->load->model('Pelelang_model', 'MPelelang');
+		} else {
+			redirect('admin');
+		}
 	}
 
 	public function index()
