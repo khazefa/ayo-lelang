@@ -21,7 +21,7 @@ class Produk extends Back_Controller
 			$this->load->model('admin/Produk_model', 'MProduk');
 			$this->load->model('admin/Kategori_model', 'MKategori');
 		} else {
-			redirect('admin');
+			redirect('/admin/dashboard');
 		}
     }
 
