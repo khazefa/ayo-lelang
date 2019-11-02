@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 07, 2019 at 05:11 PM
+-- Generation Time: Nov 02, 2019 at 02:10 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
@@ -167,7 +167,7 @@ CREATE TABLE `lelang` (
 
 INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, `gambar_produk`, `berat_produk`, `harga_awal`, `harga_maksimal`, `waktu_mulai`, `waktu_selesai`, `keterangan`, `status_lelang`) VALUES
 (1, 1, 1, 'Xiaomi A2 Lite', 'xiaomi_mi_a2_lite.jpg', 200, 500000, 5000000, '2019-08-01 09:30:00', '2019-08-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(2, 1, 1, 'Meizu M3 Note', 'l-20190807114138.jpg', 170, 500000, 1250000, '2019-09-07 13:55:00', '2019-09-30 00:00:00', 'Meizu M3 Note\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(2, 1, 1, 'Meizu M3 Note', 'l-20190807114138.jpg', 170, 500000, 1250000, '2019-10-07 19:08:50', '2019-10-31 19:08:53', 'Meizu M3 Note\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (3, 1, 1, 'Iphone 6s 64 Gb', 'l-20190621230933.jpg', 250, 1000000, 3000000, '2019-08-01 00:00:00', '2019-08-15 00:00:00', 'Iphone 6s 64 gb rose gold\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'end'),
 (4, 1, 1, 'Xiaomi Redmi Note 7', 'l-20190624143409.jpg', 200, 500000, 2500000, '2019-08-01 00:00:00', '2019-08-22 00:00:00', 'Xiaomi Redmi Note 7 4/64\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'end'),
 (5, 1, 1, 'Samsung Galaxy Note 4', 'l-20180409235352.jpg', 500, 1000000, 2500000, '2019-08-01 00:00:00', '2019-08-21 00:00:00', 'Samsung Galaxy Note 4 SEIN Fullset\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
@@ -232,6 +232,27 @@ INSERT INTO `pelelang` (`id_pelelang`, `nama_pelelang`, `akun_pelelang`, `sandi_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pelelang_akun_bank`
+--
+
+CREATE TABLE `pelelang_akun_bank` (
+  `id_akun_bank` int(5) NOT NULL,
+  `no_akun_bank` varchar(50) NOT NULL,
+  `nama_akun_bank` varchar(100) NOT NULL,
+  `bank_akun_bank` varchar(25) NOT NULL,
+  `id_pelelang` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pelelang_akun_bank`
+--
+
+INSERT INTO `pelelang_akun_bank` (`id_akun_bank`, `no_akun_bank`, `nama_akun_bank`, `bank_akun_bank`, `id_pelelang`) VALUES
+(1, '7230252527', 'Fajar Hidayati', 'BCA', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `peserta`
 --
 
@@ -256,6 +277,29 @@ INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_pese
 (1, 'Hyde Lawlesss', 'hydelaw', '6cf50439ff6959475621f3a762fcc9b2cf62b503', 'hydelaw@email.com', '081299998878', 'Jl Shinjuku Kosakabe No 07', 3, '2019-07-14 10:28:38', 1),
 (2, 'Jay Weinberg', 'jaywein', 'd70fa9ddea6eb70c28bf0f75ec5107614786129b', 'jaywein@email.com', '081276765454', 'Jl Core Sana No 08', 1, '2019-07-14 10:32:14', 1),
 (3, 'Zainal Abidin', 'zainalay', '7b72713003291020cc46b79d7486dba899f0b604', 'zainalay@email.com', '081298987676', 'Jl. KH Agus Salim 16, Sabang, Menteng Jakarta Pusat', 5, '2019-08-10 14:08:21', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `saldo_pelelang`
+--
+
+CREATE TABLE `saldo_pelelang` (
+  `id_saldo` int(11) NOT NULL,
+  `id_pelelang` int(11) NOT NULL,
+  `id_akun_bank` int(11) NOT NULL,
+  `jumlah_saldo` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `tgl_saldo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `saldo_pelelang`
+--
+
+INSERT INTO `saldo_pelelang` (`id_saldo`, `id_pelelang`, `id_akun_bank`, `jumlah_saldo`, `status`, `tgl_saldo`) VALUES
+(1, 1, 1, 2000000, 1, '2019-11-02 13:03:51'),
+(2, 1, 1, 500000, 1, '2019-11-02 13:31:27');
 
 -- --------------------------------------------------------
 
@@ -341,11 +385,23 @@ ALTER TABLE `pelelang`
   ADD UNIQUE KEY `email_pelelang` (`email_pelelang`);
 
 --
+-- Indexes for table `pelelang_akun_bank`
+--
+ALTER TABLE `pelelang_akun_bank`
+  ADD PRIMARY KEY (`id_akun_bank`);
+
+--
 -- Indexes for table `peserta`
 --
 ALTER TABLE `peserta`
   ADD PRIMARY KEY (`id_peserta`),
   ADD UNIQUE KEY `email_peserta` (`email_peserta`);
+
+--
+-- Indexes for table `saldo_pelelang`
+--
+ALTER TABLE `saldo_pelelang`
+  ADD PRIMARY KEY (`id_saldo`);
 
 --
 -- Indexes for table `tawaran`
@@ -406,10 +462,22 @@ ALTER TABLE `pelelang`
   MODIFY `id_pelelang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `pelelang_akun_bank`
+--
+ALTER TABLE `pelelang_akun_bank`
+  MODIFY `id_akun_bank` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `peserta`
 --
 ALTER TABLE `peserta`
   MODIFY `id_peserta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `saldo_pelelang`
+--
+ALTER TABLE `saldo_pelelang`
+  MODIFY `id_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tawaran`
