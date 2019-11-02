@@ -9,7 +9,11 @@ class Peserta extends Back_Controller
 	{
 		parent::__construct();
 		$this->isLoggedIn();
-		$this->load->model('Peserta_model', 'MPeserta');
+		if ($this->accRole === 'auctioner') {
+			redirect('/admin/dashboard');
+		} else {
+			$this->load->model('Peserta_model', 'MPeserta');
+		}
 	}
 
 	public function index()
