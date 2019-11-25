@@ -42,6 +42,9 @@
 							<div class="box-footer">
 								Belum bergabung ? <a href="<?= base_url('peserta/registrasi'); ?>"><b>Registrasi</b></a>
 								<button type="submit" class="btn btn-info pull-right">Sign in</button>
+								<hr>
+								<a href="<?= base_url('/admin'); ?>"><span class="badge"><i class="fa fa-user"></i></span> Auctioner</a> |
+								<a href="<?= base_url('/admin'); ?>"><span class="badge"><i class="fa fa-user"></i></span> Admin</a>
 							</div>
 							<!-- /.box-footer -->
 						</form>
