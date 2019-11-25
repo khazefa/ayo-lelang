@@ -123,71 +123,74 @@
 							<?php
 							if ($this->session->userdata('signed_in')) {
 								?>
-							<li class="dropdown notifications-menu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= $name; ?></b> <span class="caret"></span></a>
-								<ul id="login-dp" class="dropdown-menu">
-									<li class="header">Your access link</li>
-									<li>
-										<ul class="menu">
-											<li>
-												<a href="<?= base_url('peserta/profil'); ?>">
-													<i class="fa fa-user text-aqua"></i> Profil
-												</a>
-											</li>
-											<li>
-												<a href="<?= base_url('peserta/status-bid'); ?>">
-													<i class="fa fa-gavel text-aqua"></i> Status Bid
-												</a>
-											</li>
-											<li>
-												<a href="<?= base_url('peserta/list-invoice'); ?>">
-													<i class="fa fa-file-text-o text-aqua"></i> Invoice
-												</a>
-											</li>
-											<li>
-												<a href="<?= base_url('signout'); ?>">
-													<i class="fa fa-sign-out text-aqua"></i> Logout
-												</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
+								<li class="dropdown notifications-menu">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= $name; ?></b> <span class="caret"></span></a>
+									<ul id="login-dp" class="dropdown-menu">
+										<li class="header">Your access link</li>
+										<li>
+											<ul class="menu">
+												<li>
+													<a href="<?= base_url('peserta/profil'); ?>">
+														<i class="fa fa-user text-aqua"></i> Profil
+													</a>
+												</li>
+												<li>
+													<a href="<?= base_url('peserta/status-bid'); ?>">
+														<i class="fa fa-gavel text-aqua"></i> Status Bid
+													</a>
+												</li>
+												<li>
+													<a href="<?= base_url('peserta/list-invoice'); ?>">
+														<i class="fa fa-file-text-o text-aqua"></i> Invoice
+													</a>
+												</li>
+												<li>
+													<a href="<?= base_url('signout'); ?>">
+														<i class="fa fa-sign-out text-aqua"></i> Logout
+													</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
 							<?php
 							} else {
 								?>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-								<ul id="login-dp" class="dropdown-menu">
-									<li>
-										<div class="row">
-											<div class="col-md-12">
-												<form class="form" role="form" method="post" action="<?= base_url('signin'); ?>" accept-charset="UTF-8" id="login-nav">
-													<div class="form-group">
-														<label class="sr-only" for="login_email">Email</label>
-														<input type="email" class="form-control" id="login_email" name="login_email" placeholder="Email" required="required">
-													</div>
-													<div class="form-group">
-														<label class="sr-only" for="login_password">Password</label>
-														<input type="password" class="form-control" id="login_password" name="login_password" placeholder="Password" required="required">
-													</div>
-													<div class="form-group">
-														<button type="submit" class="btn btn-primary btn-block">Sign in</button>
-													</div>
-													<div class="checkbox">
-														<label>
-															<input type="checkbox" name="login_remember"> tetap login
-														</label>
-													</div>
-												</form>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <b>Login Bidder</b> <span class="caret"></span></a>
+									<ul id="login-dp" class="dropdown-menu">
+										<li>
+											<div class="row">
+												<div class="col-md-12">
+													<form class="form" role="form" method="post" action="<?= base_url('signin'); ?>" accept-charset="UTF-8" id="login-nav">
+														<div class="form-group">
+															<label class="sr-only" for="login_email">Email</label>
+															<input type="email" class="form-control" id="login_email" name="login_email" placeholder="Email" required="required">
+														</div>
+														<div class="form-group">
+															<label class="sr-only" for="login_password">Password</label>
+															<input type="password" class="form-control" id="login_password" name="login_password" placeholder="Password" required="required">
+														</div>
+														<div class="form-group">
+															<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+														</div>
+														<div class="checkbox">
+															<label>
+																<input type="checkbox" name="login_remember"> tetap login
+															</label>
+														</div>
+													</form>
+												</div>
+												<div class="bottom text-center">
+													Belum bergabung ? <a href="<?= base_url('peserta/registrasi'); ?>"><b>Registrasi</b></a>
+													<hr>
+													<a href="<?= base_url('/admin'); ?>"><span class="badge"><i class="fa fa-user"></i></span> Auctioner</a> |
+													<a href="<?= base_url('/admin'); ?>"><span class="badge"><i class="fa fa-user"></i></span> Admin</a>
+												</div>
 											</div>
-											<div class="bottom text-center">
-												Belum bergabung ? <a href="<?= base_url('peserta/registrasi'); ?>"><b>Registrasi</b></a>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</li>
+										</li>
+									</ul>
+								</li>
 							<?php
 							}
 							?>
