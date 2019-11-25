@@ -141,7 +141,11 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
-						<button type="submit" class="btn btn-info pull-right">Submit</button>
+						<?php
+							if ( $records[0]['status_lelang'] !== 'end' ) {
+								echo '<button type="submit" class="btn btn-info pull-right">Submit</button>';
+							}
+						?>
 					</div>
 					<!-- /.box-footer -->
 				</form>

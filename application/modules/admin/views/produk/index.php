@@ -76,7 +76,9 @@
 									<span class="caret"></span>
 									</button>';
 									$button .= '<ul class="dropdown-menu">';
-									$button .= '<li><a href="' . base_url('admin/produk/edit/') . $id . '"><i class="mdi mdi-pencil mr-2 text-muted font-18 vertical-middle"></i> Edit</a></li>';
+									if ( $r['status_lelang'] === 'active') {
+										$button .= '<li><a href="' . base_url('admin/produk/edit/') . $id . '"><i class="mdi mdi-pencil mr-2 text-muted font-18 vertical-middle"></i> Edit</a></li>';
+									}
 									$button .= '<li><a href="' . base_url('admin/produk/delete/') . $id . '"><i class="mdi mdi-delete mr-2 text-muted font-18 vertical-middle"></i> Remove</a></li>';
 									$button .= '</ul>';
 									$button .= '</div>';
