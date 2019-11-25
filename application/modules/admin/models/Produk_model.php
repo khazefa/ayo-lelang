@@ -11,6 +11,7 @@ class Produk_model extends CI_Model
     protected $tbl_produk = 'lelang';
     protected $tbl_kategori = 'kategori';
     protected $tbl_pelelang = 'pelelang';
+    protected $tbl_bid = 'tawaran';
     protected $primKey = 'id_lelang';
     protected $indexKey = 'id_lelang';
     protected $order = array('nama_lelang' => 'asc'); // default order
@@ -264,5 +265,25 @@ class Produk_model extends CI_Model
              }
          }
          return $this->db->count_all_results();
+    }
+
+    /**
+     * This function is used to check whether field is already exist or not
+     * @param {string} $param : This is param
+     * @return {mixed} $result : This is searched result
+     */
+    function get_expired_bids()
+    {
+        //Flush Param
+        $this->db->flush_cache();
+        $this->db->select('p.id_lelang');
+        $this->db->from($this->tbl_produk.' as p');
+        $this->db->join($this->tbl_bid.' as t','t.id_lelang = p.id_lelang', 'left');
+        $this->db->where('p.waktu_selesai <', date('Y-m-d H:i:s'));
+        $this->db->where('p.status_lelang', 'active');
+        $this->db->where('t.status_tawaran', NULL);
+
+        $query = $this->db->get();
+        return $query->result_array();
     }
 }

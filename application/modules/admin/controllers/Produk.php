@@ -35,8 +35,11 @@ class Produk extends Back_Controller
 		$arrOrder = array('p.nama_lelang'=>'ASC');
 		$limit = 0;
 		$id_pelelang = (int) $this->session->userdata('accBid');
+
+		// $expiree = $this->MProduk->get_expired_bids();
 		
 		$this->global['pageTitle'] = 'Produk';
+		// $this->global['contentHeader'] = 'Produk '.var_dump($expiree);
 		$this->global['contentHeader'] = 'Produk';
 		$this->global['contentTitle'] = 'Produk';
 		$this->global['name'] = $this->accName;
