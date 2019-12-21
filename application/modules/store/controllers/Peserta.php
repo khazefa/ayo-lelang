@@ -195,9 +195,9 @@ class Peserta extends Front_Controller
 				$row['peserta_id'] = $peserta_id;
 				$row['item_id'] = (int) $rb['id_lelang'];
 				$rs_items = $this->MProduk->get_data_info((int) $rb['id_lelang']);
-				$row['item_name'] = $rs_items[0]['nama_lelang'];
-				$row['item_img'] = $rs_items[0]['gambar_produk'];
-				$row['item_status'] = $rs_items[0]['status_lelang'];
+				$row['item_name'] = empty($rs_items) ? "Item telah dihapus" : $rs_items[0]['nama_lelang'];
+				$row['item_img'] = empty($rs_items) ? "undefined.jpg" : $rs_items[0]['gambar_produk'];
+				$row['item_status'] = empty($rs_items) ? "undefined" : $rs_items[0]['status_lelang'];
 				$row['bid_price'] = (int) $rb['jumlah_tawaran'];
 				$row['bid_type'] = $rb['tipe_tawaran'];
 				$row['bid_time'] = $rb['waktu_tawaran'];
@@ -271,9 +271,9 @@ class Peserta extends Front_Controller
 				$row['item_id'] = (int) $rs_bid[0]['id_lelang'];
 				$rs_items = $this->MProduk->get_data_info($row['item_id']);
 				$rs_ongkir = $this->MOngkir->get_data_info($rb['id_biaya_kirim']);
-				$row['item_name'] = $rs_items[0]['nama_lelang'];
-				$row['item_img'] = $rs_items[0]['gambar_produk'];
-				$row['item_status'] = $rs_items[0]['status_lelang'];
+				$row['item_name'] = empty($rs_items) ? "Item telah dihapus" : $rs_items[0]['nama_lelang'];
+				$row['item_img'] = empty($rs_items) ? "undefined.jpg" : $rs_items[0]['gambar_produk'];
+				$row['item_status'] = empty($rs_items) ? "undefined" : $rs_items[0]['status_lelang'];
 				$row['bid_price'] = (int) $rs_bid[0]['jumlah_tawaran'];
 				$row['bid_type'] = $rs_bid[0]['tipe_tawaran'];
 				$row['order_total'] = (int) ( $rs_bid[0]['jumlah_tawaran'] + $rs_ongkir[0]['jumlah_biaya_kirim'] );
