@@ -47,6 +47,7 @@ class Bid extends Back_Controller
 			$row['item_img'] = $rs_produk[0]['gambar_produk'];
 			$row['item_name'] = $rs_produk[0]['nama_lelang'];
 			$row['bidder_name'] = $rs_peserta[0]['nama_peserta'];
+			$row['max_price'] = $rs_produk[0]['harga_maksimal'];
 			$row['bid_price'] = $rb['jumlah_tawaran'];
 			$row['bid_time'] = $rb['waktu_tawaran'];
 			$row['bid_type'] = $rb['tipe_tawaran'];

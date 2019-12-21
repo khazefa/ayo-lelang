@@ -60,6 +60,8 @@
 									$bidder_name = $r['bidder_name'];
 									$bid_price = $r['bid_price'];
 									$bid_price_rp = "Rp. " . format_rupiah($bid_price);
+									$max_price = $r['max_price'];
+									$max_price_rp = "Rp. " . format_rupiah($max_price);
 									$bid_time = date('d/m/Y H:i:s', strtotime($r['bid_time']));
 									$bid_type = strtoupper($r['bid_type']);
 									$bid_status = strtoupper($r['bid_status']);
@@ -88,7 +90,7 @@
 									echo '<td>' . $item_img . '</td>';
 									echo '<td>' . $item_name . '</td>';
 									echo '<td>' . $bidder_name . '</td>';
-									echo '<td>' . $bid_price_rp . '</td>';
+									echo '<td>' . $bid_price_rp . ' (BIN price '. $max_price_rp .')</td>';
 									echo '<td>' . $bid_time . '</td>';
 									echo '<td>' . $bid_type . '</td>';
 									echo '<td>' . $bid_status . '</td>';
