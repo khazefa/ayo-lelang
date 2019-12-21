@@ -48,7 +48,7 @@ class Bid extends Front_Controller
 		$current_date = date('Y-m-d H:i:s');
 
 		$dataInfo = array(
-			'id_peserta' => $peserta_id, 'id_lelang' => $item_id, 'id_pelelang' => $rs_pelelang[0]['id_pelelang'], 'jumlah_tawaran' => $bid_price, 'waktu_tawaran' => $current_date,
+			'id_peserta' => $peserta_id, 'id_lelang' => $item_id, 'id_pelelang' => $rs_items[0]['id_pelelang'], 'jumlah_tawaran' => $bid_price, 'waktu_tawaran' => $current_date,
 			'tipe_tawaran' => 'bin'
 		);
 
@@ -82,11 +82,12 @@ class Bid extends Front_Controller
 		$rs_pelelang = $this->MProduk->get_data_info((int)$item_id);
 		$peserta_id = (int) $this->uBid;
 		$peserta_name = $this->uName;
+		$rs_items = $this->MProduk->get_data_info($item_id);
 		$bid_price = (int) $this->input->post('mdl_bid_price', TRUE);
 		$current_date = date('Y-m-d H:i:s');
 
 		$dataInfo = array(
-			'id_peserta' => $peserta_id, 'id_lelang' => $item_id, 'id_pelelang' => $rs_pelelang[0]['id_pelelang'], 'jumlah_tawaran' => $bid_price, 'waktu_tawaran' => $current_date, 
+			'id_peserta' => $peserta_id, 'id_lelang' => $item_id, 'id_pelelang' => $rs_items[0]['id_pelelang'], 'jumlah_tawaran' => $bid_price, 'waktu_tawaran' => $current_date, 
 			'tipe_tawaran' => 'bid'
 		);
 
