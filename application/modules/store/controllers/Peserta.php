@@ -30,7 +30,7 @@ class Peserta extends Front_Controller
 	function index()
 	{
 		if ( $this->session->userdata('signed_in') ) {
-			$this->profile();
+			$this->profil();
 			exit;
 		} else {
 			$this->registrasi();
@@ -194,7 +194,7 @@ class Peserta extends Front_Controller
 				$row['id'] = $rb['id_tawaran'];
 				$row['peserta_id'] = $peserta_id;
 				$row['item_id'] = (int) $rb['id_lelang'];
-				$rs_items = $this->MProduk->get_data_info($row['item_id']);
+				$rs_items = $this->MProduk->get_data_info((int) $rb['id_lelang']);
 				$row['item_name'] = $rs_items[0]['nama_lelang'];
 				$row['item_img'] = $rs_items[0]['gambar_produk'];
 				$row['item_status'] = $rs_items[0]['status_lelang'];
