@@ -393,7 +393,8 @@ class Peserta extends Front_Controller
 
 			if ($result > 0) {
 				setFlashData('success', 'Nomor Order '. $no_trans . ', telah sukses dikonfirmasi.');
-				$this->MOrder->update_data(array('status_order'=>'verify_pay'), $no_trans);
+				// $this->MOrder->update_data(array('status_order'=>'verify_pay'), $no_trans);
+				$this->MOrder->update_data(array('status_order'=>'paid'), $no_trans); // directly update status paid to auctioner
 				redirect('peserta/list-invoice');
 			} else {
 				setFlashData('error', 'Nomor Order '. $no_trans . ', telah gagal dikonfirmasi.');

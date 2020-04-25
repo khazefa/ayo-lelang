@@ -58,7 +58,9 @@
 										 * only show Del button
 										 */
 										if ($bid_status === "ACCEPTED") {
+											/** // remove del button
 											$bid_button .= '<a class="btn btn-danger btn-sm" href="' . base_url('bid/delete/') . $id . '"><i class="fa fa-trash"></i> Del</a>';
+											 */
 											$bid_button .= ' <a class="btn btn-success btn-sm" href="' . base_url('peserta/checkout/') . $id . '"><i class="fa fa-money"></i> Pay</a>';
 										}
 									} elseif ($bid_type === "BID") {

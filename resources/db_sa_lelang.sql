@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 02, 2019 at 02:10 PM
+-- Generation Time: Jan 09, 2020 at 11:26 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.27
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `akun`
 --
 
+DROP TABLE IF EXISTS `akun`;
 CREATE TABLE `akun` (
   `id_akun` int(11) NOT NULL,
   `nama_akun` varchar(25) NOT NULL,
@@ -36,6 +37,11 @@ CREATE TABLE `akun` (
   `status_akun` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `akun`
+--
+
+TRUNCATE TABLE `akun`;
 --
 -- Dumping data for table `akun`
 --
@@ -49,12 +55,18 @@ INSERT INTO `akun` (`id_akun`, `nama_akun`, `sandi_akun`, `nama_lengkap_akun`, `
 -- Table structure for table `biaya_kirim`
 --
 
+DROP TABLE IF EXISTS `biaya_kirim`;
 CREATE TABLE `biaya_kirim` (
   `id_biaya_kirim` int(11) NOT NULL,
   `id_kota` int(11) NOT NULL,
   `jumlah_biaya_kirim` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `biaya_kirim`
+--
+
+TRUNCATE TABLE `biaya_kirim`;
 --
 -- Dumping data for table `biaya_kirim`
 --
@@ -70,6 +82,7 @@ INSERT INTO `biaya_kirim` (`id_biaya_kirim`, `id_kota`, `jumlah_biaya_kirim`) VA
 -- Table structure for table `kategori`
 --
 
+DROP TABLE IF EXISTS `kategori`;
 CREATE TABLE `kategori` (
   `id_kategori` int(5) NOT NULL,
   `alias_kategori` varchar(100) NOT NULL,
@@ -77,6 +90,11 @@ CREATE TABLE `kategori` (
   `deskripsi_kategori` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `kategori`
+--
+
+TRUNCATE TABLE `kategori`;
 --
 -- Dumping data for table `kategori`
 --
@@ -93,6 +111,7 @@ INSERT INTO `kategori` (`id_kategori`, `alias_kategori`, `nama_kategori`, `deskr
 -- Table structure for table `konfirmasi_bayar`
 --
 
+DROP TABLE IF EXISTS `konfirmasi_bayar`;
 CREATE TABLE `konfirmasi_bayar` (
   `id_konfirmasi` int(11) NOT NULL,
   `tgl_konfirmasi` datetime NOT NULL,
@@ -109,23 +128,27 @@ CREATE TABLE `konfirmasi_bayar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `konfirmasi_bayar`
+-- Truncate table before insert `konfirmasi_bayar`
 --
 
-INSERT INTO `konfirmasi_bayar` (`id_konfirmasi`, `tgl_konfirmasi`, `notrans_order`, `no_rek`, `nama_bank`, `atas_nama`, `nominal`, `tgl_transfer`, `file_konfirmasi`, `id_peserta`, `bank_tujuan`, `status_konfirmasi`) VALUES
-(1, '2019-08-25 16:00:49', 'TR19080001', '0283116322', 'BCA', 'Hyde Lawless', 2609000, '2019-08-25 16:00:00', 'bukti_transfer_1.jpg', 1, 'BCA - 0283116411', 1);
-
+TRUNCATE TABLE `konfirmasi_bayar`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `kota`
 --
 
+DROP TABLE IF EXISTS `kota`;
 CREATE TABLE `kota` (
   `id_kota` int(11) NOT NULL,
   `nama_kota` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `kota`
+--
+
+TRUNCATE TABLE `kota`;
 --
 -- Dumping data for table `kota`
 --
@@ -146,6 +169,7 @@ INSERT INTO `kota` (`id_kota`, `nama_kota`) VALUES
 -- Table structure for table `lelang`
 --
 
+DROP TABLE IF EXISTS `lelang`;
 CREATE TABLE `lelang` (
   `id_lelang` int(11) NOT NULL,
   `id_kategori` int(11) NOT NULL,
@@ -162,15 +186,20 @@ CREATE TABLE `lelang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Truncate table before insert `lelang`
+--
+
+TRUNCATE TABLE `lelang`;
+--
 -- Dumping data for table `lelang`
 --
 
 INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, `gambar_produk`, `berat_produk`, `harga_awal`, `harga_maksimal`, `waktu_mulai`, `waktu_selesai`, `keterangan`, `status_lelang`) VALUES
 (1, 1, 1, 'Xiaomi A2 Lite', 'xiaomi_mi_a2_lite.jpg', 200, 500000, 5000000, '2019-08-01 09:30:00', '2019-08-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
-(2, 1, 1, 'Meizu M3 Note', 'l-20190807114138.jpg', 170, 500000, 1250000, '2019-10-07 19:08:50', '2019-10-31 19:08:53', 'Meizu M3 Note\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(2, 1, 1, 'Meizu M3 Note', 'l-20190807114138.jpg', 170, 500000, 1250000, '2019-12-21 07:51:59', '2019-12-31 07:52:05', 'Meizu M3 Note\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (3, 1, 1, 'Iphone 6s 64 Gb', 'l-20190621230933.jpg', 250, 1000000, 3000000, '2019-08-01 00:00:00', '2019-08-15 00:00:00', 'Iphone 6s 64 gb rose gold\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'end'),
 (4, 1, 1, 'Xiaomi Redmi Note 7', 'l-20190624143409.jpg', 200, 500000, 2500000, '2019-08-01 00:00:00', '2019-08-22 00:00:00', 'Xiaomi Redmi Note 7 4/64\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'end'),
-(5, 1, 1, 'Samsung Galaxy Note 4', 'l-20180409235352.jpg', 500, 1000000, 2500000, '2019-08-01 00:00:00', '2019-08-21 00:00:00', 'Samsung Galaxy Note 4 SEIN Fullset\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
+(5, 1, 1, 'Samsung Galaxy Note 4', 'l-20180409235352.jpg', 500, 1000000, 2500000, '2019-12-21 07:54:00', '2019-12-31 00:00:00', 'Samsung Galaxy Note 4 SEIN Fullset\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (6, 1, 1, 'Xiaomi A2 China', 'xiaomi_a2.jpg', 0, 2000000, 4500000, '2019-06-26 00:00:00', '2019-07-31 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'active'),
 (8, 3, 2, 'Laptop ASUS X441U', 'l-20190810115.jpeg', 3000, 1000000, 4000000, '2019-08-01 00:00:00', '2019-09-01 00:00:00', 'Laptop ASUS X441U Intel Core i3/RAM 4GB/HDD 1TB/Windows 10\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'active'),
 (9, 3, 2, 'Lenovo IdeaPad G50', 'l-20190709130119.jpg', 3000, 1500000, 6750000, '2019-08-01 00:00:00', '2019-09-01 00:00:00', 'Lenovo IdeaPad G50 Core i5-5200U\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'active'),
@@ -182,6 +211,7 @@ INSERT INTO `lelang` (`id_lelang`, `id_kategori`, `id_pelelang`, `nama_lelang`, 
 -- Table structure for table `order_lelang`
 --
 
+DROP TABLE IF EXISTS `order_lelang`;
 CREATE TABLE `order_lelang` (
   `id_order` int(11) NOT NULL,
   `notrans_order` varchar(11) NOT NULL,
@@ -194,18 +224,17 @@ CREATE TABLE `order_lelang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order_lelang`
+-- Truncate table before insert `order_lelang`
 --
 
-INSERT INTO `order_lelang` (`id_order`, `notrans_order`, `tgl_order`, `id_tawaran`, `id_biaya_kirim`, `id_peserta`, `order_no_resi`, `status_order`) VALUES
-(1, 'TR19080001', '2019-08-25 13:22:46', 1, 3, 1, '2342553456345676', 'received');
-
+TRUNCATE TABLE `order_lelang`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `pelelang`
 --
 
+DROP TABLE IF EXISTS `pelelang`;
 CREATE TABLE `pelelang` (
   `id_pelelang` int(11) NOT NULL,
   `nama_pelelang` varchar(100) NOT NULL,
@@ -219,6 +248,11 @@ CREATE TABLE `pelelang` (
   `tgl_daftar_pelelang` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `pelelang`
+--
+
+TRUNCATE TABLE `pelelang`;
 --
 -- Dumping data for table `pelelang`
 --
@@ -235,6 +269,7 @@ INSERT INTO `pelelang` (`id_pelelang`, `nama_pelelang`, `akun_pelelang`, `sandi_
 -- Table structure for table `pelelang_akun_bank`
 --
 
+DROP TABLE IF EXISTS `pelelang_akun_bank`;
 CREATE TABLE `pelelang_akun_bank` (
   `id_akun_bank` int(5) NOT NULL,
   `no_akun_bank` varchar(50) NOT NULL,
@@ -243,6 +278,11 @@ CREATE TABLE `pelelang_akun_bank` (
   `id_pelelang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `pelelang_akun_bank`
+--
+
+TRUNCATE TABLE `pelelang_akun_bank`;
 --
 -- Dumping data for table `pelelang_akun_bank`
 --
@@ -256,6 +296,7 @@ INSERT INTO `pelelang_akun_bank` (`id_akun_bank`, `no_akun_bank`, `nama_akun_ban
 -- Table structure for table `peserta`
 --
 
+DROP TABLE IF EXISTS `peserta`;
 CREATE TABLE `peserta` (
   `id_peserta` int(11) NOT NULL,
   `nama_peserta` varchar(100) NOT NULL,
@@ -269,6 +310,11 @@ CREATE TABLE `peserta` (
   `status_peserta` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `peserta`
+--
+
+TRUNCATE TABLE `peserta`;
 --
 -- Dumping data for table `peserta`
 --
@@ -284,6 +330,7 @@ INSERT INTO `peserta` (`id_peserta`, `nama_peserta`, `akun_peserta`, `sandi_pese
 -- Table structure for table `saldo_pelelang`
 --
 
+DROP TABLE IF EXISTS `saldo_pelelang`;
 CREATE TABLE `saldo_pelelang` (
   `id_saldo` int(11) NOT NULL,
   `id_pelelang` int(11) NOT NULL,
@@ -294,19 +341,17 @@ CREATE TABLE `saldo_pelelang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `saldo_pelelang`
+-- Truncate table before insert `saldo_pelelang`
 --
 
-INSERT INTO `saldo_pelelang` (`id_saldo`, `id_pelelang`, `id_akun_bank`, `jumlah_saldo`, `status`, `tgl_saldo`) VALUES
-(1, 1, 1, 2000000, 1, '2019-11-02 13:03:51'),
-(2, 1, 1, 500000, 1, '2019-11-02 13:31:27');
-
+TRUNCATE TABLE `saldo_pelelang`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tawaran`
 --
 
+DROP TABLE IF EXISTS `tawaran`;
 CREATE TABLE `tawaran` (
   `id_tawaran` int(11) NOT NULL,
   `id_peserta` int(11) NOT NULL,
@@ -319,14 +364,10 @@ CREATE TABLE `tawaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tawaran`
+-- Truncate table before insert `tawaran`
 --
 
-INSERT INTO `tawaran` (`id_tawaran`, `id_peserta`, `id_lelang`, `id_pelelang`, `jumlah_tawaran`, `waktu_tawaran`, `tipe_tawaran`, `status_tawaran`) VALUES
-(1, 1, 4, 1, 2600000, '2019-08-14 20:48:51', 'bid', 'accepted'),
-(2, 2, 4, 1, 1200000, '2019-08-14 20:40:16', 'bid', 'rejected'),
-(3, 3, 4, 1, 1500000, '2019-08-14 20:48:14', 'bid', 'rejected');
-
+TRUNCATE TABLE `tawaran`;
 --
 -- Indexes for dumped tables
 --
@@ -435,7 +476,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `konfirmasi_bayar`
 --
 ALTER TABLE `konfirmasi_bayar`
-  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_konfirmasi` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kota`
@@ -453,7 +494,7 @@ ALTER TABLE `lelang`
 -- AUTO_INCREMENT for table `order_lelang`
 --
 ALTER TABLE `order_lelang`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pelelang`
@@ -477,13 +518,13 @@ ALTER TABLE `peserta`
 -- AUTO_INCREMENT for table `saldo_pelelang`
 --
 ALTER TABLE `saldo_pelelang`
-  MODIFY `id_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_saldo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tawaran`
 --
 ALTER TABLE `tawaran`
-  MODIFY `id_tawaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_tawaran` int(11) NOT NULL AUTO_INCREMENT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

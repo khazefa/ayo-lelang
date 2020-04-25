@@ -78,6 +78,8 @@
 									$button .= '<ul class="dropdown-menu">';
 									if ( strtolower($order_status) === 'order' || strtolower($order_status) === 'verify pay' ) {
 										$button .= '<li><a href="' . base_url('admin/orders/verify/') . $order_num . '"><i class="fa fa-circle-o-notch"></i> Verify Payment</a></li>';
+									} elseif (strtolower($order_status) === 'paid') {
+										$button .= '<li><a href="' . base_url('admin/orders/verify/') . $order_num . '"><i class="fa fa-circle-o-notch"></i> Paid to Auctioner</a></li>';
 									} else {
 										$button .= '<li><a href="#"><i class="fa fa-bars"></i></a></li>';
 									}
